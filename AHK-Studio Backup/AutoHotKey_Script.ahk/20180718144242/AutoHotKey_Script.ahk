@@ -37,7 +37,7 @@ CoordMode, mouse, Screen
 	}
 	#IfWinExist
 		
-	
+		
 	{ ; Tray Icon If Pause and/or Suspend
 		
 		OnMessage(0x111,"WM_COMMAND")
@@ -72,7 +72,31 @@ CoordMode, mouse, Screen
 	#F1::Suspend, Toggle
 	#F4::ExitApp	
 	^#!SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
-}
+	
+	#t::
+	{
+		If !WinExist("MSI Afterburner")
+		{
+			Run, C:\Program Files (x86)\MSI Afterburner\MSIAfterburner.exe
+			WinWait MSI Afterburner
+			MsgBox Check Mouse and keyboard profile!
+		}
+		Else If !WinExist("Set Timer Resolution")
+		{
+			Run, D:\-  Téléchargements sur D\TimerResolution.exe
+			WinWait Set Timer Resolution
+			WinMinimize Set Timer Resolution
+			WinWait MSI Afterburner
+		}
+		Else if WinExist("MSI Afterburner") || WinExist("Set Timer Resolution")
+		{
+			WinActivate, MSI Afterburner
+			WinActivate, Set Timer Resolution
+		}
+		return
+	}	
+	
+} ;Before running a Game. Run and/or close Program.
 
 { ;Joystick ID (Use JoyID Program)
 	;6Joy = T16000L (See JoyID)
@@ -93,40 +117,40 @@ CoordMode, mouse, Screen
 	*/
 	
 	/* ; Pixel color as as condition
-		{
-			!#z::
-			MouseGetPos, xpos, ypos 	
+	{
+		!#z::
+		MouseGetPos, xpos, ypos 	
 		;PixelGetColor, color, xpos, xpos
-			PixelGetColor, color, 1889, 95
+		PixelGetColor, color, 1889, 95
 		;MsgBox The color at X%xpos% Y%ypos% is %color%.
-			MsgBox The color is %color%.
-			return
-			
-			{ ; Numpad1
-				Numpad1::
-				PixelGetColor, color, 1889, 95
-				if color = 0x213A70
-				{
-					MouseGetPos, xpos, ypos 
-					BlockInput, On
-					MouseClick, left, 1732, 171
-					MouseMove, xpos, ypos 
-					BlockInput, Off
-					return
-				}
-				Else
-				{
-					MouseGetPos, xpos, ypos 
-					BlockInput, On
-					SetKeyDelay 32, 32
-					Send {NumpadEnter}
-					MouseClick, left, 1732, 171
-					MouseMove, xpos, ypos 
-					BlockInput, Off
-				}
-				Return
+		MsgBox The color is %color%.
+		return
+		
+		{ ; Numpad1
+			Numpad1::
+			PixelGetColor, color, 1889, 95
+			if color = 0x213A70
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				MouseClick, left, 1732, 171
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+				return
 			}
+			Else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 171
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+			}
+			Return
 		}
+	}
 	*/
 	
 	/* ; On press != on double press != on long press.
@@ -162,9 +186,9 @@ CoordMode, mouse, Screen
 		return
 	*/
 	
-	/* ; Multi-Tap
+	/*
 		
-		{ 
+		{
 			$f1::
 			{
 				count++
@@ -188,93 +212,88 @@ CoordMode, mouse, Screen
 				}
 				count := 0
 			}
+			return	
+			
+			
+			SetTimer, WatchAxis, 5
 			return
-		}
-	*/
-	
-	/* ; Watch axis
-		
-		SetTimer, WatchAxis, 5
-		return
-		
-		WatchAxis:
-		GetKeyState, 6JoyX, 6JoyX  ; Get position of X axis.
-		GetKeyState, 6JoyY, 6JoyY  ; Get position of Y axis.
-		KeyToHoldDownPrev = %KeyToHoldDown%  ; Prev now holds the key that was down before (if any).
-		
-		if 6JoyX > 70
-			KeyToHoldDown = Right
-		else if 6JoyX < 30
-			KeyToHoldDown = Left
-		else if 6JoyY > 70
-			KeyToHoldDown = Down
-		else if 6JoyY < 30
-			KeyToHoldDown = Up
-		else
-			KeyToHoldDown =
-		
-		if KeyToHoldDown = %KeyToHoldDownPrev%  ; The correct key is already down (or no key is needed).
-			return  ; Do nothing.
-		
+			
+			WatchAxis:
+			GetKeyState, 6JoyX, 6JoyX  ; Get position of X axis.
+			GetKeyState, 6JoyY, 6JoyY  ; Get position of Y axis.
+			KeyToHoldDownPrev = %KeyToHoldDown%  ; Prev now holds the key that was down before (if any).
+			
+			if 6JoyX > 70
+				KeyToHoldDown = Right
+			else if 6JoyX < 30
+				KeyToHoldDown = Left
+			else if 6JoyY > 70
+				KeyToHoldDown = Down
+			else if 6JoyY < 30
+				KeyToHoldDown = Up
+			else
+				KeyToHoldDown =
+			
+			if KeyToHoldDown = %KeyToHoldDownPrev%  ; The correct key is already down (or no key is needed).
+				return  ; Do nothing.
+			
 	; Otherwise, release the previous key and press down the new key:
-		SetKeyDelay -1  ; Avoid delays between keystrokes.
-		if KeyToHoldDownPrev   ; There is a previous key to release.
-			Send, {%KeyToHoldDownPrev% up}  ; Release it.
-		if KeyToHoldDown   ; There is a key to press down.
-			Send, {%KeyToHoldDown% down}  ; Press it down.
-		return
-	*/	
-	
-	/* ; Joystick layer, shift
-		
-		6Joy1::
-		If GetKeyState("6Joy2", "P")=1
-		{
-			send {d Down}
-			keywait 6Joy1
-			send, {d Up}
-		}
-		else 
-			if GetKeyState("6joy3", "p")=1
+			SetKeyDelay -1  ; Avoid delays between keystrokes.
+			if KeyToHoldDownPrev   ; There is a previous key to release.
+				Send, {%KeyToHoldDownPrev% up}  ; Release it.
+			if KeyToHoldDown   ; There is a key to press down.
+				Send, {%KeyToHoldDown% down}  ; Press it down.
+			return
+			
+			
+			
+			6Joy1::
+			If GetKeyState("6Joy2", "P")=1
 			{
-				send {v Down}
+				send {d Down}
 				keywait 6Joy1
-				send, {v Up}
+				send, {d Up}
 			}
-		Else 
-		{
-			send {c Down}
-			keywait 6Joy1
-			send, {c Up}
-		}
-		Return
-	*/	
-	
-	/* ; Multi-Tap
-		$f8::
-		{
-			count++
-			settimer, actionsF8, 200
-		}
-		return
-		
-		actionsF8:
-		{
-			if (count = 1)
+			else 
+				if GetKeyState("6joy3", "p")=1
+				{
+					send {v Down}
+					keywait 6Joy1
+					send, {v Up}
+				}
+			Else 
 			{
-				send {F8}
+				send {c Down}
+				keywait 6Joy1
+				send, {c Up}
 			}
-			else if (count = 2)
+			Return
+			
+			
+			$f8::
 			{
-				send {F9}
+				count++
+				settimer, actionsF8, 200
 			}
-			else if (count = 3)
+			return
+			
+			actionsF8:
 			{
-				send {F10}
+				if (count = 1)
+				{
+					send {F8}
+				}
+				else if (count = 2)
+				{
+					send {F9}
+				}
+				else if (count = 3)
+				{
+					send {F10}
+				}
+				count := 0
 			}
-			count := 0
-		}
-		return
+			return
 		}
 	*/	
 	
@@ -298,7 +317,7 @@ CoordMode, mouse, Screen
 { ; Layer modifier
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	Layer := 2
-	if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 333)
+	if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)
 		Layer := 3
 	KeyWait, CapsLock
 	Layer := 1
@@ -337,7 +356,7 @@ CoordMode, mouse, Screen
 		return
 	}
 	
-	SC056:: ; >, <
+	SC056:: ; <>
 	KeyWait SC056, t0.100
 	t:= A_TimeSinceThisHotkey
 	If ErrorLevel
@@ -354,7 +373,7 @@ CoordMode, mouse, Screen
 		SendInput {l up}
 	}
 	return
-	
+		
 }
 
 { ; Mouse Wheel Layer 1
@@ -492,7 +511,7 @@ CoordMode, mouse, Screen
 }
 
 #If ; End of "If Layer = 1".
-	
+
 }
 
 { #if Layer = 2 
@@ -701,7 +720,7 @@ CoordMode, mouse, Screen
 }
 
 #If ; End of "If Layer = 2".
-	
+
 }
 
 { #if Layer = 3
@@ -906,7 +925,7 @@ CoordMode, mouse, Screen
 }
 
 #If ; End of "If Layer = 3".
-	
+
 }
 
 
@@ -915,3 +934,41 @@ CoordMode, mouse, Screen
 :*:ahk::AutoHotKey
 	
 }
+
+/*
+	#IfWinActive Python 3 Tutorial | SoloLearn: Learn to code for FREE! - Google Chrome
+	$Mbutton::
+	BlockInput, On
+		;SetKeyDelay 32, 32
+	Send {RButton}{down}{down}{Enter}{LWin down}{Right}{LWin Up}
+	#IfWinExist Code Playground | SoloLearn: Learn to code for FREE! - Google Chrome
+	WinClose Code Playground | SoloLearn: Learn to code for FREE! - Google Chrome
+	WinWait Code Playground | SoloLearn: Learn to code for FREE! - Google Chrome
+	sleep 32
+	send {space}
+	WinWait Code Playground | SoloLearn: Learn to code for FREE! - Google Chrome
+	Send {MButton Up}
+	BlockInput, Off
+	return
+	#IfWinExist
+	#IfWinActive
+*/
+
+/*sleep 32
+	MouseClick, left, 1400, 600
+	sleep 32
+	Send ^a
+	sleep 32
+	Send ^c
+	sleep 32
+	MouseClick, left, 2700, 600
+	sleep 32
+	Send ^a
+	sleep 32
+	Send ^v
+	Send {MButton Up}{F9}
+	BlockInput, Off
+	return
+	#IfWinExist
+	#IfWinActive
+*/
