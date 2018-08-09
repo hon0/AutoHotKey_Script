@@ -12,10 +12,8 @@ Process, Priority, , A
 ;#InstallMouseHook
 CoordMode, mouse, Screen
 
-{ ;Monitoring Windows
-	
+{ ; Monitoring Windows
 	BlockInput, On
-	
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
@@ -37,16 +35,6 @@ CoordMode, mouse, Screen
 		return
 	}
 	#IfWinExist
-		
-	#If WinActive("Event Tester") || WinActive("AHK Studio - C:\Users\hon0_Corsair\Documents\GitHub\AutoHotKey_Script\AutoHotKey_Script.ahk")
-	{
-		$F5::
-		WinActivate %Title%
-		SetKeyDelay 2000, 32
-		Send {F5}
-		return
-	}
-	#IfWinActive
 		
 	{ ; Tray Icon If Pause and/or Suspend
 		
@@ -77,43 +65,19 @@ CoordMode, mouse, Screen
 	}
 }
 
-{ ;Before running a Game. Run and/or close Program.
+{ ; Script Settings
 	
 	#F1::Suspend, Toggle
 	#F4::ExitApp	
-	^#!SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 	
-	#t::
-	{
-		If !WinExist("MSI Afterburner")
-		{
-			Run, C:\Program Files (x86)\MSI Afterburner\MSIAfterburner.exe
-			WinWait MSI Afterburner
-			MsgBox Check Mouse and keyboard profile!
-		}
-		Else If !WinExist("Set Timer Resolution")
-		{
-			Run, D:\-  T?chargements sur D\TimerResolution.exe
-			WinWait Set Timer Resolution
-			WinMinimize Set Timer Resolution
-			WinWait MSI Afterburner
-		}
-		Else if WinExist("MSI Afterburner") || WinExist("Set Timer Resolution")
-		{
-			WinActivate, MSI Afterburner
-			WinActivate, Set Timer Resolution
-		}
-		return
-	}	
-	
-} ;Before running a Game. Run and/or close Program.
+} ; Script Settings
 
-{ ;Joystick ID (Use JoyID Program)
+{ ; Joystick ID (Use JoyID Program)
 	;6Joy = T16000L (See JoyID)
 	;5Joy = Vjoy
 }
 
-{ ;Testing
+{ ; Testing
 	
 	/* ; If prior key ""
 		{ ; If prior key ""
@@ -163,7 +127,7 @@ CoordMode, mouse, Screen
 		}
 	*/
 	
-	/* ; On press != on double press != on long press.
+	/* ; On pulse, on double pulse, on long press.
 		$a::
 		KeyWait, a, T0.1
 		
@@ -309,8 +273,7 @@ CoordMode, mouse, Screen
 	
 }
 
-
-/*
+/* ; Layer checker
 	 ;Layer checker
 	
 	z::
@@ -323,8 +286,6 @@ CoordMode, mouse, Screen
 	ToolTip
 	return
 */
-
-
 
 { ; Layer modifier
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
@@ -340,67 +301,77 @@ CoordMode, mouse, Screen
 
 { #if Layer = 1
 
-{ ;Global remapping
+{ ; Global remapping
 	
-	XButton1:: ; Fire mode selector
-	KeyWait, XButton1, T0.2
-	
-	if (ErrorLevel)
-	{
-		Send {RAlt Down}{F11}{RAlt Up}
-	}
-	else {
-		KeyWait, XButton1, D T0.2
+	{ ; XButton1, Fire mode selector
+		
+		XButton1:: 
+		KeyWait, XButton1, T0.2
 		
 		if (ErrorLevel)
 		{
-			Send {RAlt Down}{F9}{RAlt Up}
+			Send {RAlt Down}{F11}{RAlt Up}
+		}
+		else {
+			KeyWait, XButton1, D T0.2
+			
+			if (ErrorLevel)
+			{
+				Send {RAlt Down}{F9}{RAlt Up}
+			}
+			
+			else
+			{
+				Send {RAlt Down}{F10}{RAlt Up}
+			}
+			
 		}
 		
-		else
-		{
-			Send {RAlt Down}{F10}{RAlt Up}
-		}
+		KeyWait, XButton1
+		return
+	}
+	
+	{ ; XButton2, Move mode selector
 		
-	}
-	
-	KeyWait, XButton1
-	return
-	
-	XButton2:: ; Move mode selector
-	KeyWait, XButton2, T0.2
-	
-	if (ErrorLevel)
-	{
-		Send {LControl Down}{F11}{LControl Up}
-	}
-	else {
-		KeyWait, XButton2, D T0.2
+		XButton2:: 
+		KeyWait, XButton2, T0.2
 		
 		if (ErrorLevel)
 		{
-			Send {LControl Down}{F9}{LControl Up}
+			Send {LControl Down}{F11}{LControl Up}
+		}
+		else {
+			KeyWait, XButton2, D T0.2
+			
+			if (ErrorLevel)
+			{
+				Send {LControl Down}{F9}{LControl Up}
+			}
+			
+			else
+			{
+				Send {LControl Down}{F10}{LControl Up}
+			}
+			
 		}
 		
-		else
-		{
-			Send {LControl Down}{F10}{LControl Up}
-		}
-		
+		KeyWait, XButton2
+		return
 	}
 	
-	KeyWait, XButton2
-	return
-	
-	F1::
+	F1:: ; Select Land Factory
 	send {LControl Down}{F1}{Numpad1}{LControl Up}
 	return
 	
-	F2::
+	F2:: ; Select Air Factory
 	send {LControl Down}{F1}{Numpad2}{LControl Up}
 	return
 	
-	F3::
+	F3:: ; Select Naval Factory
+	send {LControl Down}{F1}{Numpad3}{LControl Up}
+	return
+	
+	F4:: ; Select Orbital Factory
 	send {LControl Down}{F1}{Numpad3}{LControl Up}
 	return
 	
@@ -409,23 +380,26 @@ CoordMode, mouse, Screen
 	sleep 200
 	return
 	
-	SC002:: ; 
-	KeyWait SC002, t0.100
-	t:= A_TimeSinceThisHotkey
-	If ErrorLevel
-	{
-		Send {F11}
-		sleep 333
-	}
-	else
-	{
-		Send {SC002}
-	}
-	return
 	
-	Tab::Send {SC002}{F11}
+	{ ; &, Cycle unit one by one, long press to center on selection
+		&:: ; &, Cycle unit one by one, long press to center on selection
+		KeyWait SC002, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Send {F11}
+			sleep 333
+		}
+		else
+		{
+			Send {SC002}
+		}
+		return
+	}
 	
-	SC006::
+	Tab::Send {&}{F11}
+	
+	SC006:: ; ?
 	{
 		SendInput	{LShift Down}{LControl Down}{F10}{LControl Up}{LShift Up}
 	}
@@ -459,20 +433,22 @@ CoordMode, mouse, Screen
 		return
 	*/
 	
-	SC056:: ; > <
-	KeyWait SC056, t0.100
-	t:= A_TimeSinceThisHotkey
-	If ErrorLevel
-	{
-		SendInput {m down}ll
-		KeyWait SC056
-		SendInput {m up}
+	{ ; SC056, > <
+		SC056:: ; > <
+		KeyWait SC056, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SendInput {m down}ll
+			KeyWait SC056
+			SendInput {m up}
+		}
+		else
+		{
+			SendInput {p}
+		}
+		return
 	}
-	else
-	{
-		SendInput {p}
-	}
-	return
 	
 	;#IfWinActive Planetary Annihilation
 	
@@ -513,14 +489,18 @@ CoordMode, mouse, Screen
 	c::,
 	v::
 	s::esc
-	Send {LShift down}{F11}{LShift Up}{&}{F11}
-	return
+	/*
+		Send {LShift down}{F11}{LShift Up}{&}{F11}
+		return
+	*/
 	
-	~LButton Up:: ; Remove Air
-	Send {}
-	return
+	/*
+		~LButton Up:: ; Remove Air
+		Send {}
+		return
+	*/
 	
-	Tab::Send {SC002}{F11}
+	;Tab::Send {SC002}{F11}
 	
 	;#IfWinActive
 }
@@ -541,7 +521,7 @@ CoordMode, mouse, Screen
 }	
 
 #If ; End of "If Layer = 2".
-
+	
 }
 
 { #if Layer = 3

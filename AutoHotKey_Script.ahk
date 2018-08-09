@@ -11,10 +11,8 @@ Process, Priority, , A
 ;#InstallMouseHook
 CoordMode, mouse, Screen
 
-{ ;Monitoring Windows
-	
+{ ; Monitoring Windows
 	BlockInput, On
-	
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
@@ -36,50 +34,20 @@ CoordMode, mouse, Screen
 		return
 	}
 	#IfWinExist
-		
-	
-	{ ; Tray Icon If Pause and/or Suspend
-		
-		OnMessage(0x111,"WM_COMMAND")
-		return
-		
-		WM_Command(wP) {
-			
-			static Suspend:=65305, Pause:=65306
-			
-			If (wP = Suspend)
-				If !A_IsSuspended
-					Menu, Tray, Icon, Shell32.dll, 132, 1
-			Else If A_IsPaused
-				Menu, Tray, Icon, Shell32.dll, 110, 1
-			Else
-				Menu, Tray, Icon, %A_AhkPath%
-			
-			
-			Else If (wP = Pause)
-				If !A_IsPaused
-					Menu, Tray, Icon, Shell32.dll, 110, 1
-			Else If A_IsSuspended
-				Menu, Tray, Icon, Shell32.dll, 132, 1
-			Else
-				Menu, Tray, Icon, %A_AhkPath%
-		}	
-	}
 }
 
-{ ;Before running a Game. Run and/or close Program.
-	
+{ ; Global Hotkey
 	#F1::Suspend, Toggle
 	#F4::ExitApp	
-	^#!SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
+	; ^#!SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 }
 
-{ ;Joystick ID (Use JoyID Program)
+{ ; Joystick ID (Use JoyID Program)
 	;6Joy = T16000L (See JoyID)
 	;5Joy = Vjoy
 }
 
-{ ;Testing
+{ ; Testing
 	
 	/* ; If prior key ""
 		{ ; If prior key ""
@@ -281,7 +249,7 @@ CoordMode, mouse, Screen
 }
 
 
-/* ;Layer checker
+/* ; Layer checker
 	
 	z::
 	ToolTip %Layer%
