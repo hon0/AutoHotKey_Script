@@ -491,7 +491,7 @@ SetTitleMatchMode, 2
 
 { ;#if Layer = 3
 	#if Layer = 3
-	
+		
 	{ ; Mouse Remapping Layer 3
 		LButton::F3
 		RButton::F2
