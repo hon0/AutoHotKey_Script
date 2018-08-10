@@ -80,7 +80,7 @@ SetTitleMatchMode, 2
 	}
 } ; End of AutoHotKey Script option.
 
-/* ; Get exit cross color
+/* ; Get exit cross cOlo
 	#z::	
 	PixelGetColor, color, 1889, 95
 	MsgBox The color at X1889 Y95 is %color%.

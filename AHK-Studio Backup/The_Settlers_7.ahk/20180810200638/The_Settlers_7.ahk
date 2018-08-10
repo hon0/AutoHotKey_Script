@@ -80,7 +80,7 @@ SetTitleMatchMode, 2
 	}
 } ; End of AutoHotKey Script option.
 
-/* ; Get exit cross color
+/* ; Get exit cross cOlo
 	#z::	
 	PixelGetColor, color, 1889, 95
 	MsgBox The color at X1889 Y95 is %color%.
@@ -544,16 +544,12 @@ $f::
 			SendInput {h down}
 			KeyWait f
 			SendInput {h up}
-			ControlSend, Edit3, ^a21, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 		}
 		else
 		{
 			SendInput {g down}
 			sleep 32
 			SendInput {g up}
-			ControlSend, Edit3, ^a20, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 		}
 		return
 	}
@@ -580,8 +576,6 @@ $f::
 		Send {f Down}
 		KeyWait, f
 		Send {f Up}
-		ControlSend, Edit3, ^a20, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 		Return
 	}
 }
@@ -634,7 +628,7 @@ $r::
 }
 
 #IfWinActive Settlers 7 Window
-	
+
 LAlt::
 {
 	PixelGetColor, color, 1889, 95

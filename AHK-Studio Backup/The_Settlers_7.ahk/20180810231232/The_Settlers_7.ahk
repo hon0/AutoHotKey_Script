@@ -80,7 +80,7 @@ SetTitleMatchMode, 2
 	}
 } ; End of AutoHotKey Script option.
 
-/* ; Get exit cross color
+/* ; Get exit cross cOlo
 	#z::	
 	PixelGetColor, color, 1889, 95
 	MsgBox The color at X1889 Y95 is %color%.
@@ -757,3 +757,22 @@ Numpad3::
 }
 
 #IfWinActive
+
+
+$AppsKey:: ;[3, F3], [9, F9], [F15, F21]
+KeyWait AppsKey, t0.200
+t:= A_TimeSinceThisHotkey
+If ErrorLevel
+{
+	SendInput {RControl down}
+	KeyWait AppsKey
+	SendInput {RControl up}
+}
+else
+{
+	SendInput {RShift down}
+	sleep 32
+	KeyWait AppsKey
+	SendInput {RShift up}
+}
+return
