@@ -137,7 +137,7 @@ SetTitleMatchMode, 2
 }
 
 #if Layer = 1
-{
+{ 
 	;#if Layer = 1
 	
 	{ ; Mouse Remapping Layer 1
@@ -346,9 +346,9 @@ SetTitleMatchMode, 2
 		#IfWinActive
 			
 	} ; End of Keyboard remapping	
-}
-#If ; End of If Layer 1	
 	
+	#If ; End of If Layer 1	
+}
 
 { ;#if Layer = 2 
 	#if Layer = 2 

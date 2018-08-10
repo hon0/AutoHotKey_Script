@@ -136,10 +136,9 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-#if Layer = 1
-{
-	;#if Layer = 1
-	
+{ ; #if Layer = 1
+	#if Layer = 1
+		
 	{ ; Mouse Remapping Layer 1
 		XButton2::
 		SetKeyDelay 32, 32
@@ -346,9 +345,9 @@ SetTitleMatchMode, 2
 		#IfWinActive
 			
 	} ; End of Keyboard remapping	
-}
-#If ; End of If Layer 1	
 	
+	#If ; End of If Layer 1	
+}
 
 { ;#if Layer = 2 
 	#if Layer = 2 
@@ -492,7 +491,7 @@ SetTitleMatchMode, 2
 
 { ;#if Layer = 3
 	#if Layer = 3
-		
+	
 	{ ; Mouse Remapping Layer 3
 		LButton::F3
 		RButton::F2
