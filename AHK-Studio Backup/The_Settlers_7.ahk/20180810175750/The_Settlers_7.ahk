@@ -249,15 +249,15 @@ $e::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		Send {SC004 Down}
+		Send {" Down}
 		KeyWait, e
-		Send {SC004 Up}
+		Send {" Up}
 	}
 	Else if (Layer=2) and WinActive(Settlers 7 Window)
 	{
-		Send {SC004 Down}
+		Send {" Down}
 		KeyWait, e
-		Send {SC004 Up}
+		Send {" Up}
 	}
 	Else
 	{
@@ -287,12 +287,13 @@ $w::
 
 $Tab::
 {
-	If (Layer=2)
+	If (Layer=2) and WinActive(Settlers 7 Window)
 	{
 		Send {esc Down}
 		KeyWait, Tab
 		Send {esc Up}
 	}
+	
 	Else
 	{
 		Send {Tab Down}

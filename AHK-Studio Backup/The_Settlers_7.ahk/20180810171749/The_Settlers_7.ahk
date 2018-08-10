@@ -80,7 +80,7 @@ SetTitleMatchMode, 2
 	}
 } ; End of AutoHotKey Script option.
 
-/* ; Get exit cross cOlo
+/*
 	#z::	
 	PixelGetColor, color, 1889, 95
 	MsgBox The color at X1889 Y95 is %color%.
@@ -220,86 +220,6 @@ WheelDown::
 		Send {WheelDown}
 		Return
 	}
-}
-
-$q::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else
-	{
-		Send {q Down}
-		KeyWait, q
-		Send {q Up}
-	}
-	Return
-}
-
-$e::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else
-	{
-		Send {e Down}
-		KeyWait, e
-		Send {e Up}
-	}
-	Return
-}
-
-$w::
-{
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {é Down}
-		KeyWait, w
-		Send {é Up}
-	}
-	Else
-	{
-		Send {w Down}
-		KeyWait, w
-		Send {w Up}
-	}
-	Return
-}
-
-$Tab::
-{
-	If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, Tab
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Return
 }
 
 $y::
@@ -501,36 +421,17 @@ $c::
 		}
 		Return
 	}
-	Else
-	{
-		Send {c Down}
-		KeyWait, c
-		Send {c Up}
-		Return
-	}
-	Return
 }
 
 $v::
 {
-	If WinActive(Settlers 7 Window)
-	{
-		Send, {v Down}
-		Sleep 32
-		Send, {v Up}
-		ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		KeyWait, v
-		return
-	}	
-	Else
-	{
-		Send {v Down}
-		KeyWait, v
-		Send {v Up}
-		Return
-	}
-	Return
+	Send, {v Down}
+	Sleep 32
+	Send, {v Up}
+	ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+	ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+	KeyWait, v
+	return
 }
 
 $f::
@@ -580,174 +481,270 @@ $f::
 	}
 }
 
-$r::
-{
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {y down}
-			KeyWait r
-			SendInput {y up}
-		}
-		else
-		{
-			SendInput {t down}
-			sleep 32
-			SendInput {t up}
-		}
-		return
-	}
-	Else if (Layer=3) and WinActive(Settlers 7 Window)
-	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {i down}
-			KeyWait r
-			SendInput {i up}
-		}
-		else
-		{
-			SendInput {u down}
-			sleep 32
-			SendInput {u up}
-		}
-		return
-	}
-	Else
-	{
-		Send {r Down}
-		KeyWait, r
-		Send {r Up}
-		Return
-	}
-}
-
-#IfWinActive Settlers 7 Window
-
 LAlt::
 {
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
+	If WinActive(Settlers 7 Window)
 	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait LAlt
+		PixelGetColor, color, 1889, 95
+		if color = 0x20396f ;0x20396F 
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 135
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait LAlt
+			Return
+		}
+		else
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			SetKeyDelay 32, 32
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 135
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait LAlt
+			Return
+		}
 		Return
 	}
-	else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		SetKeyDelay 32, 32
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait LAlt
-		Return
-	}
-}
-
-Numpad1::
-{
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 171
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad1
-	}
+	#If
 	Else
 	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 171
-		MouseMove, xpos, ypos
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad1
+		Send {LAlt Down}
+		KeyWait, LAlt
+		Send {LAlt Up}
+		Return
 	}
-	Return
+	return
 }
 
-Numpad2::
+#if Layer = 1
 {	
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 279
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad2
-	}
-	Else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 279
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad2
-	}
-	Return
+	{ ; Keyboard Remapping Layer 1		
+		
+		/*
+			{ ; LAlt
+				LAlt::
+				PixelGetColor, color, 1889, 95
+				if color = 0x20396f ;0x20396F 
+				{
+					MouseGetPos, xpos, ypos 
+					BlockInput, On
+					Send, {PGUP Down}
+					MouseClick, left, 1732, 135
+					MouseMove, xpos, ypos 
+					Send, {PGUP Up}
+					BlockInput, Off
+					return
+				}
+				else
+				{
+					MouseGetPos, xpos, ypos 
+					BlockInput, On
+					SetKeyDelay 32, 32
+					Send, {PGUP Down}
+					MouseClick, left, 1732, 135
+					MouseMove, xpos, ypos 
+					Send, {PGUP Up}
+					BlockInput, Off			
+				}
+				Return
+			}	
+		*/
+		
+		{ ; Numpad1
+			Numpad1::
+			PixelGetColor, color, 1889, 95
+			if color = 0x20396f ;0x20396F
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				MouseClick, left, 1732, 171
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				return
+			}
+			Else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 171
+				MouseMove, xpos, ypos
+				Send, {PGUP Up}
+				BlockInput, Off
+			}
+			Return
+		}
+		
+		{ ; Numpad 2
+			Numpad2::
+			PixelGetColor, color, 1889, 95
+			if color = 0x20396f ;0x20396F 
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				MouseClick, left, 1732, 279
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+			}
+			Else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 279
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+			}
+			Return
+			
+		}
+		
+		{ ; Numpad 3
+			Numpad3::
+			PixelGetColor, color, 1889, 95
+			if color = 0x20396f ;0x20396F 
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				MouseClick, left, 1732, 135
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				return
+			}
+			else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 135
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+			}
+			Return
+		}
+		;#IfWinActive
+		
+	} ; End of Keyboard remapping	
 }
-
-Numpad3::
+#If ; End of If Layer 1	
+	
+#if Layer = 2 
+{		
+	{ ; Keyboard Remapping Layer 2
+		q::&
+		w::é
+		e::"
+		tab::esc
+		
+		/*
+			{ ; f Remapping Layer 2
+				$f::
+				KeyWait f, t0.100
+				t:= A_TimeSinceThisHotkey
+				If ErrorLevel
+				{
+					SendInput {h down}
+					KeyWait f
+					SendInput {h up}
+				}
+				else
+				{
+					SendInput {g down}
+					sleep 32
+					SendInput {g up}
+				}
+				return
+			}
+		*/
+		
+		{ ; r Remapping Layer 2
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {y down}
+				KeyWait r
+				SendInput {y up}
+			}
+			else
+			{
+				SendInput {t down}
+				sleep 32
+				SendInput {t up}
+			}
+			return
+		}
+	}	
+}
+#If ; End of If Layer 2
+	
+#if Layer = 3
 {
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad3
-		return
+	{ ; Keyboard Remapping Layer 3
+		tab::AppsKey
+		
+		/*
+			{ ; f Remapping Layer 3
+				$f::
+				KeyWait f, t0.100
+				t:= A_TimeSinceThisHotkey
+				If ErrorLevel
+				{
+					SendInput {k down}
+					KeyWait f
+					SendInput {k up}
+				}
+				else
+				{
+					SendInput {j down}
+					sleep 32
+					SendInput {j up}
+				}
+				return
+			}
+		*/
+		
+		{ ; r Remapping Layer 3
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {i down}
+				KeyWait r
+				SendInput {i up}
+			}
+			else
+			{
+				SendInput {u down}
+				sleep 32
+				SendInput {u up}
+			}
+			return
+		}
 	}
-	else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait Numpad3
-	}
-	Return
 }
-
-#IfWinActive
+#If ; End of If Layer 3

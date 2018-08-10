@@ -5,7 +5,7 @@ Layer := 1
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
-SetTitleMatchMode, 2
+SetTitleMatchMode, 3
 ;#InstallKeybdHook
 ;#InstallMouseHook
 
@@ -249,15 +249,15 @@ $e::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		Send {SC004 Down}
+		Send {" Down}
 		KeyWait, e
-		Send {SC004 Up}
+		Send {" Up}
 	}
 	Else if (Layer=2) and WinActive(Settlers 7 Window)
 	{
-		Send {SC004 Down}
+		Send {" Down}
 		KeyWait, e
-		Send {SC004 Up}
+		Send {" Up}
 	}
 	Else
 	{

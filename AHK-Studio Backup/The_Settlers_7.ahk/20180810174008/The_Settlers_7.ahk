@@ -222,86 +222,6 @@ WheelDown::
 	}
 }
 
-$q::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else
-	{
-		Send {q Down}
-		KeyWait, q
-		Send {q Up}
-	}
-	Return
-}
-
-$e::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else
-	{
-		Send {e Down}
-		KeyWait, e
-		Send {e Up}
-	}
-	Return
-}
-
-$w::
-{
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {é Down}
-		KeyWait, w
-		Send {é Up}
-	}
-	Else
-	{
-		Send {w Down}
-		KeyWait, w
-		Send {w Up}
-	}
-	Return
-}
-
-$Tab::
-{
-	If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, Tab
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Return
-}
-
 $y::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
@@ -628,7 +548,7 @@ $r::
 }
 
 #IfWinActive Settlers 7 Window
-
+	
 LAlt::
 {
 	PixelGetColor, color, 1889, 95
@@ -751,3 +671,60 @@ Numpad3::
 }
 
 #IfWinActive
+	
+#if Layer = 2 
+{		
+	{ ; Keyboard Remapping Layer 2
+		q::&
+		w::é
+		e::"
+		tab::esc
+		
+		{ ; r Remapping Layer 2
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {y down}
+				KeyWait r
+				SendInput {y up}
+			}
+			else
+			{
+				SendInput {t down}
+				sleep 32
+				SendInput {t up}
+			}
+			return
+		}
+	}	
+}
+#If ; End of If Layer 2
+	
+#if Layer = 3
+{
+	{ ; Keyboard Remapping Layer 3
+		tab::AppsKey
+		
+		{ ; r Remapping Layer 3
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {i down}
+				KeyWait r
+				SendInput {i up}
+			}
+			else
+			{
+				SendInput {u down}
+				sleep 32
+				SendInput {u up}
+			}
+			return
+		}
+	}
+}
+#If ; End of If Layer 3

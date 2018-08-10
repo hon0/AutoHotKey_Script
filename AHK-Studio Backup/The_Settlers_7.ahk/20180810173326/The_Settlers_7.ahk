@@ -80,7 +80,7 @@ SetTitleMatchMode, 2
 	}
 } ; End of AutoHotKey Script option.
 
-/* ; Get exit cross cOlo
+/*
 	#z::	
 	PixelGetColor, color, 1889, 95
 	MsgBox The color at X1889 Y95 is %color%.
@@ -220,86 +220,6 @@ WheelDown::
 		Send {WheelDown}
 		Return
 	}
-}
-
-$q::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {& Down}
-		KeyWait, q
-		Send {& Up}
-	}
-	Else
-	{
-		Send {q Down}
-		KeyWait, q
-		Send {q Up}
-	}
-	Return
-}
-
-$e::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {SC004 Down}
-		KeyWait, e
-		Send {SC004 Up}
-	}
-	Else
-	{
-		Send {e Down}
-		KeyWait, e
-		Send {e Up}
-	}
-	Return
-}
-
-$w::
-{
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		Send {é Down}
-		KeyWait, w
-		Send {é Up}
-	}
-	Else
-	{
-		Send {w Down}
-		KeyWait, w
-		Send {w Up}
-	}
-	Return
-}
-
-$Tab::
-{
-	If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, Tab
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Return
 }
 
 $y::
@@ -501,36 +421,17 @@ $c::
 		}
 		Return
 	}
-	Else
-	{
-		Send {c Down}
-		KeyWait, c
-		Send {c Up}
-		Return
-	}
-	Return
 }
 
 $v::
 {
-	If WinActive(Settlers 7 Window)
-	{
-		Send, {v Down}
-		Sleep 32
-		Send, {v Up}
-		ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		KeyWait, v
-		return
-	}	
-	Else
-	{
-		Send {v Down}
-		KeyWait, v
-		Send {v Up}
-		Return
-	}
-	Return
+	Send, {v Down}
+	Sleep 32
+	Send, {v Up}
+	ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+	ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+	KeyWait, v
+	return
 }
 
 $f::
@@ -751,3 +652,60 @@ Numpad3::
 }
 
 #IfWinActive
+	
+#if Layer = 2 
+{		
+	{ ; Keyboard Remapping Layer 2
+		q::&
+		w::é
+		e::"
+		tab::esc
+				
+		{ ; r Remapping Layer 2
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {y down}
+				KeyWait r
+				SendInput {y up}
+			}
+			else
+			{
+				SendInput {t down}
+				sleep 32
+				SendInput {t up}
+			}
+			return
+		}
+	}	
+}
+#If ; End of If Layer 2
+	
+#if Layer = 3
+{
+	{ ; Keyboard Remapping Layer 3
+		tab::AppsKey
+				
+		{ ; r Remapping Layer 3
+			$r::
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {i down}
+				KeyWait r
+				SendInput {i up}
+			}
+			else
+			{
+				SendInput {u down}
+				sleep 32
+				SendInput {u up}
+			}
+			return
+		}
+	}
+}
+#If ; End of If Layer 3
