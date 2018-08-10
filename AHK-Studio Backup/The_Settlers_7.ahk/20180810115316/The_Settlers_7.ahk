@@ -1,6 +1,6 @@
 ﻿#SingleInstance force
 #Persistent  ; Keep this script running until the user explicitly exits it.
-;#Warn  ; Enable warnings to assist with detecting common errors.
+#Warn  ; Enable warnings to assist with detecting common errors.
 Layer := 1
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -136,95 +136,20 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-XButton2::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait XButton2, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SetKeyDelay 10, 32
-			Send, ^(
-			KeyWait, XButton2
-		}
-		else
-		{
-			SetKeyDelay 10, 32
-			Send, ^'
-			KeyWait, XButton2
-		}
-		return
-	}
-}
-
-XButton1::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait XButton1, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SetKeyDelay 10, 32
-			Send, ^è
-			KeyWait, XButton1
-		}
-		else
-		{
-			SetKeyDelay 10, 32
-			Send, ^"
-			KeyWait, XButton1
-		}
-		return
-	}
-}
-
-$y::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{ ; y Reampping Layer 1
-		KeyWait y, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {t down}
-			Sleep 32
-			SendInput {t up}
-			ControlSend, Edit3, ^a21, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, y
-		}
-		else
-		{
-			SendInput {y down}
-			sleep 32
-			SendInput {y up}
-			ControlSend, Edit3, ^a17, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, y
-		}
-		return
-	}
-}
-Return
-
 #if Layer = 1
 {	
 	{ ; Mouse Remapping Layer 1
-		/*
-			#IfWinActive Settlers 7 Window
-			XButton2::
-			SetKeyDelay 32, 32
-			send, ^'
-			return
-			
-			XButton1::
-			SetKeyDelay 32, 32
-			send, ^"
-			return
-			#If
-		*/
+		#IfWinActive Settlers 7 Window
+		XButton2::
+		SetKeyDelay 32, 32
+		send, ^'
+		return
+		
+		XButton1::
+		SetKeyDelay 32, 32
+		send, ^"
+		return
+		#If
 		
 		{ ; Mouse Wheel Remapping Layer 1
 			~WheelUp:: 
@@ -249,20 +174,14 @@ Return
 			If ErrorLevel
 			{
 				SendInput {b down}
-				Sleep 32
+				KeyWait z
 				SendInput {b up}
-				ControlSend, Edit3, ^a19, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				KeyWait, z
 			}
 			else
 			{
 				SendInput {z down}
 				sleep 32
 				SendInput {z up}
-				ControlSend, Edit3, ^a22, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				KeyWait, z
 			}
 			return
 		}
@@ -278,7 +197,6 @@ Return
 				SendInput {n up}
 				ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 				ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				KeyWait, x
 			}
 			else
 			{
@@ -287,7 +205,6 @@ Return
 				SendInput {x up}
 				ControlSend, Edit3, ^a17, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 				ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-				KeyWait, x
 				return
 			}
 			return
@@ -301,18 +218,6 @@ Return
 			Send, {c Up}
 			ControlSend, Edit3, ^a19, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, c
-			return
-		}
-		
-		{ ; v Remapping Layer 1
-			$v::
-			Send, {v Down}
-			Sleep 32
-			Send, {v Up}
-			ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, v
 			return
 		}
 		
@@ -436,21 +341,22 @@ Return
 	} ; End of Keyboard remapping	
 }
 #If ; End of If Layer 1	
-	
+
 #if Layer = 2 
 {		
 	{ ; Mouse Remapping Layer 2
-		/*
-				XButton2::
-			SetKeyDelay 32, 32
-			send, ^(
-			return
-			
-			XButton1::
-			SetKeyDelay 32, 32
-			send, ^è
-			return
-		*/
+		#IfWinActive Settlers 7 Window
+		
+		XButton2::
+		SetKeyDelay 32, 32
+		send, ^(
+		return
+		
+		XButton1::
+		SetKeyDelay 32, 32
+		send, ^è
+		return
+		#If
 		
 		{ ; Mouse Wheel Layer 2
 			~WheelUp:: 
@@ -570,16 +476,14 @@ Return
 	}	
 }
 #If ; End of If Layer 2
-	
+
 #if Layer = 3
 {
 	{ ; Mouse Remapping Layer 3
 		LButton::F3
 		RButton::F2
-		/*
-			XButton1::^F5
-			XButton2::F5	
-		*/
+		XButton1::^F5
+		XButton2::F5	
 		
 		{ ; Mouse Wheel Layer 3
 			~WheelUp::

@@ -156,6 +156,12 @@ XButton2::
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 10, 32
+		Send, XButton2
+	}
+	Return
 }
 
 XButton1::
@@ -178,6 +184,12 @@ XButton1::
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 10, 32
+		Send, XButton1
+	}
+	Return
 }
 
 $y::

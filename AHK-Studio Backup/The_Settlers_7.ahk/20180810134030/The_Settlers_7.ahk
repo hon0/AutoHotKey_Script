@@ -140,7 +140,7 @@ XButton2::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		KeyWait XButton2, t0.100
+		KeyWait XButton2, t0.067
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
@@ -156,13 +156,19 @@ XButton2::
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 10, 32
+		Send, ^è
+	}
+	Return
 }
 
 XButton1::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		KeyWait XButton1, t0.100
+		KeyWait XButton1, t0.067
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
@@ -178,6 +184,12 @@ XButton1::
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 10, 32
+		Send, ^è
+	}
+	Return
 }
 
 $y::

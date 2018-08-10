@@ -140,44 +140,53 @@ XButton2::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		KeyWait XButton2, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SetKeyDelay 10, 32
-			Send, ^(
-			KeyWait, XButton2
-		}
-		else
-		{
-			SetKeyDelay 10, 32
-			Send, ^'
-			KeyWait, XButton2
-		}
-		return
+		SetKeyDelay 32, 32
+		Send, ^'
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 32, 32
+		Send, ^(
+	}
+	Return
 }
 
 XButton1::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait XButton1, t0.100
+	/*
+		{
+			SetKeyDelay 32, 32
+			Send, ^"
+		}
+	*/
+	{ ; y Reampping Layer 1
+		KeyWait XButton1, t0.200
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
-			SetKeyDelay 10, 32
+			SetKeyDelay 32, 32
 			Send, ^è
+			ControlSend, Edit3, ^a21, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, XButton1
 		}
 		else
 		{
-			SetKeyDelay 10, 32
+			SetKeyDelay 32, 32
 			Send, ^"
+			ControlSend, Edit3, ^a17, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
+			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, XButton1
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		SetKeyDelay 32, 32
+		Send, ^è
+	}
+	Return
 }
 
 $y::
