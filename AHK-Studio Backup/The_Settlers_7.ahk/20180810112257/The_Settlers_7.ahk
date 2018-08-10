@@ -193,7 +193,6 @@ SetTitleMatchMode, 2
 			return
 		}
 		
-		#IfWinActive Settlers 7 Window
 		{ ; x Reampping Layer 1
 			$x::
 			KeyWait x, t0.200
@@ -229,7 +228,7 @@ SetTitleMatchMode, 2
 			return
 		}
 		
-		
+		#IfWinActive Settlers 7 Window
 		{ ; LAlt
 			LAlt::
 			PixelGetColor, color, 1889, 95
@@ -345,7 +344,7 @@ SetTitleMatchMode, 2
 			Return
 		}
 		#IfWinActive
-		
+			
 	} ; End of Keyboard remapping	
 }
 #If ; End of If Layer 1	

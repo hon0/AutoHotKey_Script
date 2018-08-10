@@ -193,7 +193,6 @@ SetTitleMatchMode, 2
 			return
 		}
 		
-		#IfWinActive Settlers 7 Window
 		{ ; x Reampping Layer 1
 			$x::
 			KeyWait x, t0.200
@@ -229,7 +228,7 @@ SetTitleMatchMode, 2
 			return
 		}
 		
-		
+		#IfWinActive Settlers 7 Window
 		{ ; LAlt
 			LAlt::
 			PixelGetColor, color, 1889, 95
@@ -345,13 +344,15 @@ SetTitleMatchMode, 2
 			Return
 		}
 		#IfWinActive
-		
+			
 	} ; End of Keyboard remapping	
 }
 #If ; End of If Layer 1	
+	
 
-#if Layer = 2 
-{		
+{ ;#if Layer = 2 
+	#if Layer = 2 
+		
 	{ ; Mouse Remapping Layer 2
 		XButton2::
 		SetKeyDelay 32, 32
@@ -424,6 +425,7 @@ SetTitleMatchMode, 2
 			return
 		}
 		
+		#IfWinActive Settlers 7 Window
 		{ ; x Remapping Layer 2
 			x:: 
 			PixelGetColor, color, 1889, 95
@@ -480,13 +482,17 @@ SetTitleMatchMode, 2
 				BlockInput, Off
 			}
 			Return
-		}	
-	}	
+		}
+		#IfWinActive Settlers 7 Window
+			
+	} ; End of Keyboard Remapping Layer 2
+	
+	#If ; End of If Layer 2	
 }
-#If ; End of If Layer 2
 
-#if Layer = 3
-{
+{ ;#if Layer = 3
+	#if Layer = 3
+		
 	{ ; Mouse Remapping Layer 3
 		LButton::F3
 		RButton::F2
@@ -559,5 +565,6 @@ SetTitleMatchMode, 2
 			return
 		}
 	}
+	
+	#If ; End of If Layer 3
 }
-#If ; End of If Layer 3

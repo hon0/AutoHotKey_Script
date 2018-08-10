@@ -192,7 +192,6 @@ SetTitleMatchMode, 2
 			}
 			return
 		}
-		
 		#IfWinActive Settlers 7 Window
 		{ ; x Reampping Layer 1
 			$x::
