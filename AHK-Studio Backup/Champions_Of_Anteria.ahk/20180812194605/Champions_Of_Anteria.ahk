@@ -136,19 +136,6 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-Down::
-{
-	SetkeyDelay 32
-	Loop
-	{
-		Send {Down}
-		Sleep 32	
-		If (GetKeyState("Down","P")=0)
-			Break
-	}
-	Return
-}
-
 XButton2::
 {
 	If (Layer=1) ;and WinActive(Champions of Anteria)
@@ -164,21 +151,25 @@ XButton2::
 			}
 			else
 		*/
-		/*
-			{
-				Send {F3 Down}
-				Sleep 32
-				Send {F3 Up}
-			}
-		*/
+		{
+			Send {F3 Down}
+			Sleep 32
+			Send {F3 Up}
+		}
 		Return
 	}
 }
 
-XButton1::
+$XButton1::
 {
 	If (Layer=1) ;and WinActive(Settlers 7 Window)
 	{
+		If GetKeyState("LShift")
+		{
+			SetkeyDelay, 0, 32
+			Send u
+			Return
+		}
 		/*
 			KeyWait XButton1, t0.100
 			t:= A_TimeSinceThisHotkey
@@ -190,20 +181,15 @@ XButton1::
 			}
 			else
 		*/
-		/*
-			{
-				Send {t Down}
-				KeyWait, XButton1
-				Send {t Up}
-			}
-		*/
+		Else
+		{
+			Send {t Down}
+			KeyWait, XButton2
+			Send {t Up}
+		}
 		Return
 	}
 }
-
-LShift & XButton1::
-send, +t
-return
 
 WheelUp::
 {
@@ -260,23 +246,6 @@ $a::
 		Send {a Down}
 		KeyWait, a
 		Send {a Up}
-	}
-	Return
-}
-
-$SC029::
-{
-	If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, SC029
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {SC029 Down}
-		KeyWait, SC029
-		Send {SC029 Up}
 	}
 	Return
 }

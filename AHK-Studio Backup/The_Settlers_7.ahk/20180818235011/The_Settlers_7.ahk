@@ -36,8 +36,54 @@ SetTitleMatchMode, 2
 	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	^!f:: ; FullScreen Window. Control+Alt+F
-	{
+	
+	/* ; Lock mouse to Window. LControl+LAlt+A. LControl+LAlt+S.
+		{ ; Lock mouse to Window. LControl+LAlt+A. LControl+LAlt+S.
+			^!a::
+			LockMouseToWindow("Settlers 7 Window")
+			Return
+			
+			^!s::
+			LockMouseToWindow()
+			Return
+			
+			
+			LockMouseToWindow(llwindowname="")
+			{
+				VarSetCapacity(llrectA, 16)
+				WinGetPos, llX, llY, llWidth, llHeight, %llwindowname%
+				If (!llWidth AND !llHeight) {
+					DllCall("ClipCursor")
+					Return, False
+				}
+				Loop, 4 { 
+					DllCall("RtlFillMemory", UInt,&llrectA+0+A_Index-1, UInt,1, UChar,llX >> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+4+A_Index-1, UInt,1, UChar,llY >> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+8+A_Index-1, UInt,1, UChar,(llWidth + llX)>> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+12+A_Index-1, UInt,1, UChar,(llHeight + llY) >> 8*A_Index-8) 
+				} 
+				DllCall("ClipCursor", "UInt", &llrectA)
+				Return, True
+			}
+		}
+	*/
+	
+	f1::     ;on
+	WinGetPos, VarX, VarY, Width, Height, A
+	VarX2 := VarX + Width
+	VarY2 := VarY + Height
+	ClipCursor( True, VarX, VarY, VarX2, VarY2)
+	Return
+	
+	f2::ClipCursor( False,0,0,0,0)      ;off
+	
+	ClipCursor( Confine=True, x1=0 , y1=0, x2=1, y2=1 ) {
+		VarSetCapacity(R,16,0),  NumPut(x1,&R+0),NumPut(y1,&R+4),NumPut(x2,&R+8),NumPut(y2,&R+12)
+		Return Confine ? DllCall( "ClipCursor", UInt,&R ) : DllCall( "ClipCursor" )
+	}
+	
+	{ ; FullScreen Window. Control+Alt+F
+		^!f::
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
 		{
@@ -46,7 +92,7 @@ SetTitleMatchMode, 2
 		}
 		return
 	}
-} ; AutoHotKey Script option.
+} ; End of AutoHotKey Script option.
 
 /* ; Get exit cross color
 	#z::	

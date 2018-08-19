@@ -36,8 +36,10 @@ SetTitleMatchMode, 2
 	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	^!f:: ; FullScreen Window. Control+Alt+F
-	{
+	
+	
+	{ ; FullScreen Window. Control+Alt+F
+		^!f::
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
 		{
@@ -46,7 +48,7 @@ SetTitleMatchMode, 2
 		}
 		return
 	}
-} ; AutoHotKey Script option.
+} ; End of AutoHotKey Script option.
 
 /* ; Get exit cross color
 	#z::	

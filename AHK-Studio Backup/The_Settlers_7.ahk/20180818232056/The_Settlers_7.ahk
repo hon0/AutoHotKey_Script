@@ -36,8 +36,40 @@ SetTitleMatchMode, 2
 	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	^!f:: ; FullScreen Window. Control+Alt+F
-	{
+	
+	/* ; Lock mouse to Window. LControl+LAlt+A. LControl+LAlt+S.
+		{ ; Lock mouse to Window. LControl+LAlt+A. LControl+LAlt+S.
+			^!a::
+			LockMouseToWindow("Settlers 7 Window")
+			Return
+			
+			^!s::
+			LockMouseToWindow()
+			Return
+			
+			
+			LockMouseToWindow(llwindowname="")
+			{
+				VarSetCapacity(llrectA, 16)
+				WinGetPos, llX, llY, llWidth, llHeight, %llwindowname%
+				If (!llWidth AND !llHeight) {
+					DllCall("ClipCursor")
+					Return, False
+				}
+				Loop, 4 { 
+					DllCall("RtlFillMemory", UInt,&llrectA+0+A_Index-1, UInt,1, UChar,llX >> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+4+A_Index-1, UInt,1, UChar,llY >> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+8+A_Index-1, UInt,1, UChar,(llWidth + llX)>> 8*A_Index-8) 
+					DllCall("RtlFillMemory", UInt,&llrectA+12+A_Index-1, UInt,1, UChar,(llHeight + llY) >> 8*A_Index-8) 
+				} 
+				DllCall("ClipCursor", "UInt", &llrectA)
+				Return, True
+			}
+		}
+	*/
+	
+	{ ; FullScreen Window.	
+		^!f::
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
 		{
@@ -46,7 +78,7 @@ SetTitleMatchMode, 2
 		}
 		return
 	}
-} ; AutoHotKey Script option.
+} ; End of AutoHotKey Script option.
 
 /* ; Get exit cross color
 	#z::	
@@ -159,7 +191,7 @@ WheelUp::
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {PgDn}
+		Send {PgUp}
 		Return
 	}
 	Else
@@ -167,7 +199,6 @@ WheelUp::
 		Send {WheelUp}
 		Return
 	}
-	Return
 }
 
 WheelDown::
@@ -181,7 +212,7 @@ WheelDown::
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {PGUP}
+		Send {PgDn}
 		Return
 	}
 	Else
@@ -189,7 +220,6 @@ WheelDown::
 		Send {WheelDown}
 		Return
 	}
-	Return
 }
 
 $q::
@@ -291,6 +321,7 @@ $z::
 			ControlSend, Edit3, ^a22, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, z
+			
 		}
 		else
 		{
@@ -303,6 +334,33 @@ $z::
 		}
 		return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		PixelGetColor, color, 1889, 95
+		if color = 0x20396f ;0x20396F 
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 208
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+		}
+		else
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			SetKeyDelay 32, 32
+			Send {NumpadEnter}
+			MouseClick, left, 1732, 208
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+		}
+		Return
+	}
 	Else
 	{
 		Send {z Down}
@@ -310,7 +368,6 @@ $z::
 		Send {z Up}
 		Return
 	}
-	Return
 }
 
 $x::
@@ -339,6 +396,33 @@ $x::
 		}
 		Return
 	}
+	Else if (Layer=2) and WinActive(Settlers 7 Window)
+	{
+		PixelGetColor, color, 1889, 95
+		if color = 0x20396f ;0x20396F 
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 208
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+		}
+		else
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			SetKeyDelay 32, 32
+			Send {NumpadEnter}
+			MouseClick, left, 1732, 208
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+		}
+		Return
+	}
 	Else
 	{
 		Send {x Down}
@@ -346,7 +430,6 @@ $x::
 		Send {x Up}
 		Return
 	}
-	Return
 }
 
 $c::
@@ -369,11 +452,11 @@ $c::
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
 			Send, {PGUP Down}
-			MouseClick, left, 1732, 208
+			MouseClick, left, 1732, 242
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, c
+			return
 		}
 		else
 		{
@@ -382,11 +465,10 @@ $c::
 			Send, {PGUP Down}
 			SetKeyDelay 32, 32
 			Send {NumpadEnter}
-			MouseClick, left, 1732, 208
+			MouseClick, left, 1732, 242
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, c
 		}
 		Return
 	}
@@ -402,7 +484,7 @@ $c::
 
 $v::
 {
-	If (Layer=1) and WinActive(Settlers 7 Window)
+	If WinActive(Settlers 7 Window)
 	{
 		Send, {v Down}
 		Sleep 32
@@ -412,35 +494,6 @@ $v::
 		KeyWait, v
 		return
 	}	
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		PixelGetColor, color, 1889, 95
-		if color = 0x20396f ;0x20396F 
-		{
-			MouseGetPos, xpos, ypos 
-			BlockInput, On
-			Send, {PGUP Down}
-			MouseClick, left, 1732, 242
-			MouseMove, xpos, ypos 
-			Send, {PGUP Up}
-			BlockInput, Off
-			KeyWait, v
-		}
-		else
-		{
-			MouseGetPos, xpos, ypos 
-			BlockInput, On
-			Send, {PGUP Down}
-			SetKeyDelay 32, 32
-			Send {NumpadEnter}
-			MouseClick, left, 1732, 242
-			MouseMove, xpos, ypos 
-			Send, {PGUP Up}
-			BlockInput, Off
-			KeyWait, v
-		}
-		Return
-	}
 	Else
 	{
 		Send {v Down}
@@ -564,6 +617,7 @@ LAlt::
 		Send, {PGUP Up}
 		BlockInput, Off
 		KeyWait LAlt
+		Return
 	}
 	else
 	{
@@ -576,8 +630,8 @@ LAlt::
 		Send, {PGUP Up}
 		BlockInput, Off
 		KeyWait LAlt
+		Return
 	}
-	Return
 }
 
 F13::
@@ -592,7 +646,7 @@ F13::
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F13
+		KeyWait Numpad1
 	}
 	Else
 	{
@@ -605,7 +659,7 @@ F13::
 		MouseMove, xpos, ypos
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F13
+		KeyWait Numpad1
 	}
 	Return
 }
@@ -622,7 +676,7 @@ F14::
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F14
+		KeyWait Numpad2
 	}
 	Else
 	{
@@ -635,7 +689,7 @@ F14::
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F14
+		KeyWait Numpad2
 	}
 	Return
 }
@@ -652,7 +706,8 @@ F15::
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F15
+		KeyWait Numpad3
+		return
 	}
 	else
 	{
@@ -665,7 +720,7 @@ F15::
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F15
+		KeyWait Numpad3
 	}
 	Return
 }

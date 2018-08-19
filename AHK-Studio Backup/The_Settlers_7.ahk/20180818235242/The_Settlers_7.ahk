@@ -36,8 +36,52 @@ SetTitleMatchMode, 2
 	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	^!f:: ; FullScreen Window. Control+Alt+F
+	
+	; Lock mouse to Window. LControl+LAlt+A. LControl+LAlt+S.
+	^space::
+	LockMouseToWindow()
+	sleep 3000           ; to have some time to deactivate window!
+	Hotkey, Lbutton,on
+	return
+	
+	
+	esc::
+	LockMouseToWindow()
+	exitapp
+	
+	#IfWinExist Notepad
+		~Lbutton::
+	MouseGetPos, ,,hwnd
+	WinGetTitle, title,ahk_id %hwnd%
+	ifinstring, title,Notepad
 	{
+		LockMouseToWindow("Notepad")
+		Hotkey, Lbutton,off
+	}
+	return
+	
+	
+	LockMouseToWindow(llwindowname="")
+	{
+		VarSetCapacity(llrectA, 16)
+		WinGetPos, llX, llY, llWidth, llHeight, %llwindowname%
+		If (!llWidth AND !llHeight) {
+			DllCall("ClipCursor")
+			Return, False
+		}
+		Loop, 4 { 
+			DllCall("RtlFillMemory", UInt,&llrectA+0+A_Index-1, UInt,1, UChar,llX >> 8*A_Index-8) 
+			DllCall("RtlFillMemory", UInt,&llrectA+4+A_Index-1, UInt,1, UChar,llY >> 8*A_Index-8) 
+			DllCall("RtlFillMemory", UInt,&llrectA+8+A_Index-1, UInt,1, UChar,(llWidth + llX)>> 8*A_Index-8) 
+			DllCall("RtlFillMemory", UInt,&llrectA+12+A_Index-1, UInt,1, UChar,(llHeight + llY) >> 8*A_Index-8) 
+		} 
+		DllCall("ClipCursor", "UInt", &llrectA)
+		Return, True
+	}
+	Return
+	
+	{ ; FullScreen Window. Control+Alt+F
+		^!f::
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
 		{
@@ -46,7 +90,7 @@ SetTitleMatchMode, 2
 		}
 		return
 	}
-} ; AutoHotKey Script option.
+} ; End of AutoHotKey Script option.
 
 /* ; Get exit cross color
 	#z::	

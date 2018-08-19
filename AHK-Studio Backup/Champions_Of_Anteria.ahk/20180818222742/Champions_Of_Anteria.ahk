@@ -138,9 +138,9 @@ SetTitleMatchMode, 2
 
 Down::
 {
-	SetkeyDelay 32
 	Loop
 	{
+		SetkeyDelay 32
 		Send {Down}
 		Sleep 32	
 		If (GetKeyState("Down","P")=0)

@@ -137,8 +137,8 @@ SetTitleMatchMode, 2
 }
 
 Down::
+SetkeyDelay 32
 {
-	SetkeyDelay 32
 	Loop
 	{
 		Send {Down}

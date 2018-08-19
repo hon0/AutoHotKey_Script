@@ -137,17 +137,15 @@ SetTitleMatchMode, 2
 }
 
 Down::
+Loop
 {
 	SetkeyDelay 32
-	Loop
-	{
-		Send {Down}
-		Sleep 32	
-		If (GetKeyState("Down","P")=0)
-			Break
-	}
-	Return
+	Send {Down}
+	Sleep 32	
+	If (GetKeyState("Down","P")=0)
+		Break
 }
+Return
 
 XButton2::
 {

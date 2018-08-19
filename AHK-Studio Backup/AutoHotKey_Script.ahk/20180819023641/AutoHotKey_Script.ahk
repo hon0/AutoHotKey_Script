@@ -327,104 +327,6 @@ WheelDown::
 	Return
 }
 
-$Tab::
-{
-	If (Layer=1)
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Else If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, Tab
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Return
-}
-
-$w::
-{
-	If (Layer=1)
-	{
-		Send {w Down}
-		KeyWait, w
-		Send {w Up}
-		Return
-	}
-	Else If (Layer=2)
-	{
-		Send {b Down}
-		KeyWait, w
-		Send {b Up}
-		Return
-	}
-	Else if (Layer=3)
-	{
-		Send {Numpad1 Down}
-		KeyWait, w
-		Send {Numpad1 Up}
-		Return
-	}
-}
-
-$x::
-{
-	If (Layer=1)
-	{
-		Send {x Down}
-		KeyWait, x
-		Send {x Up}
-		Return
-	}
-	Else If (Layer=2)
-	{
-		Send {n Down}
-		KeyWait, x
-		Send {n Up}
-		Return
-	}
-	Else if (Layer=3)
-	{
-		Send {Numpad2 Down}
-		KeyWait, x
-		Send {Numpad2 Up}
-		Return
-	}
-}
-
-$c::
-{
-	If (Layer=1)
-	{
-		Send {c Down}
-		KeyWait, c
-		Send {c Up}
-		Return
-	}
-	Else If (Layer=2)
-	{
-		Send {, Down}
-		KeyWait, c
-		Send {, Up}
-		Return
-	}
-	Else if (Layer=3)
-	{
-		Send {Numpad3 Down}
-		KeyWait, c
-		Send {Numpad3 Up}
-		Return
-	}
-}
-
 $r::
 {
 	If (Layer=1)
@@ -463,7 +365,6 @@ $r::
 			SendInput {i down}
 			sleep 32
 			SendInput {i up}
-			KeyWait, r
 		}
 		else
 		{
@@ -510,7 +411,7 @@ $f::
 			SendInput {g up}
 			KeyWait, f
 		}
-		Return
+		return
 	}
 	Else if (Layer=3)
 	{
@@ -521,16 +422,14 @@ $f::
 			SendInput {k down}
 			sleep 32
 			SendInput {k up}
-			KeyWait, f
 		}
 		else
 		{
 			SendInput {j down}
 			sleep 32
 			SendInput {j up}
-			KeyWait, f
 		}
-		Return
+		return
 	}
 	Else
 	{
@@ -541,32 +440,8 @@ $f::
 	}
 }
 
-$v::
-{
-	If (Layer=1)
-	{
-		Send {v Down}
-		KeyWait, v
-		Send {v Up}
-		Return
-	}
-	Else If (Layer=2)
-	{
-		Send {; Down}
-		KeyWait, v
-		Send {; Up}
-		Return
-	}
-	Else if (Layer=3)
-	{
-		Send {! Down}
-		KeyWait, v
-		Send {! Up}
-		Return
-	}
-}
 
-{ ; HotStrings
+{ ;HotStrings
 	
 :*:ahk::AutoHotKey
 	

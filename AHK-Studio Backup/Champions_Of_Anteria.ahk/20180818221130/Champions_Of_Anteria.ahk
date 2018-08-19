@@ -136,19 +136,6 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-Down::
-{
-	SetkeyDelay 32
-	Loop
-	{
-		Send {Down}
-		Sleep 32	
-		If (GetKeyState("Down","P")=0)
-			Break
-	}
-	Return
-}
-
 XButton2::
 {
 	If (Layer=1) ;and WinActive(Champions of Anteria)

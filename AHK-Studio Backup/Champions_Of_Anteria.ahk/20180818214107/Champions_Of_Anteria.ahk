@@ -136,19 +136,6 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-Down::
-{
-	SetkeyDelay 32
-	Loop
-	{
-		Send {Down}
-		Sleep 32	
-		If (GetKeyState("Down","P")=0)
-			Break
-	}
-	Return
-}
-
 XButton2::
 {
 	If (Layer=1) ;and WinActive(Champions of Anteria)
@@ -164,13 +151,11 @@ XButton2::
 			}
 			else
 		*/
-		/*
-			{
-				Send {F3 Down}
-				Sleep 32
-				Send {F3 Up}
-			}
-		*/
+		{
+			Send {F3 Down}
+			Sleep 32
+			Send {F3 Up}
+		}
 		Return
 	}
 }
@@ -190,13 +175,11 @@ XButton1::
 			}
 			else
 		*/
-		/*
-			{
-				Send {t Down}
-				KeyWait, XButton1
-				Send {t Up}
-			}
-		*/
+		{
+			Send {t Down}
+			KeyWait, XButton1
+			Send {t Up}
+		}
 		Return
 	}
 }

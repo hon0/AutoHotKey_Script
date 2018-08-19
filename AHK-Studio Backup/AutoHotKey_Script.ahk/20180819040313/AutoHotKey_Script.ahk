@@ -327,29 +327,6 @@ WheelDown::
 	Return
 }
 
-$Tab::
-{
-	If (Layer=1)
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Else If (Layer=2)
-	{
-		Send {esc Down}
-		KeyWait, Tab
-		Send {esc Up}
-	}
-	Else
-	{
-		Send {Tab Down}
-		KeyWait, Tab
-		Send {Tab Up}
-	}
-	Return
-}
-
 $w::
 {
 	If (Layer=1)
@@ -510,7 +487,7 @@ $f::
 			SendInput {g up}
 			KeyWait, f
 		}
-		Return
+		return
 	}
 	Else if (Layer=3)
 	{
@@ -530,7 +507,7 @@ $f::
 			SendInput {j up}
 			KeyWait, f
 		}
-		Return
+		return
 	}
 	Else
 	{
@@ -566,7 +543,7 @@ $v::
 	}
 }
 
-{ ; HotStrings
+{ ;HotStrings
 	
 :*:ahk::AutoHotKey
 	
