@@ -16,9 +16,6 @@ AntiShipShipFilter :=0
 NavalSupportFireFilter :=0
 NavalMiscellaneous := 0
 ScoutFilter := 0
-LandFabricatorFilter := 0
-AirAndOrbitalFabricatorFilter := 0
-SeaFabricatorFilter := 0
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
@@ -524,103 +521,6 @@ $SC004:: ; Scout selection
 	Return
 }
 
-LAlt & SC004::
-{
-	If GetKeyState("MButton", "P")=1
-	{
-		Sendinput {MButton Up}{LAlt Down}{Numpad3}{LAlt Up}{MButton Down}
-		KeyWait SC004
-	}
-	Else
-	{
-		Send {LAlt Down}{Numpad3}{LAlt Up}y
-		KeyWait SC004
-	}
-	Return
-}
-
-/*
-	LAlt & f:: ; Fabricator selection
-	{
-		KeyWait, f, T0.150
-		If (ErrorLevel) ; Select Advcaned Bot Fabricator
-		{
-			If GetKeyState("MButton", "P")=1
-			{
-				Send {MButton Up}{LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-				Sleep 67
-				Send {h}
-				If GetKeyState("MButton", "P")=1
-				{
-					Send {MButton Down}
-				}
-				NavalHeaviesFilter := 2
-				KeyWait f
-			}
-			Else
-			{
-				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-				Sleep 67
-				Send {h}
-				NavalHeaviesFilter := 2
-				KeyWait f
-			}
-		}
-		Else 
-		{
-			KeyWait, f, D T0.150
-			If (ErrorLevel) ; Select Orca
-			{
-				If GetKeyState("MButton", "P")=1
-				{
-					Send {MButton Up}{LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-					Sleep 67
-					Send {u}
-					If GetKeyState("MButton", "P")=1
-					{
-						Send {MButton Down}
-					}
-					NavalHeaviesFilter := 1
-					KeyWait f
-				}
-				Else
-				{
-					Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-					Sleep 67
-					Send {u}
-					NavalHeaviesFilter := 1
-					KeyWait f
-				}
-			}
-			Else ; Select Typhoon
-			{
-				If GetKeyState("MButton", "P")=1
-				{
-					Send {MButton Up}{LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-					Sleep 67
-					Send {n}
-					If GetKeyState("MButton", "P")=1
-					{
-						Send {MButton Down}
-					}
-					NavalHeaviesFilter := 3
-					KeyWait f
-				}
-				Else
-				{
-					Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
-					Sleep 67
-					Send {n}
-					NavalHeaviesFilter := 3
-					KeyWait f
-				}
-			}
-		}
-		KeyWait, f
-		Return
-	}
-*/
-
 SC005:: ; Fighter selection, See LButton Filter
 {
 	KeyWait, SC005, T0.2
@@ -779,7 +679,7 @@ SC006:: ; Air bomber selection, See LButton Filter
 
 F13:: ; Heavies selection, See LButton Filter
 {
-	KeyWait, F13, T0.150
+	KeyWait, F13, T0.1
 	If (ErrorLevel) ; Select Vanguard
 	{
 		If GetKeyState("MButton", "P")=1
@@ -805,7 +705,7 @@ F13:: ; Heavies selection, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F13, D T0.150
+		KeyWait, F13, D T0.1
 		If (ErrorLevel) ; Select Inferno
 		{
 			If GetKeyState("MButton", "P")=1
@@ -859,7 +759,7 @@ F13:: ; Heavies selection, See LButton Filter
 
 SC029 & F13:: ; Naval heavies, See LButton Filter
 {
-	KeyWait, F13, T0.150
+	KeyWait, F13, T0.1
 	If (ErrorLevel) ; Select Leviathan
 	{
 		If GetKeyState("MButton", "P")=1
@@ -885,7 +785,7 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F13, D T0.150
+		KeyWait, F13, D T0.1
 		If (ErrorLevel) ; Select Orca
 		{
 			If GetKeyState("MButton", "P")=1
@@ -939,7 +839,7 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 
 F14:: ; Tank selection, See LButton Filter
 {
-	KeyWait, F14, T0.150
+	KeyWait, F14, T0.1
 	If (ErrorLevel) ; Select Leveler
 	{
 		If GetKeyState("MButton", "P")=1
@@ -965,7 +865,7 @@ F14:: ; Tank selection, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F14, D T0.150
+		KeyWait, F14, D T0.1
 		If (ErrorLevel) ; Select Ant
 		{
 			If GetKeyState("MButton", "P")=1
@@ -1019,7 +919,7 @@ F14:: ; Tank selection, See LButton Filter
 
 SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 {
-	KeyWait, F14, T0.150
+	KeyWait, F14, T0.1
 	If (ErrorLevel) ; Select Kraken
 	{
 		If GetKeyState("MButton", "P")=1
@@ -1045,7 +945,7 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F14, D T0.150
+		KeyWait, F14, D T0.1
 		If (ErrorLevel) ; Select Barracuda
 		{
 			If GetKeyState("MButton", "P")=1
@@ -1179,7 +1079,7 @@ F15:: ; Assault Bot selection, See LButton Filter
 
 SC029 & F15:: ; Naval support fire, See LButton Filter
 {
-	KeyWait, F15, T0.150
+	KeyWait, F15, T0.1
 	If (ErrorLevel) ; Select Stingray
 	{
 		If GetKeyState("MButton", "P")=1
@@ -1205,7 +1105,7 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F15, D T0.150
+		KeyWait, F15, D T0.1
 		If (ErrorLevel) ; Select Narwhal
 		{
 			If GetKeyState("MButton", "P")=1
@@ -1339,7 +1239,7 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 
 SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 {
-	KeyWait, F16, T0.150
+	KeyWait, F16, T0.1
 	If (ErrorLevel) ; Select Kaiju
 	{
 		If GetKeyState("MButton", "P")=1
@@ -1365,7 +1265,7 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F16, D T0.150
+		KeyWait, F16, D T0.1
 		If (ErrorLevel) ; Select Piranha
 		{
 			If GetKeyState("MButton", "P")=1
@@ -1499,12 +1399,12 @@ F17:: ; Air Defense selection, See LButton Filter
 
 F18:: ; Repair unit selection, See LButton Filter
 {
-	KeyWait, F18, T0.150
+	KeyWait, F18, T0.1
 	If (ErrorLevel) ; Select Mend
 	{
 		If GetKeyState("MButton", "P")=1
 		{
-			Send {MButton Up}{LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
+			Send {MButton Up}{F5}
 			Sleep 67
 			Send {k}
 			If GetKeyState("MButton", "P")=1
@@ -1516,7 +1416,7 @@ F18:: ; Repair unit selection, See LButton Filter
 		}
 		Else
 		{
-			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
+			Send {F5}
 			Sleep 67
 			Send {k}
 			RepairUnitFilter := 2
@@ -1525,7 +1425,7 @@ F18:: ; Repair unit selection, See LButton Filter
 	}
 	Else 
 	{
-		KeyWait, F18, D T0.150
+		KeyWait, F18, D T0.1
 		If (ErrorLevel) ; Select Sticht
 		{
 			If GetKeyState("MButton", "P")=1
@@ -1553,7 +1453,7 @@ F18:: ; Repair unit selection, See LButton Filter
 		{
 			If GetKeyState("MButton", "P")=1
 			{
-				Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
+				Send {MButton Up}{F5}
 				Sleep 67
 				Send {n}
 				If GetKeyState("MButton", "P")=1
@@ -1565,9 +1465,9 @@ F18:: ; Repair unit selection, See LButton Filter
 			}
 			Else
 			{
-				Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
-				Sleep 67
-				Send {n}
+				;Send {F5}
+				;Sleep 67
+				;Send {n}
 				RepairUnitFilter := 3
 				KeyWait F18
 			}
@@ -1926,7 +1826,7 @@ Tab:: ; Cycle unit in selection and center on it
 	Else	If ScoutFilter = 2 ; Selection filter Skitter
 	{
 		Sleep 67
-		Send {LControl Down}{Numpad1}{Numpad9}{LControl Up}
+		Send {SC004}{LControl Down}{Numpad1}{LControl Up}
 		Sleep 67
 		Send {i}
 		ScoutFilter := 0
@@ -1935,7 +1835,7 @@ Tab:: ; Cycle unit in selection and center on it
 	Else	If ScoutFilter = 1 ; Selection filter FireFly
 	{
 		Sleep 67
-		Send {LControl Down}{Numpad2}{LControl Up}
+		Send {SC004}{LControl Down}{Numpad2}{LControl Up}
 		Sleep 67
 		Send {i}
 		ScoutFilter := 0
@@ -1944,37 +1844,10 @@ Tab:: ; Cycle unit in selection and center on it
 	Else	If ScoutFilter = 3 ; Selection filter Hermes
 	{
 		Sleep 67
-		Send {LControl Down}{Numpad4}{LControl Up}
+		Send {SC004}{LControl Down}{Numpad4}{LControl Up}
 		Sleep 67
 		Send {o}
 		ScoutFilter := 0
-		Return
-	}
-	Else	If LandFabricatorFilter = 2 ; Selection filter Skitter
-	{
-		Sleep 67
-		Send {LControl Down}{Numpad1}{Numpad9}{LControl Up}
-		Sleep 67
-		Send {i}
-		ScoutFilter := 0
-		Return
-	}
-	Else	If LandFabricatorFilter = 1 ; Selection filter FireFly
-	{
-		Sleep 67
-		Send {LControl Down}{Numpad2}{LControl Up}
-		Sleep 67
-		Send {i}
-		LandFabricatorFilter := 0
-		Return
-	}
-	Else	If LandFabricatorFilter = 3 ; Selection filter Hermes
-	{
-		Sleep 67
-		Send {LControl Down}{Numpad4}{LControl Up}
-		Sleep 67
-		Send {o}
-		LandFabricatorFilter := 0
 		Return
 	}
 	Return
