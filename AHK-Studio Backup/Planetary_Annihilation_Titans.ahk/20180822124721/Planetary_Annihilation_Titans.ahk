@@ -676,7 +676,9 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 			{
 				If GetKeyState("MButton", "P")=1
 				{
-					Send {MButton Up}{NumpadDiv}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+					SendInput {MButton Up}{NumpadDiv}{LControl Down}{Numpad1}{w}{LControl Up}{t}
+					Sleep 67
+					Send {t}
 					If GetKeyState("MButton", "P")=1
 					{
 						SendInput {MButton Down}
@@ -686,7 +688,9 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 				}
 				Else
 				{
-					Send {NumpadDiv}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+					SendInput {NumpadDiv}{LControl Down}{Numpad1}{w}{LControl Up}
+					Sleep 67
+					Send {t}
 					LandFabricatorFilter := 1
 					KeyWait f
 				}
@@ -695,7 +699,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 			{
 				If GetKeyState("MButton", "P")=1
 				{
-					Send {MButton Up}{NumpadDiv}{LControl Down}{Numpad3}{p}{w}{LControl Up}
+					SendInput {MButton Up}{NumpadDiv}{LControl Down}{Numpad3}{w}{LControl Up}
 					If GetKeyState("MButton", "P")=1
 					{
 						SendInput {MButton Down}
@@ -705,7 +709,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 				}
 				Else
 				{
-					Send {NumpadDiv}{LControl Down}{Numpad3}{p}{w}{LControl Up}
+					SendInput {NumpadDiv}{LControl Down}{Numpad3}{w}{LControl Up}
 					SeaFabricatorFilter := 1
 					KeyWait f
 				}
@@ -2231,7 +2235,7 @@ $LButton:: ; Selection Filter
 	Else	If LandFabricatorFilter = 1 ; Selection filter Land Fabricator
 	{
 		Sleep 67
-		Sendinput {LShift Up}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+		Sendinput {LShift Up}{LControl Down}{Numpad1}{w}{LControl Up}{t}
 		LandFabricatorFilter := 0
 		Return
 	}

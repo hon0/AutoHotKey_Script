@@ -174,7 +174,7 @@ SetTitleMatchMode, 2
 	*/	
 }
 
-{ ; Layer modifier: Press and hold to get into Layer 2, double tap and hold to get into Layer 3. Release to come back to Layer 1
+{ ; Layer modIfier. Press and hold to get into Layer 2, double press and hold to get into Layer 3. Release to come back to Layer 1
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	Layer := 2
 	If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)
@@ -185,72 +185,7 @@ SetTitleMatchMode, 2
 	Return
 }
 
-SC056:: ; PIP management
-{
-	KeyWait, SC056, T0.1
-	If (ErrorLevel) ; Swap PIP
-	{
-		If GetKeyState("MButton", "P")=1
-		{
-			Sendinput {MButton Up}{LShift Down}{Insert}{LShift Up}{MButton Down}
-			KeyWait F1
-		}
-		Else
-		{
-			Sendinput {LShift Down}{Insert}{LShift Up}
-			KeyWait SC056
-		}
-	}
-	Else 
-	{
-		KeyWait, SC056, D T0.1
-		If (ErrorLevel) ; Show/Hide PIP
-		{
-			If GetKeyState("MButton", "P")=1
-			{
-				Sendinput {MButton Up}{Insert}{MButton Down}
-				KeyWait SC056
-			}
-			Else
-			{
-				Sendinput {Insert}
-				KeyWait SC056
-			}
-		}
-		Else ; Copy to PIP
-		{
-			If GetKeyState("MButton", "P")=1
-			{
-				Sendinput {MButton Up}{LAlt Down}{Insert}{LAlt Up}{MButton Down}
-				KeyWait SC056
-			}
-			Else
-			{
-				Sendinput {LAlt Down}{Insert}{LAlt Up}
-				KeyWait SC056
-			}
-		}
-	}
-	KeyWait, SC056
-	Return
-}
-
-LControl & c:: ; Select Commander, then center on him
-{
-	If GetKeyState("MButton", "P")=1
-	{
-		Sendinput {MButton Up}{LShift Down}{c}{LShift Up}{MButton Down}
-		KeyWait c
-	}
-	Else
-	{
-		Sendinput {LShift Down}{c}{LShift Up}
-		KeyWait c
-	}
-	Return
-}
-
-XButton1:: ; XButton1, Move mode selector
+XButton1:: ; XButton1, Fire mode selector
 {
 	KeyWait, XButton1, T0.2
 	If (ErrorLevel) ; Hold Fire
@@ -270,26 +205,10 @@ XButton1:: ; XButton1, Move mode selector
 		}
 	}
 	KeyWait, XButton1
-	Return
+	return
 }
 
-LControl & XButton1::
-{
-	Sendinput {F7 Down}
-	KeyWait XButton1
-	Sendinput {F7 Up}
-	Return
-}
-
-LControl & XButton2::
-{
-	Sendinput {F8 Down}
-	KeyWait XButton2
-	Sendinput {F8 Up}
-	Return
-}
-
-XButton2:: ; XButton2, Fire mode selector
+XButton2:: ; XButton2, Move mode selector
 {
 	KeyWait, XButton2, T0.2
 	If (ErrorLevel) ; Hold Position
@@ -624,11 +543,11 @@ LAlt & SC004:: ; Only Scout in selection
 	Return
 }
 
-LControl & f:: ; Oribtal Fabricator selection, See LButton Filter
+LAlt & f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		SendInput {MButton Up}{NumpadDiv}{LControl Down}{Numpad4}{w}{LControl Up}
+		SendInput {MButton Up}{LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad4}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			SendInput {MButton Down}
@@ -638,14 +557,14 @@ LControl & f:: ; Oribtal Fabricator selection, See LButton Filter
 	}
 	Else
 	{
-		SendInput {NumpadDiv}{LControl Down}{Numpad4}{w}{LControl Up}
+		SendInput {LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad4}{LControl Up}
 		OrbitalFabricatorFilter := 1
 		KeyWait f
 	}
 	Return
 }
 
-$f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
+$f:: ; Oribtal Fabricator selection, See LButton Filter
 {
 	If Layer = 2
 	{
@@ -654,7 +573,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 		{
 			If GetKeyState("MButton", "P")=1
 			{
-				SendInput {MButton Up}{NumpadDiv}{LControl Down}{Numpad2}{w}{LControl Up}
+				SendInput {MButton Up}{LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad2}{LControl Up}
 				If GetKeyState("MButton", "P")=1
 				{
 					SendInput {MButton Down}
@@ -664,7 +583,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 			}
 			Else
 			{
-				SendInput {NumpadDiv}{LControl Down}{Numpad2}{w}{LControl Up}
+				SendInput {LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad2}{LControl Up}
 				AirFabricatorFilter := 1
 				KeyWait f
 			}
@@ -676,7 +595,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 			{
 				If GetKeyState("MButton", "P")=1
 				{
-					Send {MButton Up}{NumpadDiv}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+					SendInput {MButton Up}{LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad1}{LControl Up}
 					If GetKeyState("MButton", "P")=1
 					{
 						SendInput {MButton Down}
@@ -686,7 +605,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 				}
 				Else
 				{
-					Send {NumpadDiv}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+					SendInput {LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad1}{LControl Up}
 					LandFabricatorFilter := 1
 					KeyWait f
 				}
@@ -695,7 +614,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 			{
 				If GetKeyState("MButton", "P")=1
 				{
-					Send {MButton Up}{NumpadDiv}{LControl Down}{Numpad3}{p}{w}{LControl Up}
+					SendInput {MButton Up}{LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad3}{LControl Up}
 					If GetKeyState("MButton", "P")=1
 					{
 						SendInput {MButton Down}
@@ -705,7 +624,7 @@ $f:: ; Air, Sea, Land Fabricator selection, See LButton Filter
 				}
 				Else
 				{
-					Send {NumpadDiv}{LControl Down}{Numpad3}{p}{w}{LControl Up}
+					SendInput {LAlt Down}{f}{LAlt Up}{LControl Down}{Numpad3}{LControl Up}
 					SeaFabricatorFilter := 1
 					KeyWait f
 				}
@@ -792,104 +711,78 @@ SC005:: ; Fighter selection, See LButton Filter
 
 SC006:: ; Air bomber selection, See LButton Filter
 {
-	If Layer = 1
+	KeyWait, SC006, T0.100
+	If (ErrorLevel) ; Select Kestrel
 	{
-		KeyWait, SC006, T0.100
-		If (ErrorLevel) ; Select Kestrel
+		If GetKeyState("MButton", "P")=1
+		{
+			Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
+			Sleep 67
+			Send {j}
+			If GetKeyState("MButton", "P")=1
+			{
+				SendInput {MButton Down}
+			}
+			BomberFilter := 2
+			KeyWait SC006
+		}
+		Else
+		{
+			Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
+			Sleep 67
+			Send {j}
+			BomberFilter := 2
+			KeyWait SC006
+		}
+	}
+	Else 
+	{
+		KeyWait, SC006, D T0.100
+		If (ErrorLevel) ; Select BumbleBee
 		{
 			If GetKeyState("MButton", "P")=1
 			{
 				Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
 				Sleep 67
-				Send {j}
+				Send {u}
 				If GetKeyState("MButton", "P")=1
 				{
 					SendInput {MButton Down}
 				}
-				BomberFilter := 2
+				BomberFilter := 1
 				KeyWait SC006
 			}
 			Else
 			{
 				Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
 				Sleep 67
-				Send {j}
-				BomberFilter := 2
+				Send {u}
+				BomberFilter := 1
 				KeyWait SC006
 			}
 		}
-		Else 
+		Else ; Select Hornet
 		{
-			KeyWait, SC006, D T0.100
-			If (ErrorLevel) ; Select BumbleBee
-			{
-				If GetKeyState("MButton", "P")=1
-				{
-					Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
-					Sleep 67
-					Send {u}
-					If GetKeyState("MButton", "P")=1
-					{
-						SendInput {MButton Down}
-					}
-					BomberFilter := 1
-					KeyWait SC006
-				}
-				Else
-				{
-					Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
-					Sleep 67
-					Send {u}
-					BomberFilter := 1
-					KeyWait SC006
-				}
-			}
-			Else ; Select Hornet
-			{
-				If GetKeyState("MButton", "P")=1
-				{
-					Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
-					Sleep 67
-					Send {k}
-					If GetKeyState("MButton", "P")=1
-					{
-						SendInput {MButton Down}
-					}
-					BomberFilter := 3
-					KeyWait SC006
-				}
-				Else
-				{
-					Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}{k}
-					Sleep 67
-					Send {k}
-					BomberFilter := 3
-					KeyWait SC006
-				}
-			}
-		}
-	}
-	Else If Layer = 2 ; Select Wyrm
-	{
-		If GetKeyState("MButton", "P")=1
-		{
-			Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
-			Sleep 67
-			Send {l}
 			If GetKeyState("MButton", "P")=1
 			{
-				SendInput {MButton Down}
+				Send {MButton Up}{LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
+				Sleep 67
+				Send {k}
+				If GetKeyState("MButton", "P")=1
+				{
+					SendInput {MButton Down}
+				}
+				BomberFilter := 3
+				KeyWait SC006
 			}
-			BomberFilter := 4
-			KeyWait SC006
-		}
-		Else
-		{
-			Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}{k}
-			Sleep 67
-			Send {l}
-			BomberFilter := 4
-			KeyWait SC006
+			Else
+			{
+				Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}{k}
+				Sleep 67
+				Send {k}
+				BomberFilter := 3
+				KeyWait SC006
+			}
 		}
 	}
 	KeyWait, SC006
@@ -1776,7 +1669,7 @@ $LButton:: ; Selection Filter
 	Return
 }
 
-~RButton:: ; Reset Filter
+~RButton::
 {
 	FighterFilter := 0
 	BomberFilter := 0
@@ -1797,7 +1690,7 @@ $LButton:: ; Selection Filter
 	OrbitalFabricatorFilter := 0	
 }
 
-~*a:: ; Reset Filter
+~a::
 {
 	FighterFilter := 0
 	BomberFilter := 0
@@ -1818,28 +1711,7 @@ $LButton:: ; Selection Filter
 	OrbitalFabricatorFilter := 0	
 }
 
-~*e:: ; Reset Filter
-{
-	FighterFilter := 0
-	BomberFilter := 0
-	HeavyFilter := 0
-	TankFilter := 0
-	AssaultBotFilter := 0
-	RepairUnitFilter := 0
-	SupportFireFilter := 0
-	AirDefenseFilter := 0
-	NavalHeaviesFilter :=0
-	AntiShipShipFilter :=0
-	NavalSupportFireFilter :=0
-	NavalMiscellaneous := 0
-	ScoutFilter := 0
-	LandFabricatorFilter := 0
-	AirFabricatorFilter := 0
-	SeaFabricatorFilter := 0
-	OrbitalFabricatorFilter := 0	
-}
-
-~*w:: ; Reset Filter
+~*e::
 {
 	FighterFilter := 0
 	BomberFilter := 0
@@ -1912,15 +1784,6 @@ $LButton:: ; Selection Filter
 		Send {LControl Down}{Numpad2}{LControl Up}
 		Sleep 32
 		Send {k}
-		BomberFilter := 0
-		Return
-	}
-	Else	If BomberFilter = 4 ; Selection filter Hornet
-	{
-		Sleep 67
-		Send {LControl Down}{Numpad2}{LControl Up}
-		Sleep 32
-		Send {l}
 		BomberFilter := 0
 		Return
 	}
@@ -2223,29 +2086,25 @@ $LButton:: ; Selection Filter
 	}
 	Else	If AirFabricatorFilter = 1 ; Selection filter Air Fabricator
 	{
-		Sleep 67
-		Sendinput {LShift Up}{LControl Down}{Numpad2}{w}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad2}{f}{LControl Up}
 		AirFabricatorFilter := 0
 		Return
 	}
 	Else	If LandFabricatorFilter = 1 ; Selection filter Land Fabricator
 	{
-		Sleep 67
-		Sendinput {LShift Up}{LControl Down}{Numpad1}{w}{i}{k}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad1}{f}{i}{k}{LControl Up}
 		LandFabricatorFilter := 0
 		Return
 	}
 	Else	If SeaFabricatorFilter = 1 ; Selection filter Sea Fabricator
 	{
-		Sleep 67
-		Sendinput {LShift Up}{LControl Down}{Numpad3}{p}{w}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad3}{f}{p}{LControl Up}
 		SeaFabricatorFilter := 0
 		Return
 	}
 	Else	If OrbitalFabricatorFilter = 1 ; Selection filter Orbital Fabricator
 	{
-		Sleep 67
-		SendInput {LShift Up}{LControl Down}{Numpad4}{w}{LControl Up}
+		SendInput {LButton Up}{LShift Up}{LControl Down}{Numpad4}{f}{LControl Up}
 		OrbitalFabricatorFilter := 0
 		Return
 	}
