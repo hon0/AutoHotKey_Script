@@ -620,44 +620,12 @@ $SC004:: ; Scout selection, See LButton Filter
 			If GetKeyState("MButton", "P")=1
 			{
 				Sendinput {MButton Up}{SC004}{LControl Down}{Numpad1}{LControl Up}{MButton Down}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				ScoutFilter := 2
 				KeyWait SC004
 			}
 			Else
 			{
 				Sendinput {SC004}{LControl Down}{Numpad1}{LControl Up}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				ScoutFilter := 2
 				KeyWait SC004
 			}
@@ -670,44 +638,12 @@ $SC004:: ; Scout selection, See LButton Filter
 				If GetKeyState("MButton", "P")=1
 				{
 					Sendinput {MButton Up}{SC004}{LControl Down}{Numpad2}{LControl Up}{MButton Down}
-					FighterFilter := 0
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					ScoutFilter := 1
 					KeyWait SC004
 				}
 				Else
 				{
 					Sendinput {SC004}{LControl Down}{Numpad2}{LControl Up}
-					FighterFilter := 0
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					ScoutFilter := 1
 					KeyWait SC004
 				}
@@ -717,45 +653,12 @@ $SC004:: ; Scout selection, See LButton Filter
 				If GetKeyState("MButton", "P")=1
 				{
 					Sendinput {MButton Up}{SC004}{LControl Down}{Numpad4}{LControl Up}{MButton Down}
-					FighterFilter := 0
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					ScoutFilter := 3
 					KeyWait SC004
 				}
 				Else
 				{
 					Sendinput {SC004}{LControl Down}{Numpad4}{LControl Up}
-					FighterFilter := 0
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					ScoutFilter := 3
 					KeyWait SC004
 				}
@@ -899,44 +802,12 @@ SC005:: ; Fighter selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				FighterFilter := 2
 				KeyWait SC005
 			}
 			Else
 			{
 				SendInput {SC005}{SC005}{LControl Down}{Numpad2}{Numpad5}{LControl Up}
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				FighterFilter := 2
 				KeyWait SC005
 			}
@@ -953,44 +824,12 @@ SC005:: ; Fighter selection, See LButton Filter
 					{
 						SendInput {MButton Down}
 					}
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					FighterFilter := 1
 					KeyWait SC005
 				}
 				Else
 				{
 					SendInput {SC005}{SC005}{LControl Down}{Numpad2}{LAlt Down}{Numpad5}{LAlt Up}{LControl Up}
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					FighterFilter := 1
 					KeyWait SC005
 				}
@@ -1004,44 +843,12 @@ SC005:: ; Fighter selection, See LButton Filter
 					{
 						SendInput {MButton Down}
 					}
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					FighterFilter := 3
 					KeyWait SC005
 				}
 				Else
 				{
 					Send {SC005}{SC005}{LControl Down}{Numpad4}{LControl Up}{y}
-					BomberFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					FighterFilter := 3
 					KeyWait SC005
 				}
@@ -1074,22 +881,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				BomberFilter := 2
 				KeyWait SC006
 			}
@@ -1098,22 +889,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
 				Sleep 67
 				Send {j}
-				FighterFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				BomberFilter := 2
 				KeyWait SC006
 			}
@@ -1132,22 +907,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 					{
 						SendInput {MButton Down}
 					}
-					FighterFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					BomberFilter := 1
 					KeyWait SC006
 				}
@@ -1156,22 +915,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 					Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
 					Sleep 67
 					Send {u}
-					FighterFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					BomberFilter := 1
 					KeyWait SC006
 				}
@@ -1187,22 +930,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 					{
 						SendInput {MButton Down}
 					}
-					FighterFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					BomberFilter := 3
 					KeyWait SC006
 				}
@@ -1211,22 +938,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 					Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}{k}
 					Sleep 67
 					Send {k}
-					FighterFilter := 0
-					HeavyFilter := 0
-					TankFilter := 0
-					AssaultBotFilter := 0
-					RepairUnitFilter := 0
-					SupportFireFilter := 0
-					AirDefenseFilter := 0
-					NavalHeaviesFilter :=0
-					AntiShipShipFilter :=0
-					NavalSupportFireFilter :=0
-					NavalMiscellaneous := 0
-					ScoutFilter := 0
-					LandFabricatorFilter := 0
-					AirFabricatorFilter := 0
-					SeaFabricatorFilter := 0
-					OrbitalFabricatorFilter := 0
 					BomberFilter := 3
 					KeyWait SC006
 				}
@@ -1244,22 +955,6 @@ SC006:: ; Air bomber selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			BomberFilter := 4
 			KeyWait SC006
 		}
@@ -1268,31 +963,13 @@ SC006:: ; Air bomber selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}{k}
 			Sleep 67
 			Send {l}
-			FighterFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			BomberFilter := 4
 			KeyWait SC006
 		}
 	}
 	Else
 	{
-		Send {SC006 Down}
-		KeyWait SC006
-		Send {SC006 Up}
+		Send SC006
 	}
 	KeyWait, SC006
 	Return
@@ -1312,22 +989,6 @@ F13:: ; Heavies selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			HeavyFilter := 2
 			KeyWait F13
 		}
@@ -1336,22 +997,6 @@ F13:: ; Heavies selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad8}{LControl Up}
 			Sleep 67
 			Send {j}
-			FighterFilter := 0
-			BomberFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			HeavyFilter := 2
 			KeyWait F13
 		}
@@ -1370,22 +1015,6 @@ F13:: ; Heavies selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				HeavyFilter := 1
 				KeyWait F13
 			}
@@ -1394,22 +1023,6 @@ F13:: ; Heavies selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad8}{LControl Up}
 				Sleep 67
 				Send {u}
-				FighterFilter := 0
-				BomberFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				HeavyFilter := 1
 				KeyWait F13
 			}
@@ -1425,22 +1038,6 @@ F13:: ; Heavies selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				HeavyFilter := 3
 				KeyWait F13
 			}
@@ -1449,22 +1046,6 @@ F13:: ; Heavies selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad8}{LControl Up}
 				Sleep 67
 				Send {p}
-				FighterFilter := 0
-				BomberFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				HeavyFilter := 3
 				KeyWait F13
 			}
@@ -1488,22 +1069,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalHeaviesFilter := 2
 			KeyWait F13
 		}
@@ -1512,22 +1077,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 			Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 			Sleep 67
 			Send {h}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalHeaviesFilter := 2
 			KeyWait F13
 		}
@@ -1546,22 +1095,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 1
 				KeyWait F13
 			}
@@ -1570,22 +1103,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {u}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 1
 				KeyWait F13
 			}
@@ -1601,22 +1118,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 3
 				KeyWait F13
 			}
@@ -1625,22 +1126,6 @@ SC029 & F13:: ; Naval heavies, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {n}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 3
 				KeyWait F13
 			}
@@ -1664,22 +1149,6 @@ F14:: ; Tank selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			TankFilter := 2
 			KeyWait F14
 		}
@@ -1688,22 +1157,6 @@ F14:: ; Tank selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 			Sleep 67
 			Send {h}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			TankFilter := 2
 			KeyWait F14
 		}
@@ -1722,22 +1175,6 @@ F14:: ; Tank selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				TankFilter := 1
 				KeyWait F14
 			}
@@ -1746,22 +1183,6 @@ F14:: ; Tank selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 				Sleep 67
 				Send {y}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				TankFilter := 1
 				KeyWait F14
 			}
@@ -1777,22 +1198,6 @@ F14:: ; Tank selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				TankFilter := 3
 				KeyWait F14
 			}
@@ -1801,22 +1206,6 @@ F14:: ; Tank selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 				Sleep 67
 				Send {p}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				TankFilter := 3
 				KeyWait F14
 			}
@@ -1840,22 +1229,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AntiShipShipFilter := 2
 			KeyWait F14
 		}
@@ -1864,22 +1237,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 			Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 			Sleep 67
 			Send {k}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AntiShipShipFilter := 2
 			KeyWait F14
 		}
@@ -1898,22 +1255,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AntiShipShipFilter := 1
 				KeyWait F14
 			}
@@ -1922,22 +1263,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {i}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AntiShipShipFilter := 1
 				KeyWait F14
 			}
@@ -1953,22 +1278,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 3
 				KeyWait F14
 			}
@@ -1977,22 +1286,6 @@ SC029 & F14:: ; Anti Ship Ship, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {n}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalHeaviesFilter := 3
 				KeyWait F14
 			}
@@ -2016,22 +1309,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AssaultBotFilter := 2
 			KeyWait F15
 		}
@@ -2040,22 +1317,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 			Sleep 67
 			Send {h}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AssaultBotFilter := 2
 			KeyWait F15
 		}
@@ -2074,22 +1335,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AssaultBotFilter := 1
 				KeyWait F15
 			}
@@ -2098,22 +1343,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {y}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AssaultBotFilter := 1
 				KeyWait F15
 			}
@@ -2129,22 +1358,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AssaultBotFilter := 3
 				KeyWait F15
 			}
@@ -2153,22 +1366,6 @@ F15:: ; Assault Bot selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {m}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AssaultBotFilter := 3
 				KeyWait F15
 			}
@@ -2192,22 +1389,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalSupportFireFilter := 2
 			KeyWait F15
 		}
@@ -2216,22 +1397,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 			Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 			Sleep 67
 			Send {j}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalSupportFireFilter := 2
 			KeyWait F15
 		}
@@ -2250,22 +1415,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalSupportFireFilter := 1
 				KeyWait F15
 			}
@@ -2274,22 +1423,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {y}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalSupportFireFilter := 1
 				KeyWait F15
 			}
@@ -2305,22 +1438,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalSupportFireFilter := 3
 				KeyWait F15
 			}
@@ -2329,22 +1446,6 @@ SC029 & F15:: ; Naval support fire, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {n}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalSupportFireFilter := 3
 				KeyWait F15
 			}
@@ -2368,22 +1469,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			SupportFireFilter := 2
 			KeyWait F16
 		}
@@ -2392,22 +1477,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 			Sleep 67
 			Send {k}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			SupportFireFilter := 2
 			KeyWait F16
 		}
@@ -2426,22 +1495,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				SupportFireFilter := 1
 				KeyWait F16
 			}
@@ -2450,22 +1503,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {u}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				SupportFireFilter := 1
 				KeyWait F16
 			}
@@ -2481,22 +1518,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				SupportFireFilter := 3
 				KeyWait F16
 			}
@@ -2505,22 +1526,6 @@ F16:: ; Support Fire Bot selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {l}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				SupportFireFilter := 3
 				KeyWait F16
 			}
@@ -2544,22 +1549,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalMiscellaneous := 2
 			KeyWait F16
 		}
@@ -2568,22 +1557,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 			Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 			Sleep 67
 			Send {l}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			NavalMiscellaneous := 2
 			KeyWait F16
 		}
@@ -2602,22 +1575,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalMiscellaneous := 1
 				KeyWait F16
 			}
@@ -2626,22 +1583,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {o}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalMiscellaneous := 1
 				KeyWait F16
 			}
@@ -2657,22 +1598,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalMiscellaneous := 3
 				KeyWait F16
 			}
@@ -2681,22 +1606,6 @@ SC029 & F16:: ; Naval miscellaneous, See LButton Filter
 				Send {LControl Down}{LShift Down}{F11}{LShift Up}{Numpad3}{LControl Up}
 				Sleep 67
 				Send {p}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				NavalMiscellaneous := 3
 				KeyWait F16
 			}
@@ -2720,22 +1629,6 @@ F17:: ; Air Defense selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AirDefenseFilter := 2
 			KeyWait F17
 		}
@@ -2744,22 +1637,6 @@ F17:: ; Air Defense selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 			Sleep 67
 			Send {l}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			RepairUnitFilter := 0
-			SupportFireFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			AirDefenseFilter := 2
 			KeyWait F17
 		}
@@ -2778,22 +1655,6 @@ F17:: ; Air Defense selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AirDefenseFilter := 1
 				KeyWait F17
 			}
@@ -2802,22 +1663,6 @@ F17:: ; Air Defense selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad9}{LControl Up}
 				Sleep 67
 				Send {o}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AirDefenseFilter := 1
 				KeyWait F17
 			}
@@ -2833,22 +1678,6 @@ F17:: ; Air Defense selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AirDefenseFilter := 3
 				KeyWait F17
 			}
@@ -2857,22 +1686,6 @@ F17:: ; Air Defense selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {j}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				RepairUnitFilter := 0
-				SupportFireFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				AirDefenseFilter := 3
 				KeyWait F17
 			}
@@ -2896,22 +1709,6 @@ F18:: ; Repair unit selection, See LButton Filter
 			{
 				SendInput {MButton Down}
 			}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			RepairUnitFilter := 2
 			KeyWait F18
 		}
@@ -2920,22 +1717,6 @@ F18:: ; Repair unit selection, See LButton Filter
 			Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 			Sleep 67
 			Send {k}
-			FighterFilter := 0
-			BomberFilter := 0
-			HeavyFilter := 0
-			TankFilter := 0
-			AssaultBotFilter := 0
-			SupportFireFilter := 0
-			AirDefenseFilter := 0
-			NavalHeaviesFilter :=0
-			AntiShipShipFilter :=0
-			NavalSupportFireFilter :=0
-			NavalMiscellaneous := 0
-			ScoutFilter := 0
-			LandFabricatorFilter := 0
-			AirFabricatorFilter := 0
-			SeaFabricatorFilter := 0
-			OrbitalFabricatorFilter := 0
 			RepairUnitFilter := 2
 			KeyWait F18
 		}
@@ -2954,22 +1735,6 @@ F18:: ; Repair unit selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				RepairUnitFilter := 1
 				KeyWait F18
 			}
@@ -2978,22 +1743,6 @@ F18:: ; Repair unit selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F10}{LShift Up}{Numpad6}{LControl Up}
 				Sleep 67
 				Send {i}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				RepairUnitFilter := 1
 				KeyWait F18
 			}
@@ -3009,22 +1758,6 @@ F18:: ; Repair unit selection, See LButton Filter
 				{
 					SendInput {MButton Down}
 				}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				RepairUnitFilter := 3
 				KeyWait F18
 			}
@@ -3033,22 +1766,6 @@ F18:: ; Repair unit selection, See LButton Filter
 				Send {LControl Down}{LShift Down}{F9}{LShift Up}{LControl Up}
 				Sleep 67
 				Send {n}
-				FighterFilter := 0
-				BomberFilter := 0
-				HeavyFilter := 0
-				TankFilter := 0
-				AssaultBotFilter := 0
-				SupportFireFilter := 0
-				AirDefenseFilter := 0
-				NavalHeaviesFilter :=0
-				AntiShipShipFilter :=0
-				NavalSupportFireFilter :=0
-				NavalMiscellaneous := 0
-				ScoutFilter := 0
-				LandFabricatorFilter := 0
-				AirFabricatorFilter := 0
-				SeaFabricatorFilter := 0
-				OrbitalFabricatorFilter := 0
 				RepairUnitFilter := 3
 				KeyWait F18
 			}
@@ -3098,7 +1815,7 @@ F21:: ; Select All Land
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
+		Sendinput {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3106,13 +1823,13 @@ F21:: ; Select All Land
 	}
 	Else
 	{
-		Send {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
+		Sendinput {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{LControl Up}
 	}
 	KeyWait F21
 	Return
 }
 
-F22:: ; Select All Se
+F22:: ; Select All Sea
 {
 	If GetKeyState("MButton", "P")=1
 	{
@@ -3217,17 +1934,7 @@ $LButton:: ; Selection Filter
 	{
 		Sendinput {LButton Up}{Backspace}{LButton Down}{LShift Down}
 	}
-	Else	If FighterFilter = 2 ; Selection filter Phoenix
-	{
-		SendInput {Backspace}{LButton Down}{LShift Down}
-		Return
-	}
-	Else	If FighterFilter = 1 ; Selection filter HummmingBird
-	{
-		SendInput {Backspace}{LButton Down}{LShift Down}
-		Return
-	}
-	Else	If FighterFilter = 3 ; Selection filter Avenger
+	Else	If (FighterFilter = 2) or (FighterFilter = 1) or (FighterFilter = 3) ; Selection filter HummmingBird
 	{
 		SendInput {Backspace}{LButton Down}{LShift Down}
 		Return
@@ -3848,21 +2555,27 @@ $LButton:: ; Selection Filter
 	Else	If ScoutFilter = 2 ; Selection filter Skitter
 	{
 		Sleep 67
-		SendInput {LButton Up}{LShift Up}{LAlt Down}{Numpad3}{LAlt Up}{LControl Down}{Numpad1}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad1}{Numpad9}{LControl Up}
+		Sleep 67
+		Send {i}
 		ScoutFilter := 0
 		Return
 	}
 	Else	If ScoutFilter = 1 ; Selection filter FireFly
 	{
 		Sleep 67
-		SendInput {LButton Up}{LShift Up}{LAlt Down}{Numpad3}{LAlt Up}{LControl Down}{Numpad2}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad2}{LControl Up}
+		Sleep 67
+		Send {i}
 		ScoutFilter := 0
 		Return
 	}
 	Else	If ScoutFilter = 3 ; Selection filter Hermes
 	{
 		Sleep 67
-		Send {LButton Up}{LShift Up}{LAlt Down}{Numpad3}{LAlt Up}{LControl Down}{Numpad4}{LControl Up}
+		Send {LButton Up}{LShift Up}{LControl Down}{Numpad4}{LControl Up}
+		Sleep 67
+		Send {o}
 		ScoutFilter := 0
 		Return
 	}

@@ -3098,7 +3098,7 @@ F21:: ; Select All Land
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
+		Sendinput {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3106,13 +3106,13 @@ F21:: ; Select All Land
 	}
 	Else
 	{
-		Send {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
+		Sendinput {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
 	}
 	KeyWait F21
 	Return
 }
 
-F22:: ; Select All Se
+F22:: ; Select All Sea
 {
 	If GetKeyState("MButton", "P")=1
 	{
