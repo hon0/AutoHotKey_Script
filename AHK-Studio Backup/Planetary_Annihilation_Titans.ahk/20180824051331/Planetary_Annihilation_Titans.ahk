@@ -185,7 +185,7 @@ SetTitleMatchMode, 2
 	Return
 }
 
-~*Enter:: ; Open Global Chat Windows, Click on PA Windows to inverse InChat Value without opening Chat Windows
+~*Enter:: ; Open Global Chat Windows, Click on PA Windows to iverse Chat Value without opening Chat Windows
 {
 	If WinActive("Planetary Annihilation")
 	{
@@ -3062,7 +3062,7 @@ F19:: ; Select All Orbital except engineers
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{Backspace}{LControl Down}{LShift Down}{F12}{F12}{LShift Up}{t}{LControl Up}
+		Sendinput {MButton Up}{Backspace}{LControl Down}{LShift Down}{F12}{F12}{LShift Up}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3070,7 +3070,7 @@ F19:: ; Select All Orbital except engineers
 	}
 	Else
 	{
-		Send {Backspace}{LControl Down}{LShift Down}{F12}{F12}{LShift Up}{t}{LControl Up}
+		Sendinput {Backspace}{LControl Down}{LShift Down}{F12}{F12}{LShift Up}{LControl Up}
 	}
 	KeyWait F19
 	Return
@@ -3080,7 +3080,7 @@ F20:: ; Select All Air except engineers
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{LControl Down}{LShift Down}{F9}{F9}{LShift Up}{t}{g}{LControl Up}
+		Sendinput {MButton Up}{LControl Down}{LShift Down}{F9}{F9}{LShift Up}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3088,7 +3088,7 @@ F20:: ; Select All Air except engineers
 	}
 	Else
 	{
-		Send {LControl Down}{LShift Down}{F9}{F9}{LShift Up}{t}{g}{LControl Up}
+		Sendinput {LControl Down}{LShift Down}{F9}{F9}{LShift Up}{LControl Up}
 	}
 	KeyWait F20
 	Return
@@ -3098,7 +3098,7 @@ F21:: ; Select All Land except engineers
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{g}{LControl Up}
+		Send {MButton Up}{LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3106,7 +3106,7 @@ F21:: ; Select All Land except engineers
 	}
 	Else
 	{
-		Send {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{g}{LControl Up}
+		Send {LControl Down}{LShift Down}{F10}{F10}{LShift Up}{t}{LControl Up}
 	}
 	KeyWait F21
 	Return
@@ -3116,7 +3116,7 @@ F22:: ; Select All Sea except engineers
 {
 	If GetKeyState("MButton", "P")=1
 	{
-		Send {MButton Up}{LControl Down}{LShift Down}{F11}{F11}{LShift Up}{t}{g}{LControl Up}
+		Sendinput {MButton Up}{LControl Down}{LShift Down}{F11}{F11}{LShift Up}{LControl Up}
 		If GetKeyState("MButton", "P")=1
 		{
 			Sendinput {MButton Down}
@@ -3124,7 +3124,7 @@ F22:: ; Select All Sea except engineers
 	}
 	Else
 	{
-		Send {LControl Down}{LShift Down}{F11}{F11}{LShift Up}{t}{g}{LControl Up}
+		Sendinput {LControl Down}{LShift Down}{F11}{F11}{LShift Up}{LControl Up}
 	}
 	KeyWait F22
 	Return

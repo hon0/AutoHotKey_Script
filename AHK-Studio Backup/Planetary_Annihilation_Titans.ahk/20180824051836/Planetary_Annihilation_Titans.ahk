@@ -185,7 +185,7 @@ SetTitleMatchMode, 2
 	Return
 }
 
-~*Enter:: ; Open Global Chat Windows, Click on PA Windows to inverse InChat Value without opening Chat Windows
+~*Enter:: ; Open Global Chat Windows, Click on PA Windows to iverse Chat Value without opening Chat Windows
 {
 	If WinActive("Planetary Annihilation")
 	{

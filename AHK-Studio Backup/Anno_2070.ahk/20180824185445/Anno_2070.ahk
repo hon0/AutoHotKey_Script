@@ -111,30 +111,34 @@ CoordMode, mouse, Screen
 	/* ; On press != on double press != on long press.
 		$a::
 		KeyWait, a, T0.1
-		If (ErrorLevel)
+		
+		if (ErrorLevel)
 		{
 			Send {b down}
-			KeyWait a
+			keywait a
 			Send {b up}
 		}
-		Else 
-		{
+		else {
 			KeyWait, a, D T0.1
-			If (ErrorLevel)
+			
+			if (ErrorLevel)
 			{
 				Send {a down}
-				KeyWait a
+				keywait a
 				Send {a up}
 			}
-			Else
+			
+			else
 			{
 				Send {c down}
-				KeyWait a
+				keywait a
 				Send {c up}
 			}
+			
 		}
+		
 		KeyWait, a
-		Return
+		return
 	*/
 	
 	/* ; Multi-Tap
@@ -322,6 +326,8 @@ WheelDown::
 	}
 	Return
 }
+
+LAlt::NumpadSub
 
 $Tab::
 {

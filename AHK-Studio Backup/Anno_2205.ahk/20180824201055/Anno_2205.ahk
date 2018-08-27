@@ -2,6 +2,7 @@
 #Persistent  ; Keep this script running until the user explicitly exits it.
 ;#Warn  ; Enable warnings to assist with detecting common errors.
 Layer := 1
+Toggle_LAlt := 0
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
@@ -319,6 +320,91 @@ WheelDown::
 	{
 		Send {WheelDown}
 		Return
+	}
+	Return
+}
+
+
+#IfWinActive Anno 2205
+	
+LAlt:: ; Toggle time deceleration
+{
+	If Toggle_LAlt = 0
+	{
+		Toggle_LAlt := !Toggle_LAlt
+		SendInput {NumpadSub Down}
+		KeyWait LAlt
+	}
+	Else If Toggle_LAlt = 1
+	{
+		SendInput {NumpadSub Up}
+		Toggle_LAlt := !Toggle_LAlt
+		KeyWait LAlt
+	}
+	Return
+}
+
+$Left::
+{
+	KeyWait, Left, T0.1
+	If (ErrorLevel)
+	{
+		SendInput ^F5
+		KeyWait Left
+	}
+	Else 
+	{
+		KeyWait, a, D T0.1
+		If (ErrorLevel)
+		{
+			Send {a down}
+			KeyWait Left
+			Send {a up}
+		}
+		Else
+		{
+			Send {c down}
+			KeyWait Left
+			Send {c up}
+		}
+	}
+	KeyWait, Left
+	Return
+}
+
+
+#IfWinActive
+	
+$SC029::
+{
+	If (Layer=1)
+	{
+		Send {SC029 Down}
+		KeyWait, SC029
+		Send {SC029 Up}
+	}
+	Else If (Layer=2)
+	{
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
+	}
+	Return
+}
+
+$SC056::
+{
+	If (Layer=1)
+	{
+		Send {m Down}
+		KeyWait, SC056
+		Send {m Up}
+	}
+	Else If (Layer=2)
+	{
+		Send {l Down}
+		KeyWait, SC056
+		Send {l Up}
 	}
 	Return
 }

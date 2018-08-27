@@ -2,6 +2,7 @@
 #Persistent  ; Keep this script running until the user explicitly exits it.
 ;#Warn  ; Enable warnings to assist with detecting common errors.
 Layer := 1
+Toggle_LAlt := 0
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
@@ -111,30 +112,34 @@ CoordMode, mouse, Screen
 	/* ; On press != on double press != on long press.
 		$a::
 		KeyWait, a, T0.1
-		If (ErrorLevel)
+		
+		if (ErrorLevel)
 		{
 			Send {b down}
-			KeyWait a
+			keywait a
 			Send {b up}
 		}
-		Else 
-		{
+		else {
 			KeyWait, a, D T0.1
-			If (ErrorLevel)
+			
+			if (ErrorLevel)
 			{
 				Send {a down}
-				KeyWait a
+				keywait a
 				Send {a up}
 			}
-			Else
+			
+			else
 			{
 				Send {c down}
-				KeyWait a
+				keywait a
 				Send {c up}
 			}
+			
 		}
+		
 		KeyWait, a
-		Return
+		return
 	*/
 	
 	/* ; Multi-Tap
@@ -321,6 +326,14 @@ WheelDown::
 		Return
 	}
 	Return
+}
+
+LAlt::
+{
+	Toggle_LAlt := !Toggle_LAlt
+	SendInput {NumpadSub Down}
+	KeyWait NumpadSub Down
+	SendInput {NumpadSub Up}
 }
 
 $Tab::

@@ -111,6 +111,7 @@ CoordMode, mouse, Screen
 	/* ; On press != on double press != on long press.
 		$a::
 		KeyWait, a, T0.1
+		
 		If (ErrorLevel)
 		{
 			Send {b down}
@@ -132,6 +133,7 @@ CoordMode, mouse, Screen
 				KeyWait a
 				Send {c up}
 			}
+			
 		}
 		KeyWait, a
 		Return
