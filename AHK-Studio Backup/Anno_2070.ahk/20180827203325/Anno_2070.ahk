@@ -281,7 +281,11 @@ CoordMode, mouse, Screen
 		Layer := 3
 	KeyWait, CapsLock
 	Layer := 1
-	KeyWait F1
+	KeyWait SC002
+	{
+		Send {F1}
+		KeyWait SC002
+	}
 	Return
 }
 
@@ -402,23 +406,11 @@ LControl & c:: ; Caméra sur et selection de l'Ark
 
 SC002:: ; Faire défiler la sélection des Navires sans déplacer la caméra
 {
-	If (Toggle_LAlt = 1) and (Layer = 1)
+	If Toggle_LAlt = 1
 	{
 		Toggle_LAlt := 0
 		Send {NumpadSub Up}{LControl Down}{TAB}{LControl Up}{NumpadSub Down}
 		Toggle_LAlt := 1
-		KeyWait SC002
-	}
-	Else If (Toggle_LAlt = 1) and (Layer = 2)
-	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{F1}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait SC002
-	}
-	Else If (Toggle_LAlt = 0) and (Layer = 2)
-	{
-		Send {F1}
 		KeyWait SC002
 	}
 	Else

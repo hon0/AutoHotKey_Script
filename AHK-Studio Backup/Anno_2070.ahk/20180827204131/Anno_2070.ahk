@@ -409,22 +409,14 @@ SC002:: ; Faire défiler la sélection des Navires sans déplacer la caméra
 		Toggle_LAlt := 1
 		KeyWait SC002
 	}
-	Else If (Toggle_LAlt = 1) and (Layer = 2)
-	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{F1}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait SC002
-	}
-	Else If (Toggle_LAlt = 0) and (Layer = 2)
-	{
-		Send {F1}
-		KeyWait SC002
-	}
-	Else
+	Else If Toggle_LAlt := 0 and (Layer = 1)
 	{
 		Send {LControl Down}{TAB}{LControl Up}
 		KeyWait SC002
+	}
+	Else If Layer = 2
+	{
+		Send {F1}
 	}
 	Return
 }
