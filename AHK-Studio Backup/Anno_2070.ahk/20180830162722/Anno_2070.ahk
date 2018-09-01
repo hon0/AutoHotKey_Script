@@ -996,3 +996,5 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+<+<#a::b

@@ -996,3 +996,5 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+RShift::LControl LAlt

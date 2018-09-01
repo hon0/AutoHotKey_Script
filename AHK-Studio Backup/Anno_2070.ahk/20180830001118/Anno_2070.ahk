@@ -366,40 +366,6 @@ Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la s�
 	Return
 }
 
-XButton2:: ; Quick save
-{
-	If Toggle_LAlt = 1
-	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{F5}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait XButton2
-	}
-	Else
-	{
-		Send {F5}
-		KeyWait XButton2
-	}
-	Return
-}
-
-XButton1:: ; Quick load
-{
-	If Toggle_LAlt = 1
-	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{LControl Down}{F5}{LControl Up}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait XButton2
-	}
-	Else
-	{
-		Send {LControl Down}{F5}{LControl Up}
-		KeyWait XButton1
-	}
-	Return
-}
-
 LAlt & Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la sélection
 {
 	If Toggle_LAlt = 1

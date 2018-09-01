@@ -996,3 +996,11 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+
++left::left
+left & AppsKey::RAlt
++up::up
+up & AppsKey::RShift
++right::right
+right & AppsKey::RCtrl

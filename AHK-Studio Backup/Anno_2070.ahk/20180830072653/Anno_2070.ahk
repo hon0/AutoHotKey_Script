@@ -383,7 +383,7 @@ XButton2:: ; Quick save
 	Return
 }
 
-XButton1:: ; Quick load
+XButton2:: ; Quick load
 {
 	If Toggle_LAlt = 1
 	{
@@ -395,7 +395,7 @@ XButton1:: ; Quick load
 	Else
 	{
 		Send {LControl Down}{F5}{LControl Up}
-		KeyWait XButton1
+		KeyWait XButton2
 	}
 	Return
 }

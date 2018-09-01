@@ -996,3 +996,5 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+b::LShift

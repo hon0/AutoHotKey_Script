@@ -996,3 +996,12 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+^AppsKey::
+Send {Control Up}
+Send {RShift Down}
+KeyWait AppsKey
+Send {RShift Up}
+Return
+
+Insert::RControl

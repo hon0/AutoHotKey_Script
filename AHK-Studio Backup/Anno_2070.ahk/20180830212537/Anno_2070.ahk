@@ -996,3 +996,10 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+^Insert::
+Send {Control Up}
+Send {RShift Down}
+KeyWait Insert
+Send {RShift Up}
+Return

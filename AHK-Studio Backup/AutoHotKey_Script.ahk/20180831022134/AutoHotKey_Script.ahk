@@ -61,20 +61,13 @@ CoordMode, mouse, Screen
 { ; Testing
 	
 	/* ; If prior key ""
-		$m::
-		If (A_PriorKey = "space")
-		{
-			SendInput {p Down}
-			KeyWait m
-			Send {p Up}
+		{ ; If prior key ""
+			m::
+			Send o
+			if (A_PriorKey = "space")
+				SendInput {p}
+			return
 		}
-		Else
-		{
-			Send {m Down}
-			KeyWait m
-			Send {m Up}
-		}
-		return
 		
 	*/
 	

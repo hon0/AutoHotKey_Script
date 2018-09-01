@@ -996,3 +996,18 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+$m::
+If (A_PriorKey = "space")
+{
+	SendInput {p Down}
+	KeyWait m
+	Send {p Up}
+}
+Else
+{
+	Send {m Down}
+	KeyWait m
+	Send {m Up}
+}
+return

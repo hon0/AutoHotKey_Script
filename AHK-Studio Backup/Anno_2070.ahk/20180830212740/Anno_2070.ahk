@@ -996,3 +996,5 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+Control & Insert::RShift

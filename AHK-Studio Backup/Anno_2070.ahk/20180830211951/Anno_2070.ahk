@@ -996,3 +996,9 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+$^AppsKey::
+Send {Control Up}
+Send {RShift}
+KeyWait AppsKey
+Return

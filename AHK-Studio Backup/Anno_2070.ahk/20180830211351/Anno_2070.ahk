@@ -996,3 +996,8 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+^appkey::Rcontrol
++appkey::Rshift
+!Appkey::Ralt
+#Appkey::RWin

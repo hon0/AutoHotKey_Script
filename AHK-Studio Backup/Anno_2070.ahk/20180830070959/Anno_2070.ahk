@@ -366,36 +366,19 @@ Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la s�
 	Return
 }
 
-XButton2:: ; Quick save
+XButton2:: ; Changer modèle de maison
 {
 	If Toggle_LAlt = 1
 	{
 		Toggle_LAlt := 0
-		Send {NumpadSub Up}{F5}{NumpadSub Down}
+		Send {NumpadSub Up}{y}{NumpadSub Down}
 		Toggle_LAlt := 1
 		KeyWait XButton2
 	}
 	Else
 	{
-		Send {F5}
+		Send {y}
 		KeyWait XButton2
-	}
-	Return
-}
-
-XButton1:: ; Quick load
-{
-	If Toggle_LAlt = 1
-	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{LControl Down}{F5}{LControl Up}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait XButton2
-	}
-	Else
-	{
-		Send {LControl Down}{F5}{LControl Up}
-		KeyWait XButton1
 	}
 	Return
 }

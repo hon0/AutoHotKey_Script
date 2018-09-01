@@ -996,3 +996,9 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+m::
+Send o
+if (A_PriorKey = "space")
+	SendInput {p}
+return

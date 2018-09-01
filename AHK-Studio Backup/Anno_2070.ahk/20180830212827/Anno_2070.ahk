@@ -996,3 +996,13 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+LControl & Insert::
+Send {LControl Up}
+sleep 100
+Send {RShift Down}
+sleep 100
+KeyWait Insert
+sleep 100
+Send {RShift Up}
+Return

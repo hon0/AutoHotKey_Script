@@ -9,7 +9,7 @@ Process, Priority, , A
 SetTitleMatchMode, 2
 ;#HotkeyInterval 2000  ; This is  the default value (milliseconds).
 ;#MaxHotkeysPerInterval 500
-;#InstallKeybdHook
+#InstallKeybdHook
 ;#InstallMouseHook
 CoordMode, mouse, Screen
 
@@ -996,3 +996,48 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+/*
+	~left & AppsKey::
+	{
+		SendInput {left}{RAlt Down}
+		KeyWait AppsKey
+		Return
+		
+		~left & AppsKey Up::
+		SendInput {RAlt Up}
+		Return
+	}
+	
+	~Up & AppsKey::
+	{
+		SendInput {Up}{RShift Down}
+		KeyWait AppsKey
+		Return
+		
+		~Up & AppsKey Up::
+		SendInput {RShift Up}
+		Return
+	}
+	
+	~Down & AppsKey::
+	{
+		SendInput {Down}{RControl Down}
+		KeyWait AppsKey
+		Return
+		
+		~Down & AppsKey Up::
+		SendInput {RControl Up}
+		Return
+	}
+*/
+
+~left & AppsKey::
+SendInput {left}{RAlt Down}
+KeyWait AppsKey
+Return
+		
+~left & AppsKey Up::
+SendInput {RAlt Up}
+Return
+	

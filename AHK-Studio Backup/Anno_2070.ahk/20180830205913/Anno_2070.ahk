@@ -4,7 +4,7 @@
 Layer := 1
 Toggle_LAlt := 0
 SetCapsLockState, AlwaysOff
-SetScrollLockState, AlwaysOff
+;SetScrollLockState, AlwaysOff
 Process, Priority, , A
 SetTitleMatchMode, 2
 ;#HotkeyInterval 2000  ; This is  the default value (milliseconds).
@@ -996,3 +996,5 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+ScrollLock::RCtrl

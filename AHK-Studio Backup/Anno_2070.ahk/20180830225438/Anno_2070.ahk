@@ -366,22 +366,24 @@ Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la s�
 	Return
 }
 
-XButton2:: ; Quick save
-{
-	If Toggle_LAlt = 1
+/*
+	XButton2:: ; Quick save
 	{
-		Toggle_LAlt := 0
-		Send {NumpadSub Up}{F5}{NumpadSub Down}
-		Toggle_LAlt := 1
-		KeyWait XButton2
+		If Toggle_LAlt = 1
+		{
+			Toggle_LAlt := 0
+			Send {NumpadSub Up}{F5}{NumpadSub Down}
+			Toggle_LAlt := 1
+			KeyWait XButton2
+		}
+		Else
+		{
+			Send {F5}
+			KeyWait XButton2
+		}
+		Return
 	}
-	Else
-	{
-		Send {F5}
-		KeyWait XButton2
-	}
-	Return
-}
+*/
 
 XButton1:: ; Quick load
 {
@@ -995,4 +997,42 @@ $v::
 	
 :*:ahk::AutoHotKey
 	
+}
+
+~left & AppsKey::
+{
+	SendInput {left}{RAlt Down}
+	KeyWait AppsKey
+	Return
+	
+	
+	~left & AppsKey Up::
+	SendInput {RAlt Up}
+	Return
+}
+
+~Up & AppsKey::
+{
+	SendInput {Up}{RShift Down}
+	KeyWait AppsKey
+	Return
+}
+
+~Up & AppsKey Up::
+{
+	SendInput {RShift Up}
+	Return
+}
+
+~Down & AppsKey::
+{
+	SendInput {Down}{RControl Down}
+	KeyWait AppsKey
+	Return
+}
+
+~Down & AppsKey Up::
+{
+	SendInput {RControl Up}
+	Return
 }

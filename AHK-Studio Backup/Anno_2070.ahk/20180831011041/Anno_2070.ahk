@@ -996,3 +996,10 @@ $v::
 :*:ahk::AutoHotKey
 	
 }
+
+
+p::
+Send p
+if (A_PriorKey = "Rshift")
+	SendInput {o}
+return
