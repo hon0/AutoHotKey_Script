@@ -108,44 +108,118 @@ XButton2::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		KeyWait XButton2, t0.100
+		KeyWait XButton2, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{ ; Routes commerciales
+			If GetKeyState("MButton", "P")=1
+			{
+				Send {MButton Up}{LControl Down}{SC006}{LControl Up}
+				KeyWait XButton2
+				Return
+			}
+			Else
+			{
+				Send, ^(
+				KeyWait XButton2
+				Return
+			}
+		}
+		Else
+		{ ; Logistique
+			If GetKeyState("MButton", "P")=1
+			{
+				Send {MButton Up}{LControl Down}{SC005}{LControl Up}
+				KeyWait XButton2
+				Return
+			}
+			Else
+			{
+				Send, ^'
+				KeyWait XButton2
+				Return
+			}
+		}
+		Return
+	}
+	Else If (Layer=1) and WinActive("Discord")
+	{ ; Naviguer entre les salons non lus vers le haut
+		KeyWait XButton2, t0.200
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
 			SetKeyDelay 10, 32
-			Send, ^(
-			KeyWait, XButton2
-		}
-		else
-		{
-			SetKeyDelay 10, 32
-			Send, ^'
+			Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
 			KeyWait, XButton2
 		}
 		Return
 	}
+	Else
+	{
+		Send {XButton2 Down}
+		KeyWait XButton2
+		Send {XButton2 Up}
+	}
+	Return
 }
 
 XButton1::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		KeyWait XButton1, t0.100
+		KeyWait XButton1, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{ ; Technologie
+			If GetKeyState("MButton", "P")=1
+			{
+				Send {MButton Up}{LControl Down}{SC008}{LControl Up}
+				KeyWait XButton1
+				Return
+			}
+			Else
+			{
+				Send, ^è
+				KeyWait XButton1
+				Return
+			}
+		}
+		Else
+		{ ; Economie
+			If GetKeyState("MButton", "P")=1
+			{
+				Send {MButton Up}{LControl Down}{SC004}{LControl Up}
+				KeyWait XButton1
+				Return
+			}
+			Else
+			{
+				Send, ^"
+				KeyWait XButton1
+				Return
+			}
+		}
+		Return
+	}
+	Else If (Layer=1) and WinActive("Discord")
+	{ ; Naviguer entre les salons non lus vers le bas
+		KeyWait XButton1, t0.200
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
 			SetKeyDelay 10, 32
-			Send, ^è
-			KeyWait, XButton1
-		}
-		else
-		{
-			SetKeyDelay 10, 32
-			Send, ^"
+			Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
 			KeyWait, XButton1
 		}
 		Return
 	}
+	Else
+	{
+		Send {XButton1 Down}
+		KeyWait XButton1
+		Send {XButton1 Up}
+	}
+	Return
 }
 
 WheelUp::
@@ -195,13 +269,13 @@ WheelDown::
 $q::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
+	{ ; Sélectionner le Général 1
 		Send {& Down}
 		KeyWait, q
 		Send {& Up}
 	}
 	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
+	{ ; Sélectionner le Général 1
 		Send {& Down}
 		KeyWait, q
 		Send {& Up}
@@ -218,13 +292,13 @@ $q::
 $e::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
+	{ ; Sélectionner le Général 3
 		Send {SC004 Down}
 		KeyWait, e
 		Send {SC004 Up}
 	}
 	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
+	{ ; Sélectionner le Général 3
 		Send {SC004 Down}
 		KeyWait, e
 		Send {SC004 Up}
@@ -241,7 +315,7 @@ $e::
 $w::
 {
 	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
+	{ ; Sélectionner le Général 2
 		Send {é Down}
 		KeyWait, w
 		Send {é Up}
@@ -257,16 +331,16 @@ $w::
 
 $Tab::
 {
-	If (Layer=2)
-	{
+	If (Layer=1) and WinActive(Settlers 7 Window)
+	{ ; Points de victoire
+		Send ^é
+		KeyWait, Tab
+	}
+	Else if (Layer=2)
+	{ ; Escape
 		Send {esc Down}
 		KeyWait, Tab
 		Send {esc Up}
-	}
-	Else If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		Send ^é
-		KeyWait, Tab
 	}
 	Else
 	{
@@ -284,24 +358,20 @@ $z::
 		KeyWait z, t0.100
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
-		{
+		{ ; Puits
 			SendInput {z down}
-			sleep 32
+			Sleep 32
 			SendInput {z up}
-			ControlSend, Edit3, ^a22, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, z
 		}
-		else
-		{
+		Else
+		{ ; Abri de montagne
 			SendInput {b down}
 			Sleep 32
 			SendInput {b up}
-			ControlSend, Edit3, ^a19, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, z
 		}
-		return
+		Return
 	}
 	Else
 	{
@@ -320,21 +390,17 @@ $x::
 		KeyWait x, t0.100
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
-		{
+		{ ; Pavillong
 			SendInput {n down}
 			Sleep 32
 			SendInput {n up}
-			ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, x
 		}
-		else
-		{
+		Else 
+		{ ; Noble Demeure
 			SendInput {x down}
-			sleep 32
+			Sleep 32
 			SendInput {x up}
-			ControlSend, Edit3, ^a17, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, x
 		}
 		Return
@@ -352,19 +418,17 @@ $x::
 $c::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
+	{ ; Entrepôt
 		Send, {c Down}
 		Sleep 32
 		Send, {c Up}
-		ControlSend, Edit3, ^a19, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 		KeyWait, c
-		return
+		Return
 	}
 	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{
+	{ ; Nourriture
 		PixelGetColor, color, 1889, 95
-		if color = 0x20396f ;0x20396F 
+		If color = 0x20396f ;0x20396F 
 		{
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
@@ -375,7 +439,7 @@ $c::
 			BlockInput, Off
 			KeyWait, c
 		}
-		else
+		Else
 		{
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
@@ -403,17 +467,15 @@ $c::
 $v::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
+	{ ; Ferme
 		Send, {v Down}
 		Sleep 32
 		Send, {v Up}
-		ControlSend, Edit3, ^a18, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 		KeyWait, v
-		return
+		Return
 	}	
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{
+	Else If (Layer=2) and WinActive(Settlers 7 Window)
+	{ ; Géologue
 		PixelGetColor, color, 1889, 95
 		if color = 0x20396f ;0x20396F 
 		{
@@ -426,7 +488,7 @@ $v::
 			BlockInput, Off
 			KeyWait, v
 		}
-		else
+		Else
 		{
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
@@ -455,55 +517,31 @@ $f::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{
-		Send {f Down}
-		Sleep 32
-		Send {f Up}
-		ControlSend, Edit3, ^a20, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-		KeyWait, f
+		KeyWait f, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel 
+		{ ; Eglise
+			SendInput {g down}
+			Sleep 32
+			SendInput {g up}
+			KeyWait, f
+		}
+		Else
+		{ ; Caserne
+			SendInput {f down}
+			Sleep 32
+			SendInput {f up}
+			KeyWait, f
+		}
 		Return
 	}
-	Else If (Layer=2) and WinActive(Settlers 7 Window)
-	{
-		KeyWait f, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {h down}
-			Sleep 32
-			SendInput {h up}
-			ControlSend, Edit3, ^a21, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, f
-		}
-		else
-		{
-			SendInput {g down}
-			sleep 32
-			SendInput {g up}
-			ControlSend, Edit3, ^a20, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			KeyWait, f
-		}
-		return
-	}
-	Else if (Layer=3) and WinActive(Settlers 7 Window)
-	{
-		KeyWait f, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {k down}
-			KeyWait f
-			SendInput {k up}
-		}
-		else
-		{
-			SendInput {j down}
-			sleep 32
-			SendInput {j up}
-		}
-		return
+	If (Layer=2) and WinActive(Settlers 7 Window)
+	{ ; Guilde des commerçants
+		SendInput {h down}
+		Sleep 32
+		SendInput {h up}
+		KeyWait, f
+		Return
 	}
 	Else
 	{
@@ -521,21 +559,17 @@ $r::
 		KeyWait r, t0.100
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
-		{
+		{ ; Baraque de chantier
 			SendInput {t down}
 			Sleep 32
 			SendInput {t up}
-			ControlSend, Edit3, ^a21, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, r
 		}
-		else
-		{
+		Else
+		{ ; Demeure
 			SendInput {y down}
-			sleep 32
+			Sleep 32
 			SendInput {y up}
-			ControlSend, Edit3, ^a17, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
-			ControlSend, Edit3, {Enter}, The Settlers 7 Paths to a Kingdom Prima Official Guide.pdf - Foxit Reader
 			KeyWait, r
 		}
 		Return
@@ -551,7 +585,7 @@ $r::
 
 #IfWinActive Settlers 7 Window
 	
-LAlt::
+LAlt:: ; Art de la guerre
 {
 	PixelGetColor, color, 1889, 95
 	if color = 0x20396f ;0x20396F 
@@ -580,7 +614,7 @@ LAlt::
 	Return
 }
 
-F13::
+F13:: ; Lieux de travail
 {
 	PixelGetColor, color, 1889, 95
 	if color = 0x20396f ;0x20396F
@@ -610,7 +644,7 @@ F13::
 	Return
 }
 
-F14::
+F14:: ; Construction
 {	
 	PixelGetColor, color, 1889, 95
 	if color = 0x20396f ;0x20396F 
@@ -640,7 +674,7 @@ F14::
 	Return
 }
 
-F15::
+F15:: ; Géologue
 {
 	PixelGetColor, color, 1889, 95
 	if color = 0x20396f ;0x20396F 
@@ -648,11 +682,11 @@ F15::
 		MouseGetPos, xpos, ypos 
 		BlockInput, On
 		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
+		MouseClick, left, 1732, 242
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F15
+		KeyWait, F15
 	}
 	else
 	{
@@ -661,11 +695,11 @@ F15::
 		Send, {PGUP Down}
 		SetKeyDelay 32, 32
 		Send {NumpadEnter}
-		MouseClick, left, 1732, 135
+		MouseClick, left, 1732, 242
 		MouseMove, xpos, ypos 
 		Send, {PGUP Up}
 		BlockInput, Off
-		KeyWait F15
+		KeyWait, F15
 	}
 	Return
 }
