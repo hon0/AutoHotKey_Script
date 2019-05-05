@@ -2,7 +2,6 @@
 #Persistent  ; Keep this script running until the user explicitly exits it.
 ;#Warn  ; Enable warnings to assist with detecting common errors.
 Layer := 1
-Logistique := 0
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
@@ -115,7 +114,6 @@ XButton2::
 		{ ; Routes commerciales
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC006}{LControl Up}
 				KeyWait XButton2
 				Return
@@ -131,16 +129,13 @@ XButton2::
 		{ ; Logistique
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC005}{LControl Up}
-				Logistique := 1
 				KeyWait XButton2
 				Return
 			}
 			Else
 			{
 				Send, ^'
-				Logistique := 1
 				KeyWait XButton2
 				Return
 			}
@@ -178,7 +173,6 @@ XButton1::
 		{ ; Technologie
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC008}{LControl Up}
 				KeyWait XButton1
 				Return
@@ -194,7 +188,6 @@ XButton1::
 		{ ; Economie
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC004}{LControl Up}
 				KeyWait XButton1
 				Return
@@ -229,23 +222,9 @@ XButton1::
 	Return
 }
 
-~RButton::
-{
-	If Logistique = 1
-	{
-		Send {Escape}
-		Logistique := 0
-	}
-	Else if Logistique = 0
-	{
-		Return
-	}
-	Return
-}
-
 WheelUp::
 {
-	If (Layer=1) and WinActive("Discord") and GetKeyState("MButton")
+	If (Layer=1) and GetKeyState("MButton")
 	{
 		SetkeyDelay, 0, 32
 		Send {Home}
@@ -267,7 +246,7 @@ WheelUp::
 
 WheelDown::
 {
-	If (Layer=1) and WinActive("Discord") and GetKeyState("MButton")
+	If (Layer=1) and GetKeyState("MButton")
 	{
 		SetkeyDelay, 0, 32
 		Send {End}

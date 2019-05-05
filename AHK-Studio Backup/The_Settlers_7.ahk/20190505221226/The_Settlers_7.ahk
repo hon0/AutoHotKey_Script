@@ -115,7 +115,6 @@ XButton2::
 		{ ; Routes commerciales
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC006}{LControl Up}
 				KeyWait XButton2
 				Return
@@ -131,7 +130,6 @@ XButton2::
 		{ ; Logistique
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC005}{LControl Up}
 				Logistique := 1
 				KeyWait XButton2
@@ -178,7 +176,6 @@ XButton1::
 		{ ; Technologie
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC008}{LControl Up}
 				KeyWait XButton1
 				Return
@@ -194,7 +191,6 @@ XButton1::
 		{ ; Economie
 			If GetKeyState("MButton", "P")=1
 			{
-				SetKeyDelay 10, 32
 				Send {MButton Up}{LControl Down}{SC004}{LControl Up}
 				KeyWait XButton1
 				Return
@@ -245,13 +241,16 @@ XButton1::
 
 WheelUp::
 {
-	If (Layer=1) and WinActive("Discord") and GetKeyState("MButton")
-	{
-		SetkeyDelay, 0, 32
-		Send {Home}
-		Return
-	}
-	Else if (Layer=2)
+	/*
+		If (Layer=1) and GetKeyState("MButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {Home}
+			Return
+		}
+		Else 
+	*/
+	If (Layer=2)
 	{
 		SetkeyDelay, 0, 32
 		Send {PgDn}
@@ -267,13 +266,16 @@ WheelUp::
 
 WheelDown::
 {
-	If (Layer=1) and WinActive("Discord") and GetKeyState("MButton")
-	{
-		SetkeyDelay, 0, 32
-		Send {End}
-		Return
-	}
-	Else if (Layer=2)
+	/*
+		If (Layer=1) and GetKeyState("MButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {End}
+			Return
+		}
+		Else 
+	*/
+	If (Layer=2)
 	{
 		SetkeyDelay, 0, 32
 		Send {PGUP}
