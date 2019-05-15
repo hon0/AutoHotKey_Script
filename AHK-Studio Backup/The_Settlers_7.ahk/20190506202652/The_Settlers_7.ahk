@@ -400,146 +400,279 @@ $z::
 			If GetKeyState("LButton", "P")=1
 			{
 				SetKeyDelay 10, 32
-				Send {LButton Up}{z}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
+				Send {LButton Up}{z Down}
 				KeyWait z
 				Return
 			}
 			Else
 			{
 				Send z
-				KeyWait z
-				Return
-			}
-		}
-		Else
-		{
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{b}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait z
+				KeyWait XButton2
 				Return
 			}
 			Else
-			{
-				Send b
-				KeyWait z
-				Return
-			}	
-		}
-		Return
-	}
-	Else
-	{
-		Send {z Down}
-		KeyWait, z
-		Send {z Up}
-		Return
-	}
-	Return
-}
-
-$x::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait x, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel ; Pavillong
-		{
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{n}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait x
-				Return
+			{ ; Abri de montagne
+				SendInput {b down}
+				Sleep 32
+				SendInput {b up}
+				KeyWait, z
 			}
-			Else ; Noble Demeure
-			{
-				Send n
-				KeyWait x
-				Return
-			}
-		}
-		Else
-		{
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{x}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait z
-				Return
-			}
-			Else
-			{
-				Send x
-				KeyWait z
-				Return
-			}	
-		}
-		Return
-	}
-	Else
-	{
-		Send {x Down}
-		KeyWait, x
-		Send {x Up}
-		Return
-	}
-	Return
-}
-
-$c::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{ ; Entrepôt
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{c}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait c
 			Return
 		}
 		Else
 		{
-			Send c
-			KeyWait c
+			Send {z Down}
+			KeyWait, z
+			Send {z Up}
+			Return
+		}
+		Return
+	}
+	
+	$x::
+	{
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{
+			KeyWait x, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{ ; Pavillong
+				SendInput {n down}
+				Sleep 32
+				SendInput {n up}
+				KeyWait, x
+			}
+			Else 
+			{ ; Noble Demeure
+				SendInput {x down}
+				Sleep 32
+				SendInput {x up}
+				KeyWait, x
+			}
+			Return
+		}
+		Else
+		{
+			Send {x Down}
+			KeyWait, x
+			Send {x Up}
+			Return
+		}
+		Return
+	}
+	
+	$c::
+	{
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{ ; Entrepôt
+			Send, {c Down}
+			Sleep 32
+			Send, {c Up}
+			KeyWait, c
+			Return
+		}
+		Else if (Layer=2) and WinActive(Settlers 7 Window)
+		{ ; Nourriture
+			PixelGetColor, color, 1889, 95
+			If color = 0x20396f ;0x20396F 
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				MouseClick, left, 1732, 208
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				KeyWait, c
+			}
+			Else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 208
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				KeyWait, c
+			}
+			Return
+		}
+		Else
+		{
+			Send {c Down}
+			KeyWait, c
+			Send {c Up}
+			Return
+		}
+		Return
+	}
+	
+	$v::
+	{
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{ ; Ferme
+			Send, {v Down}
+			Sleep 32
+			Send, {v Up}
+			KeyWait, v
+			Return
+		}	
+		Else If (Layer=2) and WinActive(Settlers 7 Window)
+		{ ; Géologue
+			PixelGetColor, color, 1889, 95
+			if color = 0x20396f ;0x20396F 
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				MouseClick, left, 1732, 242
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				KeyWait, v
+			}
+			Else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				Send, {PGUP Down}
+				SetKeyDelay 32, 32
+				Send {NumpadEnter}
+				MouseClick, left, 1732, 242
+				MouseMove, xpos, ypos 
+				Send, {PGUP Up}
+				BlockInput, Off
+				KeyWait, v
+			}
+			Return
+		}
+		Else
+		{
+			Send {v Down}
+			KeyWait, v
+			Send {v Up}
+			Return
+		}
+		Return
+	}
+	
+	$f::
+	{
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{
+			KeyWait f, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel 
+			{ ; Eglise
+				SendInput {g down}
+				Sleep 32
+				SendInput {g up}
+				KeyWait, f
+			}
+			Else
+			{ ; Caserne
+				SendInput {f down}
+				Sleep 32
+				SendInput {f up}
+				KeyWait, f
+			}
+			Return
+		}
+		If (Layer=2) and WinActive(Settlers 7 Window)
+		{ ; Guilde des commerçants
+			SendInput {h down}
+			Sleep 32
+			SendInput {h up}
+			KeyWait, f
+			Return
+		}
+		Else
+		{
+			Send {f Down}
+			KeyWait, f
+			Send {f Up}
 			Return
 		}
 	}
-	Else if (Layer=2) and WinActive(Settlers 7 Window)
-	{ ; Nourriture
+	
+	$r::
+	{
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{
+			KeyWait r, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{ ; Baraque de chantier
+				SendInput {t down}
+				Sleep 32
+				SendInput {t up}
+				KeyWait, r
+			}
+			Else
+			{ ; Demeure
+				SendInput {y down}
+				Sleep 32
+				SendInput {y up}
+				KeyWait, r
+			}
+			Return
+		}
+		Else
+		{
+			Send {r Down}
+			KeyWait, r
+			Send {r Up}
+			Return
+		}
+	}
+	
+	#IfWinActive Settlers 7 Window
+		
+	LAlt:: ; Art de la guerre
+	{
 		PixelGetColor, color, 1889, 95
-		If color = 0x20396f ;0x20396F 
+		if color = 0x20396f ;0x20396F 
 		{
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
 			Send, {PGUP Down}
-			MouseClick, left, 1732, 208
+			MouseClick, left, 1732, 135
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, c
+			KeyWait LAlt
+		}
+		else
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			SetKeyDelay 32, 32
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 135
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait LAlt
+		}
+		Return
+	}
+	
+	F13:: ; Lieux de travail
+	{
+		PixelGetColor, color, 1889, 95
+		if color = 0x20396f ;0x20396F
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 171
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait F13
 		}
 		Else
 		{
@@ -548,48 +681,47 @@ $c::
 			Send, {PGUP Down}
 			SetKeyDelay 32, 32
 			Send {NumpadEnter}
-			MouseClick, left, 1732, 208
+			MouseClick, left, 1732, 171
+			MouseMove, xpos, ypos
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait F13
+		}
+		Return
+	}
+	
+	F14:: ; Construction
+	{	
+		PixelGetColor, color, 1889, 95
+		if color = 0x20396f ;0x20396F 
+		{
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			MouseClick, left, 1732, 279
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, c
-		}
-		Return
-	}
-	Else
-	{
-		Send {c Down}
-		KeyWait, c
-		Send {c Up}
-		Return
-	}
-	Return
-}
-
-$v::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{ ; Ferme
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{v}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait v
-			Return
+			KeyWait F14
 		}
 		Else
 		{
-			Send v
-			KeyWait v
-			Return
+			MouseGetPos, xpos, ypos 
+			BlockInput, On
+			Send, {PGUP Down}
+			SetKeyDelay 32, 32
+			Send {NumpadEnter}
+			MouseClick, left, 1732, 279
+			MouseMove, xpos, ypos 
+			Send, {PGUP Up}
+			BlockInput, Off
+			KeyWait F14
 		}
-	}	
-	Else If (Layer=2) and WinActive(Settlers 7 Window)
-	{ ; Géologue
+		Return
+	}
+	
+	F15:: ; Géologue
+	{
 		PixelGetColor, color, 1889, 95
 		if color = 0x20396f ;0x20396F 
 		{
@@ -600,9 +732,9 @@ $v::
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, v
+			KeyWait, F15
 		}
-		Else
+		else
 		{
 			MouseGetPos, xpos, ypos 
 			BlockInput, On
@@ -613,273 +745,9 @@ $v::
 			MouseMove, xpos, ypos 
 			Send, {PGUP Up}
 			BlockInput, Off
-			KeyWait, v
+			KeyWait, F15
 		}
 		Return
 	}
-	Else
-	{
-		Send {v Down}
-		KeyWait, v
-		Send {v Up}
-		Return
-	}
-	Return
-}
-
-$f::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait f, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel 
-		{ ; Eglise
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{g}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send g
-				KeyWait f
-				Return
-			}
-		}
-		Else
-		{ ; Caserne
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{f}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send f
-				KeyWait f
-				Return
-			}
-		}
-		Return
-	}
-	If (Layer=2) and WinActive(Settlers 7 Window)
-	{ ; Guilde des commerçants
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{h}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait f
-			Return
-		}
-		Else
-		{
-			Send h
-			KeyWait f
-			Return
-		}
-	}
-	Else
-	{
-		Send {f Down}
-		KeyWait, f
-		Send {f Up}
-		Return
-	}
-}
-
-$r::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{ ; Baraque de chantier
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{t}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send t
-				KeyWait r
-				Return
-			}
-		}
-		Else
-		{ ; Demeure
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{y}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send y
-				KeyWait r
-				Return
-			}
-		}
-		Return
-	}
-	Else
-	{
-		Send {r Down}
-		KeyWait, r
-		Send {r Up}
-		Return
-	}
-}
-
-#IfWinActive Settlers 7 Window
 	
-LAlt:: ; Art de la guerre
-{
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait LAlt
-	}
-	else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		SetKeyDelay 32, 32
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 135
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait LAlt
-	}
-	Return
-}
-
-F13:: ; Lieux de travail
-{
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 171
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait F13
-	}
-	Else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 171
-		MouseMove, xpos, ypos
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait F13
-	}
-	Return
-}
-
-F14:: ; Construction
-{	
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 279
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait F14
-	}
-	Else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 279
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait F14
-	}
-	Return
-}
-
-F15:: ; Géologue
-{
-	PixelGetColor, color, 1889, 95
-	if color = 0x20396f ;0x20396F 
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		MouseClick, left, 1732, 242
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait, F15
-	}
-	else
-	{
-		MouseGetPos, xpos, ypos 
-		BlockInput, On
-		Send, {PGUP Down}
-		SetKeyDelay 32, 32
-		Send {NumpadEnter}
-		MouseClick, left, 1732, 242
-		MouseMove, xpos, ypos 
-		Send, {PGUP Up}
-		BlockInput, Off
-		KeyWait, F15
-	}
-	Return
-}
-
-#IfWinActive
+	#IfWinActive

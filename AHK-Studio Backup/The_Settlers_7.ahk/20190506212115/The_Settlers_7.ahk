@@ -712,43 +712,17 @@ $r::
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{ ; Baraque de chantier
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{t}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send t
-				KeyWait r
-				Return
-			}
+			SendInput {t down}
+			Sleep 32
+			SendInput {t up}
+			KeyWait, r
 		}
 		Else
 		{ ; Demeure
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{y}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send y
-				KeyWait r
-				Return
-			}
+			SendInput {y down}
+			Sleep 32
+			SendInput {y up}
+			KeyWait, r
 		}
 		Return
 	}

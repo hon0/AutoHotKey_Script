@@ -105,129 +105,131 @@ SetTitleMatchMode, 2
 	Return	
 }
 
-XButton2::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
+/*
+	XButton2::
 	{
-		KeyWait XButton2, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{ ; Routes commerciales
-			If GetKeyState("MButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {MButton Up}{LControl Down}{SC006}{LControl Up}
-				KeyWait XButton2
-				Return
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{
+			KeyWait XButton2, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{ ; Routes commerciales
+				If GetKeyState("MButton", "P")=1
+				{
+					SetKeyDelay 10, 32
+					Send {MButton Up}{LControl Down}{SC006}{LControl Up}
+					KeyWait XButton2
+					Return
+				}
+				Else
+				{
+					Send, ^(
+					KeyWait XButton2
+					Return
+				}
 			}
 			Else
-			{
-				Send, ^(
-				KeyWait XButton2
-				Return
+			{ ; Logistique
+				If GetKeyState("MButton", "P")=1
+				{
+					SetKeyDelay 10, 32
+					Send {MButton Up}{LControl Down}{SC005}{LControl Up}
+					Logistique := 1
+					KeyWait XButton2
+					Return
+				}
+				Else
+				{
+					Send, ^'
+					Logistique := 1
+					KeyWait XButton2
+					Return
+				}
 			}
+			Return
+		}
+		Else If (Layer=1) and WinActive("Discord")
+		{ ; Naviguer entre les salons non lus vers le haut
+			KeyWait XButton2, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SetKeyDelay 10, 32
+				Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
+				KeyWait, XButton2
+			}
+			Return
 		}
 		Else
-		{ ; Logistique
-			If GetKeyState("MButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {MButton Up}{LControl Down}{SC005}{LControl Up}
-				Logistique := 1
-				KeyWait XButton2
-				Return
-			}
-			Else
-			{
-				Send, ^'
-				Logistique := 1
-				KeyWait XButton2
-				Return
-			}
-		}
-		Return
-	}
-	Else If (Layer=1) and WinActive("Discord")
-	{ ; Naviguer entre les salons non lus vers le haut
-		KeyWait XButton2, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
 		{
-			SetKeyDelay 10, 32
-			Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
-			KeyWait, XButton2
+			Send {XButton2 Down}
+			KeyWait XButton2
+			Send {XButton2 Up}
 		}
 		Return
 	}
-	Else
+	
+	XButton1::
 	{
-		Send {XButton2 Down}
-		KeyWait XButton2
-		Send {XButton2 Up}
-	}
-	Return
-}
-
-XButton1::
-{
-	If (Layer=1) and WinActive(Settlers 7 Window)
-	{
-		KeyWait XButton1, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{ ; Technologie
-			If GetKeyState("MButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {MButton Up}{LControl Down}{SC008}{LControl Up}
-				KeyWait XButton1
-				Return
+		If (Layer=1) and WinActive(Settlers 7 Window)
+		{
+			KeyWait XButton1, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{ ; Technologie
+				If GetKeyState("MButton", "P")=1
+				{
+					SetKeyDelay 10, 32
+					Send {MButton Up}{LControl Down}{SC008}{LControl Up}
+					KeyWait XButton1
+					Return
+				}
+				Else
+				{
+					Send, ^è
+					KeyWait XButton1
+					Return
+				}
 			}
 			Else
-			{
-				Send, ^è
-				KeyWait XButton1
-				Return
+			{ ; Economie
+				If GetKeyState("MButton", "P")=1
+				{
+					SetKeyDelay 10, 32
+					Send {MButton Up}{LControl Down}{SC004}{LControl Up}
+					KeyWait XButton1
+					Return
+				}
+				Else
+				{
+					Send, ^"
+					KeyWait XButton1
+					Return
+				}
 			}
+			Return
+		}
+		Else If (Layer=1) and WinActive("Discord")
+		{ ; Naviguer entre les salons non lus vers le bas
+			KeyWait XButton1, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SetKeyDelay 10, 32
+				Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
+				KeyWait, XButton1
+			}
+			Return
 		}
 		Else
-		{ ; Economie
-			If GetKeyState("MButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {MButton Up}{LControl Down}{SC004}{LControl Up}
-				KeyWait XButton1
-				Return
-			}
-			Else
-			{
-				Send, ^"
-				KeyWait XButton1
-				Return
-			}
-		}
-		Return
-	}
-	Else If (Layer=1) and WinActive("Discord")
-	{ ; Naviguer entre les salons non lus vers le bas
-		KeyWait XButton1, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
 		{
-			SetKeyDelay 10, 32
-			Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
-			KeyWait, XButton1
+			Send {XButton1 Down}
+			KeyWait XButton1
+			Send {XButton1 Up}
 		}
 		Return
 	}
-	Else
-	{
-		Send {XButton1 Down}
-		KeyWait XButton1
-		Send {XButton1 Up}
-	}
-	Return
-}
+*/
 
 ~RButton::
 {
@@ -570,23 +572,11 @@ $v::
 {
 	If (Layer=1) and WinActive(Settlers 7 Window)
 	{ ; Ferme
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{v}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait v
-			Return
-		}
-		Else
-		{
-			Send v
-			KeyWait v
-			Return
-		}
+		Send, {v Down}
+		Sleep 32
+		Send, {v Up}
+		KeyWait, v
+		Return
 	}	
 	Else If (Layer=2) and WinActive(Settlers 7 Window)
 	{ ; Géologue
@@ -635,65 +625,27 @@ $f::
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel 
 		{ ; Eglise
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{g}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send g
-				KeyWait f
-				Return
-			}
+			SendInput {g down}
+			Sleep 32
+			SendInput {g up}
+			KeyWait, f
 		}
 		Else
 		{ ; Caserne
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{f}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send f
-				KeyWait f
-				Return
-			}
+			SendInput {f down}
+			Sleep 32
+			SendInput {f up}
+			KeyWait, f
 		}
 		Return
 	}
 	If (Layer=2) and WinActive(Settlers 7 Window)
 	{ ; Guilde des commerçants
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{h}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait f
-			Return
-		}
-		Else
-		{
-			Send h
-			KeyWait f
-			Return
-		}
+		SendInput {h down}
+		Sleep 32
+		SendInput {h up}
+		KeyWait, f
+		Return
 	}
 	Else
 	{
@@ -712,43 +664,17 @@ $r::
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{ ; Baraque de chantier
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{t}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send t
-				KeyWait r
-				Return
-			}
+			SendInput {t down}
+			Sleep 32
+			SendInput {t up}
+			KeyWait, r
 		}
 		Else
 		{ ; Demeure
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{y}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send y
-				KeyWait r
-				Return
-			}
+			SendInput {y down}
+			Sleep 32
+			SendInput {y up}
+			KeyWait, r
 		}
 		Return
 	}

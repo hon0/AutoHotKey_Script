@@ -17,7 +17,7 @@ CoordMode, mouse, Screen
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
-	SetKeyDelay 0, 32
+	SetKeyDelay 10, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
 	
 	#IfWinExist Event Tester
@@ -26,11 +26,11 @@ CoordMode, mouse, Screen
 		
 		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
 		WinWait, Event Tester
-		SetKeyDelay 0, 32
+		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
-		Sleep 32
-		MouseClick, left, 1952, 66
-		MouseClick, left, 2016, 91
+		Sleep 100
+		MouseClick, left, 1950, 40
+		MouseClick, left, 2016, 65
 		BlockInput, Off	
 		return
 	}
@@ -260,6 +260,27 @@ CoordMode, mouse, Screen
 		}
 	*/	
 	
+	/*;Cycle
+		{
+			$&::
+			key++
+			if key = 1
+				Send, {SC002}
+			
+			else if key = 2
+				Send, {SC003}
+			
+			else if key = 3
+				Send, {SC004}
+			
+			else if key = 4
+			{
+				Send, {SC005}
+				key = 0              
+			}
+			return
+		}
+	*/
 }
 
 { ; Layer checker
@@ -286,21 +307,18 @@ CoordMode, mouse, Screen
 	Return
 }
 
-#IfWinActive Deep Rock Galactic
-	
-*WheelUp::
+WheelUp::
 {
-	If (Layer=1)
+	If (Layer=1) and GetKeyState("MButton")
 	{
 		SetkeyDelay, 0, 32
-		Send {SC002}
-		Sleep 100
+		Send {Home}
 		Return
 	}
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {WheelUp}
+		Send {PgUp}
 		Return
 	}
 	/*
@@ -311,29 +329,26 @@ CoordMode, mouse, Screen
 			Return
 		}
 	*/
-	/*
-		Else
-		{
-			Send {WheelUp}
-			Return
-		}
-	*/
+	Else
+	{
+		Send {WheelUp}
+		Return
+	}
 	Return
 }
 
-*WheelDown::
+WheelDown::
 {
-	If (Layer=1)
+	If (Layer=1) and GetKeyState("MButton")
 	{
 		SetkeyDelay, 0, 32
-		Send {SC004}
-		Sleep 100
+		Send {End}
 		Return
 	}
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {WheelDown}
+		Send {PgDn}
 		Return
 	}
 	/*
@@ -344,18 +359,58 @@ CoordMode, mouse, Screen
 			Return
 		}
 	*/
-	/*
-		Else
-		{
-			Send {WheelDown}
-			Return
-		}
-	*/
+	Else
+	{
+		Send {WheelDown}
+		Return
+	}
 	Return
 }
 
-#IfWinActive
-	
+$XButton2::
+{
+	If (Layer=1) and WinActive("Discord")
+	{
+		KeyWait XButton2, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SetKeyDelay 10, 32
+			Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
+			KeyWait, XButton2
+		}
+	}
+	Else
+	{
+		Send {XButton2 Down}
+		KeyWait XButton2
+		Send {XButton2 Up}
+	}
+	Return
+}
+
+$XButton1::
+{
+	If (Layer=1) and WinActive("Discord")
+	{
+		KeyWait XButton1, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SetKeyDelay 10, 32
+			Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
+			KeyWait, XButton1
+		}
+	}
+	Else
+	{
+		Send {XButton1 Down}
+		KeyWait XButton1
+		Send {XButton1 Up}
+	}
+	Return
+}
+
 $SC029::
 {
 	If (Layer=2)
@@ -540,32 +595,24 @@ $f::
 	}
 	Else If (Layer=2)
 	{
-		Send {g Down}
-		KeyWait, f
-		Send {g Up}
+		KeyWait f, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SendInput {h down}
+			Sleep 32
+			SendInput {h up}
+			KeyWait, f
+		}
+		else
+		{
+			SendInput {g down}
+			sleep 32
+			SendInput {g up}
+			KeyWait, f
+		}
 		Return
 	}
-	/*
-		{
-			KeyWait f, t0.100
-			t:= A_TimeSinceThisHotkey
-			If ErrorLevel
-			{
-				SendInput {h down}
-				Sleep 32
-				SendInput {h up}
-				KeyWait, f
-			}
-			else
-			{
-				SendInput {g down}
-				sleep 32
-				SendInput {g up}
-				KeyWait, f
-			}
-			Return
-		}
-	*/
 	Else if (Layer=3)
 	{
 		KeyWait f, t0.100
@@ -631,15 +678,14 @@ $a::
 	}
 	Else If (Layer=2)
 	{
-		Send {F5 Down}
+		Send {SC006 Down}
 		KeyWait, a
-		Send {F5 Up}
+		Send {SC006 Up}
 		Return
 	}
 	Else If (Layer=3)
 	{
-		Send {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
-		Return
+		
 	}
 	Return
 }
@@ -655,33 +701,14 @@ $e::
 	}
 	Else If (Layer=2)
 	{
-		Send {F8 Down}
+		Send {SC007 Down}
 		KeyWait, e
-		Send {F8 Up}
+		Send {SC007 Up}
 		Return
 	}
 	Else If (Layer=3)
 	{
-		Send {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
-		Return
-	}
-	Return
-}
-
-;LButton::LButton
-
-XButton2::
-{
-	If GetKeyState("LButton")
-	{
-		Return
-	}
-	Else
-	{
-		Send {XButton2 Down}
-		KeyWait, XButton2
-		Send {XButton2 Up}
-		Return
+		
 	}
 	Return
 }

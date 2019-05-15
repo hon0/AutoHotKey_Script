@@ -635,65 +635,27 @@ $f::
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel 
 		{ ; Eglise
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{g}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send g
-				KeyWait f
-				Return
-			}
+			SendInput {g down}
+			Sleep 32
+			SendInput {g up}
+			KeyWait, f
 		}
 		Else
 		{ ; Caserne
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{f}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait f
-				Return
-			}
-			Else
-			{
-				Send f
-				KeyWait f
-				Return
-			}
+			SendInput {f down}
+			Sleep 32
+			SendInput {f up}
+			KeyWait, f
 		}
 		Return
 	}
 	If (Layer=2) and WinActive(Settlers 7 Window)
 	{ ; Guilde des commerçants
-		If GetKeyState("LButton", "P")=1
-		{
-			SetKeyDelay 10, 32
-			Send {LButton Up}{h}
-			If GetKeyState("LButton", "P")=1
-			{
-				Send {LButton Down}
-			}
-			KeyWait f
-			Return
-		}
-		Else
-		{
-			Send h
-			KeyWait f
-			Return
-		}
+		SendInput {h down}
+		Sleep 32
+		SendInput {h up}
+		KeyWait, f
+		Return
 	}
 	Else
 	{
@@ -712,43 +674,17 @@ $r::
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{ ; Baraque de chantier
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{t}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send t
-				KeyWait r
-				Return
-			}
+			SendInput {t down}
+			Sleep 32
+			SendInput {t up}
+			KeyWait, r
 		}
 		Else
 		{ ; Demeure
-			If GetKeyState("LButton", "P")=1
-			{
-				SetKeyDelay 10, 32
-				Send {LButton Up}{y}
-				If GetKeyState("LButton", "P")=1
-				{
-					Send {LButton Down}
-				}
-				KeyWait r
-				Return
-			}
-			Else
-			{
-				Send y
-				KeyWait r
-				Return
-			}
+			SendInput {y down}
+			Sleep 32
+			SendInput {y up}
+			KeyWait, r
 		}
 		Return
 	}

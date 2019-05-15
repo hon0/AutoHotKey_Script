@@ -540,32 +540,24 @@ $f::
 	}
 	Else If (Layer=2)
 	{
-		Send {g Down}
-		KeyWait, f
-		Send {g Up}
+		KeyWait f, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SendInput {h down}
+			Sleep 32
+			SendInput {h up}
+			KeyWait, f
+		}
+		else
+		{
+			SendInput {g down}
+			sleep 32
+			SendInput {g up}
+			KeyWait, f
+		}
 		Return
 	}
-	/*
-		{
-			KeyWait f, t0.100
-			t:= A_TimeSinceThisHotkey
-			If ErrorLevel
-			{
-				SendInput {h down}
-				Sleep 32
-				SendInput {h up}
-				KeyWait, f
-			}
-			else
-			{
-				SendInput {g down}
-				sleep 32
-				SendInput {g up}
-				KeyWait, f
-			}
-			Return
-		}
-	*/
 	Else if (Layer=3)
 	{
 		KeyWait f, t0.100
