@@ -17,7 +17,7 @@ CoordMode, mouse, Screen
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
-	SetKeyDelay 10, 32
+	SetKeyDelay 0, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
 	
 	#IfWinExist Event Tester
@@ -26,11 +26,11 @@ CoordMode, mouse, Screen
 		
 		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
 		WinWait, Event Tester
-		SetKeyDelay 10, 32
+		SetKeyDelay 0, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
-		Sleep 100
-		MouseClick, left, 1950, 40
-		MouseClick, left, 2016, 65
+		Sleep 32
+		MouseClick, left, 1952, 66
+		MouseClick, left, 2016, 91
 		BlockInput, Off	
 		return
 	}
@@ -38,7 +38,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F2::Suspend, Toggle
+	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F
@@ -260,27 +260,6 @@ CoordMode, mouse, Screen
 		}
 	*/	
 	
-	/*;Cycle
-		{
-			$&::
-			key++
-			if key = 1
-				Send, {SC002}
-			
-			else if key = 2
-				Send, {SC003}
-			
-			else if key = 3
-				Send, {SC004}
-			
-			else if key = 4
-			{
-				Send, {SC005}
-				key = 0              
-			}
-			return
-		}
-	*/
 }
 
 { ; Layer checker
@@ -307,18 +286,21 @@ CoordMode, mouse, Screen
 	Return
 }
 
-WheelUp::
+#IfWinActive Deep Rock Galactic
+	
+*WheelUp::
 {
-	If (Layer=1) and GetKeyState("MButton")
+	If (Layer=1)
 	{
 		SetkeyDelay, 0, 32
-		Send {Home}
+		Send {SC002}
+		Sleep 100
 		Return
 	}
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {PgUp}
+		Send {WheelUp}
 		Return
 	}
 	/*
@@ -329,26 +311,29 @@ WheelUp::
 			Return
 		}
 	*/
-	Else
-	{
-		Send {WheelUp}
-		Return
-	}
+	/*
+		Else
+		{
+			Send {WheelUp}
+			Return
+		}
+	*/
 	Return
 }
 
-WheelDown::
+*WheelDown::
 {
-	If (Layer=1) and GetKeyState("MButton")
+	If (Layer=1)
 	{
 		SetkeyDelay, 0, 32
-		Send {End}
+		Send {SC004}
+		Sleep 100
 		Return
 	}
 	Else if (Layer=2)
 	{
 		SetkeyDelay, 0, 32
-		Send {PgDn}
+		Send {WheelDown}
 		Return
 	}
 	/*
@@ -359,84 +344,18 @@ WheelDown::
 			Return
 		}
 	*/
-	Else
-	{
-		Send {WheelDown}
-		Return
-	}
-	Return
-}
-
-*$XButton2::
-{
-	If (Layer=1) and WinActive("Discord")
-	{
-		KeyWait XButton2, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SetKeyDelay 10, 32
-			Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
-			KeyWait, XButton2
-		}
-	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		KeyWait XButton2, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {h down}
-			Sleep 32
-			SendInput {h up}
-			KeyWait, XButton2
-		}
+	/*
 		Else
 		{
-			SendInput {k down}
-			sleep 32
-			SendInput {k up}
-			KeyWait, XButton2
+			Send {WheelDown}
+			Return
 		}
-		Return
-	}
-	Else
-	{
-		Send {XButton2 Down}
-		KeyWait XButton2
-		Send {XButton2 Up}
-	}
+	*/
 	Return
 }
 
-*$XButton1::
-{
-	If (Layer=1) and WinActive("Discord")
-	{
-		KeyWait XButton1, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SetKeyDelay 10, 32
-			Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
-			KeyWait, XButton1
-		}
-	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		Send {j Down}
-		KeyWait XButton1
-		Send {j Up}
-	}
-	Else
-	{
-		Send {XButton1 Down}
-		KeyWait XButton1
-		Send {XButton1 Up}
-	}
-	Return
-}
-
+#IfWinActive
+	
 $SC029::
 {
 	If (Layer=2)
@@ -554,24 +473,11 @@ $c::
 
 $r::
 {
-	If (Layer=1) and WinActive("SteelDivision - DirectX 11")
+	If (Layer=1)
 	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {v down}
-			Sleep 32
-			SendInput {v up}
-			KeyWait, r
-		}
-		Else
-		{
-			SendInput {r down}
-			sleep 32
-			SendInput {r up}
-			KeyWait, r
-		}
+		Send {r Down}
+		KeyWait, r
+		Send {r Up}
 		Return
 	}
 	Else If (Layer=2)
@@ -585,14 +491,14 @@ $r::
 			SendInput {y up}
 			KeyWait, r
 		}
-		Else
+		else
 		{
 			SendInput {t down}
 			sleep 32
 			SendInput {t up}
 			KeyWait, r
 		}
-		Return
+		return
 	}
 	Else if (Layer=3)
 	{
@@ -621,7 +527,6 @@ $r::
 		Send {r Up}
 		Return
 	}
-	Return
 }
 
 $f::
@@ -635,24 +540,32 @@ $f::
 	}
 	Else If (Layer=2)
 	{
-		KeyWait f, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {h down}
-			Sleep 32
-			SendInput {h up}
-			KeyWait, f
-		}
-		else
-		{
-			SendInput {g down}
-			sleep 32
-			SendInput {g up}
-			KeyWait, f
-		}
+		Send {g Down}
+		KeyWait, f
+		Send {g Up}
 		Return
 	}
+	/*
+		{
+			KeyWait f, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {h down}
+				Sleep 32
+				SendInput {h up}
+				KeyWait, f
+			}
+			else
+			{
+				SendInput {g down}
+				sleep 32
+				SendInput {g up}
+				KeyWait, f
+			}
+			Return
+		}
+	*/
 	Else if (Layer=3)
 	{
 		KeyWait f, t0.100
@@ -718,14 +631,15 @@ $a::
 	}
 	Else If (Layer=2)
 	{
-		Send {SC006 Down}
+		Send {F5 Down}
 		KeyWait, a
-		Send {SC006 Up}
+		Send {F5 Up}
 		Return
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
+		Return
 	}
 	Return
 }
@@ -741,56 +655,33 @@ $e::
 	}
 	Else If (Layer=2)
 	{
-		Send {SC007 Down}
+		Send {F8 Down}
 		KeyWait, e
-		Send {SC007 Up}
+		Send {F8 Up}
 		Return
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
+		Return
 	}
 	Return
 }
 
-$Insert::
+;LButton::LButton
+
+XButton2::
 {
-	If (Layer=1)
+	If GetKeyState("LButton")
 	{
-		Send {Insert Down}
-		KeyWait, Insert
-		Send {Insert Up}
 		Return
 	}
-	Else If (Layer=2)
+	Else
 	{
-		Send {p Down}
-		KeyWait, Insert
-		Send {p Up}
+		Send {XButton2 Down}
+		KeyWait, XButton2
+		Send {XButton2 Up}
 		Return
 	}
+	Return
 }
-
-$Delete::
-{
-	If (Layer=1)
-	{
-		Send {Delete Down}
-		KeyWait, Delete
-		Send {Delete Up}
-		Return
-	}
-	Else If (Layer=2)
-	{
-		Send {m Down}
-		KeyWait, Delete
-		Send {m Up}
-		Return
-	}
-}
-
-Left::Numpad1
-
-Right::Numpad3
-
-Down::Numpad2

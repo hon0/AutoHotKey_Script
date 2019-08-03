@@ -315,12 +315,14 @@ WheelUp::
 		Send {Home}
 		Return
 	}
-	Else if (Layer=2)
-	{
-		SetkeyDelay, 0, 32
-		Send {PgUp}
-		Return
-	}
+	/*
+		Else if (Layer=2)
+		{
+			SetkeyDelay, 0, 32
+			Send {SC008}
+			Return
+		}
+	*/
 	/*
 		Else if (Layer=3)
 		{
@@ -345,12 +347,14 @@ WheelDown::
 		Send {End}
 		Return
 	}
-	Else if (Layer=2)
-	{
-		SetkeyDelay, 0, 32
-		Send {PgDn}
-		Return
-	}
+	/*
+		Else if (Layer=2)
+		{
+			SetkeyDelay, 0, 32
+			Send {SC009}
+			Return
+		}
+	*/
 	/*
 		Else if (Layer=3)
 		{
@@ -367,7 +371,7 @@ WheelDown::
 	Return
 }
 
-*$XButton2::
+$XButton2::
 {
 	If (Layer=1) and WinActive("Discord")
 	{
@@ -380,26 +384,6 @@ WheelDown::
 			KeyWait, XButton2
 		}
 	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		KeyWait XButton2, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {h down}
-			Sleep 32
-			SendInput {h up}
-			KeyWait, XButton2
-		}
-		Else
-		{
-			SendInput {k down}
-			sleep 32
-			SendInput {k up}
-			KeyWait, XButton2
-		}
-		Return
-	}
 	Else
 	{
 		Send {XButton2 Down}
@@ -409,7 +393,7 @@ WheelDown::
 	Return
 }
 
-*$XButton1::
+$XButton1::
 {
 	If (Layer=1) and WinActive("Discord")
 	{
@@ -422,12 +406,6 @@ WheelDown::
 			KeyWait, XButton1
 		}
 	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		Send {j Down}
-		KeyWait XButton1
-		Send {j Up}
-	}
 	Else
 	{
 		Send {XButton1 Down}
@@ -437,30 +415,67 @@ WheelDown::
 	Return
 }
 
-$SC029::
+Right::SC007
+
+$F13::
 {
 	If (Layer=2)
 	{
-		Send {esc Down}
-		KeyWait, SC029
-		Send {esc Up}
+		Send {F4 Down}
+		KeyWait F13
+		Send {F4 Up}
 	}
 	Else
+	{
+		Send {F5 Down}
+		KeyWait F13
+		Send {F5 Up}
+	}
+	Return
+}
+
+$F14::
+{
+	If (Layer=2)
+	{
+		Send {F6 Down}
+		KeyWait F14
+		Send {F6 Up}
+	}
+	Else
+	{
+		Send {F2 Down}
+		KeyWait F14
+		Send {F2 Up}
+	}
+	Return
+}
+
+$SC029::
+{
+	If (Layer=2)
 	{
 		Send {SC029 Down}
 		KeyWait, SC029
 		Send {SC029 Up}
 	}
+	Else
+	{
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
+	}
 	Return
 }
 
+
 $Tab::
 {
-	If (Layer=1)
+	If (Layer=1) and WinActive("BioShock 2")
 	{
-		Send {Tab Down}
+		Send {SC008 Down}
 		KeyWait, Tab
-		Send {Tab Up}
+		Send {SC008 Up}
 	}
 	Else If (Layer=2)
 	{
@@ -473,6 +488,37 @@ $Tab::
 		Send {Tab Down}
 		KeyWait, Tab
 		Send {Tab Up}
+	}
+	Return
+}
+
+$LControl::
+{
+	If (Layer=1) and WinActive("BioShock")
+	{
+		Send {LControl}
+		Keywait LControl
+		Return
+	}
+	Else
+	{
+		Send {LControl Down}
+		Keywait LControl
+	}
+	Return
+}
+
+$LControl Up::
+{
+	If (Layer=1) and WinActive("BioShock")
+	{
+		Send {LControl}
+		Keywait LControl
+		Return
+	}
+	Else
+	{
+		Send {LControl Up}
 	}
 	Return
 }
@@ -554,24 +600,11 @@ $c::
 
 $r::
 {
-	If (Layer=1) and WinActive("SteelDivision - DirectX 11")
+	If (Layer=1)
 	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {v down}
-			Sleep 32
-			SendInput {v up}
-			KeyWait, r
-		}
-		Else
-		{
-			SendInput {r down}
-			sleep 32
-			SendInput {r up}
-			KeyWait, r
-		}
+		Send {r Down}
+		KeyWait, r
+		Send {r Up}
 		Return
 	}
 	Else If (Layer=2)
@@ -585,14 +618,14 @@ $r::
 			SendInput {y up}
 			KeyWait, r
 		}
-		Else
+		else
 		{
 			SendInput {t down}
 			sleep 32
 			SendInput {t up}
 			KeyWait, r
 		}
-		Return
+		return
 	}
 	Else if (Layer=3)
 	{
@@ -621,7 +654,6 @@ $r::
 		Send {r Up}
 		Return
 	}
-	Return
 }
 
 $f::
@@ -725,7 +757,9 @@ $a::
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {F8}
+		Sleep 100
+		Return
 	}
 	Return
 }
@@ -748,7 +782,9 @@ $e::
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {F9}
+		Sleep 100
+		Return
 	}
 	Return
 }
@@ -764,9 +800,8 @@ $Insert::
 	}
 	Else If (Layer=2)
 	{
-		Send {p Down}
-		KeyWait, Insert
-		Send {p Up}
+		Send {F7}
+		Sleep 100
 		Return
 	}
 }
@@ -775,22 +810,15 @@ $Delete::
 {
 	If (Layer=1)
 	{
-		Send {Delete Down}
+		Send {F3 Down}
 		KeyWait, Delete
-		Send {Delete Up}
+		Send {F3 Up}
 		Return
 	}
 	Else If (Layer=2)
 	{
-		Send {m Down}
-		KeyWait, Delete
-		Send {m Up}
+		Send {F6}
+		Sleep 100
 		Return
 	}
 }
-
-Left::Numpad1
-
-Right::Numpad3
-
-Down::Numpad2

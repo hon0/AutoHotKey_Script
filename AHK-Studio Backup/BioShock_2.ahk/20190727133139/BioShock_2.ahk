@@ -300,8 +300,8 @@ CoordMode, mouse, Screen
 { ; Layer modifier. Press and hold to get into Layer 2, double press and hold to get into Layer 3. Release to come back to Layer 1.
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	Layer := 2
-	if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 333)
-		Layer := 3
+	;if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 333)
+		;Layer := 3
 	KeyWait, CapsLock
 	Layer := 1
 	Return
@@ -367,7 +367,7 @@ WheelDown::
 	Return
 }
 
-*$XButton2::
+$XButton2::
 {
 	If (Layer=1) and WinActive("Discord")
 	{
@@ -380,26 +380,6 @@ WheelDown::
 			KeyWait, XButton2
 		}
 	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		KeyWait XButton2, t0.200
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {h down}
-			Sleep 32
-			SendInput {h up}
-			KeyWait, XButton2
-		}
-		Else
-		{
-			SendInput {k down}
-			sleep 32
-			SendInput {k up}
-			KeyWait, XButton2
-		}
-		Return
-	}
 	Else
 	{
 		Send {XButton2 Down}
@@ -409,7 +389,7 @@ WheelDown::
 	Return
 }
 
-*$XButton1::
+$XButton1::
 {
 	If (Layer=1) and WinActive("Discord")
 	{
@@ -422,12 +402,6 @@ WheelDown::
 			KeyWait, XButton1
 		}
 	}
-	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
-	{
-		Send {j Down}
-		KeyWait XButton1
-		Send {j Up}
-	}
 	Else
 	{
 		Send {XButton1 Down}
@@ -437,19 +411,55 @@ WheelDown::
 	Return
 }
 
+Right::SC007
+
+$F13::
+{
+	If (Layer=2)
+	{
+		Send {F5 Down}
+		KeyWait F13
+		Send {F5 Up}
+	}
+	Else
+	{
+		Send {F3 Down}
+		KeyWait F13
+		Send {F3 Up}
+	}
+	Return
+}
+
+$F14::
+{
+	If (Layer=2)
+	{
+		Send {F6 Down}
+		KeyWait F14
+		Send {F6 Up}
+	}
+	Else
+	{
+		Send {Delete Down}
+		KeyWait F14
+		Send {Delete Up}
+	}
+	Return
+}
+
 $SC029::
 {
 	If (Layer=2)
 	{
-		Send {esc Down}
-		KeyWait, SC029
-		Send {esc Up}
-	}
-	Else
-	{
 		Send {SC029 Down}
 		KeyWait, SC029
 		Send {SC029 Up}
+	}
+	Else
+	{
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
 	}
 	Return
 }
@@ -473,6 +483,37 @@ $Tab::
 		Send {Tab Down}
 		KeyWait, Tab
 		Send {Tab Up}
+	}
+	Return
+}
+
+$LControl::
+{
+	If (Layer=1) and WinActive("BioShock")
+	{
+		Send {LControl}
+		Keywait LControl
+		Return
+	}
+	Else
+	{
+		Send {LControl Down}
+		Keywait LControl
+	}
+	Return
+}
+
+$LControl Up::
+{
+	If (Layer=1) and WinActive("BioShock")
+	{
+		Send {LControl}
+		Keywait LControl
+		Return
+	}
+	Else
+	{
+		Send {LControl Up}
 	}
 	Return
 }
@@ -554,24 +595,11 @@ $c::
 
 $r::
 {
-	If (Layer=1) and WinActive("SteelDivision - DirectX 11")
+	If (Layer=1)
 	{
-		KeyWait r, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {v down}
-			Sleep 32
-			SendInput {v up}
-			KeyWait, r
-		}
-		Else
-		{
-			SendInput {r down}
-			sleep 32
-			SendInput {r up}
-			KeyWait, r
-		}
+		Send {r Down}
+		KeyWait, r
+		Send {r Up}
 		Return
 	}
 	Else If (Layer=2)
@@ -585,14 +613,14 @@ $r::
 			SendInput {y up}
 			KeyWait, r
 		}
-		Else
+		else
 		{
 			SendInput {t down}
 			sleep 32
 			SendInput {t up}
 			KeyWait, r
 		}
-		Return
+		return
 	}
 	Else if (Layer=3)
 	{
@@ -621,7 +649,6 @@ $r::
 		Send {r Up}
 		Return
 	}
-	Return
 }
 
 $f::
@@ -725,7 +752,9 @@ $a::
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {F8}
+		Sleep 100
+		Return
 	}
 	Return
 }
@@ -748,7 +777,10 @@ $e::
 	}
 	Else If (Layer=3)
 	{
-		
+		Send {e Down}
+		KeyWait, e
+		Send {e Up}
+		Return
 	}
 	Return
 }
@@ -764,9 +796,8 @@ $Insert::
 	}
 	Else If (Layer=2)
 	{
-		Send {p Down}
-		KeyWait, Insert
-		Send {p Up}
+		Send {F7}
+		Sleep 100
 		Return
 	}
 }
@@ -775,22 +806,15 @@ $Delete::
 {
 	If (Layer=1)
 	{
-		Send {Delete Down}
+		Send {F4 Down}
 		KeyWait, Delete
-		Send {Delete Up}
+		Send {F4 Up}
 		Return
 	}
 	Else If (Layer=2)
 	{
-		Send {m Down}
-		KeyWait, Delete
-		Send {m Up}
+		Send {F8}
+		Sleep 100
 		Return
 	}
 }
-
-Left::Numpad1
-
-Right::Numpad3
-
-Down::Numpad2

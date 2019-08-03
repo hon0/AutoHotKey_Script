@@ -331,7 +331,7 @@ CoordMode, mouse, Screen
 	ToolTip
 	return
 */
-}
+
 
 { ; Layer modifier
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".

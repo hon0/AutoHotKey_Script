@@ -38,7 +38,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F2::Suspend, Toggle
+	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F
@@ -554,7 +554,14 @@ $c::
 
 $r::
 {
-	If (Layer=1) and WinActive("SteelDivision - DirectX 11")
+	If (Layer=1)
+	{
+		Send {r Down}
+		KeyWait, r
+		Send {r Up}
+		Return
+	}
+	Else If (Layer=1) and WinActive("SteelDivision - DirectX 11")
 	{
 		KeyWait r, t0.100
 		t:= A_TimeSinceThisHotkey
@@ -614,14 +621,16 @@ $r::
 		}
 		return
 	}
-	Else
-	{
-		Send {r Down}
-		KeyWait, r
-		Send {r Up}
+	/*
+		Else
+		{
+			Send {r Down}
+			KeyWait, r
+			Send {r Up}
+			Return
+		}
 		Return
-	}
-	Return
+	*/
 }
 
 $f::
