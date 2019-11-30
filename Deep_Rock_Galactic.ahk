@@ -29,8 +29,8 @@ CoordMode, mouse, Screen
 		SetKeyDelay 0, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
 		Sleep 32
-		MouseClick, left, 1952, 66
-		MouseClick, left, 2016, 91
+		MouseClick, left, 1952, 71
+		MouseClick, left, 2016, 96
 		BlockInput, Off	
 		return
 	}
@@ -38,7 +38,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F2c::Suspend, Toggle
+	#F2::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F
@@ -279,8 +279,8 @@ CoordMode, mouse, Screen
 { ; Layer modifier. Press and hold to get into Layer 2, double press and hold to get into Layer 3. Release to come back to Layer 1.
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	Layer := 2
-	if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 333)
-		Layer := 3
+	;if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 333)
+	;	Layer := 3
 	KeyWait, CapsLock
 	Layer := 1
 	Return
@@ -288,14 +288,38 @@ CoordMode, mouse, Screen
 
 #IfWinActive Deep Rock Galactic
 	
+XButton2::
+{
+	If GetKeyState("LButton")
+	{
+		Return
+	}
+	Else
+	{
+		Send {XButton2 Down}
+		KeyWait, XButton2
+		Send {XButton2 Up}
+		Return
+	}
+	Return
+}
+
 *WheelUp::
 {
 	If (Layer=1)
 	{
-		SetkeyDelay, 0, 32
-		Send {SC002}
-		Sleep 100
-		Return
+		If GetKeyState("Tab")
+		{
+			Send {WheelUp}
+			Return
+		}
+		Else
+		{
+			SetkeyDelay, 0, 32
+			Send {SC002}
+			Sleep 100
+			Return
+		}
 	}
 	Else if (Layer=2)
 	{
@@ -325,10 +349,18 @@ CoordMode, mouse, Screen
 {
 	If (Layer=1)
 	{
-		SetkeyDelay, 0, 32
-		Send {SC004}
-		Sleep 100
-		Return
+		If GetKeyState("Tab")
+		{
+			Send {WheelDown}
+			Return
+		}
+		Else
+		{
+			SetkeyDelay, 0, 32
+			Send {SC004}
+			Sleep 100
+			Return
+		}
 	}
 	Else if (Layer=2)
 	{
@@ -360,15 +392,15 @@ $SC029::
 {
 	If (Layer=2)
 	{
-		Send {esc Down}
-		KeyWait, SC029
-		Send {esc Up}
-	}
-	Else
-	{
 		Send {SC029 Down}
 		KeyWait, SC029
 		Send {SC029 Up}
+	}
+	Else
+	{
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
 	}
 	Return
 }
@@ -527,6 +559,7 @@ $r::
 		Send {r Up}
 		Return
 	}
+	Return
 }
 
 $f::
@@ -545,54 +578,7 @@ $f::
 		Send {g Up}
 		Return
 	}
-	/*
-		{
-			KeyWait f, t0.100
-			t:= A_TimeSinceThisHotkey
-			If ErrorLevel
-			{
-				SendInput {h down}
-				Sleep 32
-				SendInput {h up}
-				KeyWait, f
-			}
-			else
-			{
-				SendInput {g down}
-				sleep 32
-				SendInput {g up}
-				KeyWait, f
-			}
-			Return
-		}
-	*/
-	Else if (Layer=3)
-	{
-		KeyWait f, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			SendInput {k down}
-			sleep 32
-			SendInput {k up}
-			KeyWait, f
-		}
-		else
-		{
-			SendInput {j down}
-			sleep 32
-			SendInput {j up}
-			KeyWait, f
-		}
-		Return
-	}
-	Else
-	{
-		Send {f Down}
-		KeyWait, f
-		Send {f Up}
-		Return
-	}
+	Return
 }
 
 $v::
@@ -611,13 +597,6 @@ $v::
 		Send {; Up}
 		Return
 	}
-	Else if (Layer=3)
-	{
-		Send {! Down}
-		KeyWait, v
-		Send {! Up}
-		Return
-	}
 }
 
 $a::
@@ -634,11 +613,6 @@ $a::
 		Send {F5 Down}
 		KeyWait, a
 		Send {F5 Up}
-		Return
-	}
-	Else If (Layer=3)
-	{
-		Send {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
 		Return
 	}
 	Return
@@ -660,28 +634,89 @@ $e::
 		Send {F8 Up}
 		Return
 	}
-	Else If (Layer=3)
-	{
-		Send {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
-		Return
-	}
 	Return
 }
 
-;LButton::LButton
-
-XButton2::
+$XButton2::
 {
-	If GetKeyState("LButton")
+	If (Layer=1) and WinActive("Discord")
 	{
-		Return
+		KeyWait XButton2, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SetKeyDelay 10, 32
+			Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
+			KeyWait, XButton2
+		}
 	}
 	Else
 	{
 		Send {XButton2 Down}
-		KeyWait, XButton2
+		KeyWait XButton2
 		Send {XButton2 Up}
-		Return
+	}
+	Return
+}
+
+$F13::
+{
+	If (Layer=1) and WinActive("Discord")
+	{
+		KeyWait F13, t0.333
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			;SetKeyDelay 10, 32
+			SendInput, {LControl Down}{LAlt Down}{Right}{LAlt Up}{LControl Up}
+			KeyWait, F13
+		}
+		Else
+		{
+			;SetKeyDelay 10, 32
+			SendInput, {LControl Down}{k}{LControl Up}
+			Sleep 5		
+			Send {Enter}
+			KeyWait, F13
+		}
+	}
+	Else If (Layer=1) and WinActive("Deep Rock Galactic")
+	{
+		Send {g Down}
+		KeyWait F13
+		Send {g Up}
+	}
+	Else
+	{
+		Send {F13 Down}
+		KeyWait F13
+		Send {F13 Up}
+	}
+	Return
+}
+
+F13 UP::
+Send {F13 Up}{g Up}
+Return
+
+$XButton1::
+{
+	If (Layer=1) and WinActive("Discord")
+	{
+		KeyWait XButton1, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SetKeyDelay 10, 32
+			Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
+			KeyWait, XButton1
+		}
+	}
+	Else
+	{
+		Send {XButton1 Down}
+		KeyWait XButton1
+		Send {XButton1 Up}
 	}
 	Return
 }

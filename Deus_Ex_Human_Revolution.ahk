@@ -38,7 +38,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F1::Suspend, Toggle
+	#F2::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F

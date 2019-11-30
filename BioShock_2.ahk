@@ -415,8 +415,6 @@ $XButton1::
 	Return
 }
 
-Right::SC007
-
 $F13::
 {
 	If (Layer=2)
