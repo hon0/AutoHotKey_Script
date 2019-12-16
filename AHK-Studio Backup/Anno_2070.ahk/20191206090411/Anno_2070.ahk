@@ -18,7 +18,7 @@ CoordMode, mouse, Screen
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
-	SetKeyDelay 10, 32
+	SetKeyDelay 0, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
 	
 	#IfWinExist Event Tester
@@ -27,11 +27,11 @@ CoordMode, mouse, Screen
 		
 		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
 		WinWait, Event Tester
-		SetKeyDelay 10, 32
+		SetKeyDelay 0, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
-		Sleep 100
-		MouseClick, left, 1950, 70
-		MouseClick, left, 2016, 95
+		Sleep 32
+		MouseClick, left, 1942, 42	
+		MouseClick, left, 2017, 65
 		BlockInput, Off	
 		return
 	}
@@ -39,7 +39,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F2::Suspend, Toggle
+	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F

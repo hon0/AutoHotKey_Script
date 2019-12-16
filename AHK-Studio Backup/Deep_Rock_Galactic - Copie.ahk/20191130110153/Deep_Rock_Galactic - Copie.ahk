@@ -50,7 +50,7 @@ SetTitleMatchMode, 2
 	{
 		SetkeyDelay, 0, 32
 		Send {SC002}
-		Sleep 100
+		;Sleep 100
 		Return
 	}
 }
@@ -66,7 +66,7 @@ SetTitleMatchMode, 2
 	{
 		SetkeyDelay, 0, 32
 		Send {SC004}
-		Sleep 100
+		;Sleep 100
 		Return
 	}
 }
