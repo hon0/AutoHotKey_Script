@@ -276,7 +276,7 @@ $SC029::
 	SC029_pressed := 1
 	If (Layer=1)
 	{
-		SendInput { Down}
+		SendInput {esc Down}
 	}
 	If (Layer=2)
 	{

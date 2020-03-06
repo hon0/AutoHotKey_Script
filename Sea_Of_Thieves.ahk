@@ -1,6 +1,5 @@
 ﻿#SingleInstance force
 #Persistent  ; Keep this script running until the user explicitly exits it.
-;#Warn  ; Enable warnings to assist with detecting common errors.
 Layer := 1
 CapsLock_pressed := 0
 
@@ -63,7 +62,7 @@ CoordMode, mouse, Screen
 { ; AutoHotKey Script option.
 	#F3::Suspend, Toggle
 	#F4::ExitApp
-	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
+	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	^!f:: ; FullScreen Window. Control+Alt+F
 	{
 		WinGetTitle, currentWindow, A
