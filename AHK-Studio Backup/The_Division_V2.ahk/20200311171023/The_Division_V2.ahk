@@ -11,6 +11,7 @@
 	XButton1_pressed := 0
 	
 	F13_pressed := 0
+	F14_pressed := 0
 	
 	a_pressed := 0
 	e_pressed := 0
@@ -59,7 +60,7 @@ CoordMode, mouse, Screen
 }
 
 { ; AutoHotKey Script option.
-	#F3::Suspend, Toggle
+	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
@@ -324,11 +325,6 @@ CoordMode, mouse, Screen
 }
 
 { ; Mouse
-	
-	#IfWinActive 
-	F13::v
-	#IfWinActive
-	
 	WheelUp::
 	{
 		If (Layer=1) and GetKeyState("MButton")
@@ -341,12 +337,6 @@ CoordMode, mouse, Screen
 		{
 			SetkeyDelay, 0, 32
 			Send {PgUp}
-			Return
-		}
-		Else If WinActive("Tomb Raider")
-		{
-			SendInput {WheelUp}
-			Sleep 32
 			Return
 		}
 		Else
@@ -369,12 +359,6 @@ CoordMode, mouse, Screen
 		{
 			SetkeyDelay, 0, 32
 			Send {PgDn}
-			Return
-		}
-		Else If WinActive("Tomb Raider")
-		{
-			SendInput {WheelDown}
-			Sleep 32
 			Return
 		}
 		Else
@@ -443,7 +427,6 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	
 	$F13::
 	{
 		If (F13_pressed)
@@ -460,13 +443,9 @@ CoordMode, mouse, Screen
 			Else
 			{
 				SendInput {LControl Down}{k}{LControl Up}
-				;Sleep 32		
+			;Sleep 32		
 				Send {Enter}
 			}
-		}
-		Else If WinActive("Tomb Raider")
-		{
-			SendInput {v Down}
 		}
 		Else
 		{
@@ -478,17 +457,9 @@ CoordMode, mouse, Screen
 	$F13 Up::
 	{
 		F13_pressed := 0
-		If WinActive("Tomb Raider")
-		{
-			SendInput {v Up}
-		}
-		Else
-		{
-			SendInput {F13 Up}
-		}
+		SendInput {F13 Up}
 		Return
 	}
-	
 } ; Mouse
 
 { ; Keypad and/or Keyboard.
@@ -499,11 +470,11 @@ CoordMode, mouse, Screen
 		SC029_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {esc Down}
+			SendInput {SC029 Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {SC029 Down}
+			SendInput {esc Down}
 		}
 		Return
 	}
@@ -513,21 +484,21 @@ CoordMode, mouse, Screen
 		SC029_pressed := 0
 		If (Layer=1)
 		{
-			If (GetKeyState("SC029"))
-			{
-				SendInput {SC029 Up}
-			}
-			Else
-				SendInput {esc Up}
-		}
-		If (Layer=2)
-		{
 			If (GetKeyState("esc"))
 			{
 				SendInput {esc Up}
 			}
 			Else
 				SendInput {SC029 Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("SC029"))
+			{
+				SendInput {SC029 Up}
+			}
+			Else
+				SendInput {esc Up}
 		}
 		Return
 	}
@@ -889,44 +860,4 @@ CoordMode, mouse, Screen
 		}
 		Return
 	}
-	
-	$*Insert::
-	{
-		Send {Insert}
-		Sleep 32
-		Return
-	}
-	
-	$*Delete::
-	{
-		Send {Delete}
-		Sleep 32
-		Return
-	}
-	
-	#IfWinActive Tomb Raider
-	
-	LAlt::
-	{
-		Loop
-		{
-			if not GetKeyState("LAlt", "P")
-				break
-			Send {e}
-		}
-		Return
-	}
-	
-	Right::
-	{
-		Loop
-		{
-			if not GetKeyState("Right", "P")
-				break
-			Send {q}{d}
-		}
-		Return
-	}
-	
-	#IfWinActive
 } ; Keypad and/or Keyboard.

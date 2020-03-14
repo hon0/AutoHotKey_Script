@@ -905,8 +905,7 @@ CoordMode, mouse, Screen
 	}
 	
 	#IfWinActive Tomb Raider
-	
-	LAlt::
+		LAlt::
 	{
 		Loop
 		{

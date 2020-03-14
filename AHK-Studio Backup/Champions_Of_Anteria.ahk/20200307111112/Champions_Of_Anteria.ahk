@@ -1,64 +1,39 @@
 ﻿#SingleInstance force
-#Persistent 
-{
-	Layer := 1
-	CapsLock_pressed := 0
-	
-	SC029_pressed := 0
-	Tab_pressed := 0
-	
-	XButton2_pressed := 0
-	XButton1_pressed := 0
-	
-	F13_pressed := 0
-	
-	a_pressed := 0
-	e_pressed := 0
-	
-	r_pressed := 0
-	f_pressed := 0
-	
-	w_pressed := 0
-	x_pressed := 0
-	c_pressed := 0
-	v_pressed := 0
-	LAlt_pressed := 0
-}
+#Persistent  ; Keep this script running until the user explicitly exits it.
+;#Warn  ; Enable warnings to assist with detecting common errors.
+Layer := 1
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
 SetTitleMatchMode, 2
 ;#InstallKeybdHook
 ;#InstallMouseHook
-CoordMode, mouse, Screen
+
 
 { ; Monitoring Windows
 	BlockInput, On
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
-	SetKeyDelay 10, 32
+	SetKeyDelay 0, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
 	
 	#IfWinExist Event Tester
-	{
 		WinClose Event Tester
-		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
-		WinWait, Event Tester
-		SetKeyDelay 10, 32
-		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
-		Sleep 100
-		MouseClick, left, 1950, 70
-		MouseClick, left, 2016, 95
-		BlockInput, Off	
-		return
-	}
+	
+	Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+	WinWait, Event Tester
+	SetKeyDelay 0, 32
+	Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
+	MouseClick, left, 36, 40
+	MouseClick, left, 104, 62
+	BlockInput, Off	
+	return
 	#IfWinExist
 }
 
 { ; AutoHotKey Script option.
-	#F3::Suspend, Toggle
+	#F1::Suspend, Toggle
 	#F4::ExitApp
 	;^SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	
@@ -105,6 +80,14 @@ CoordMode, mouse, Screen
 	}
 } ; End of AutoHotKey Script option.
 
+/* ; Get exit cross color
+	#z::	
+	PixelGetColor, color, 1889, 95
+	MsgBox The color at X1889 Y95 is %color%.
+	Clipboard = %color%
+	return
+*/
+
 { ;Testing	
 	/*; Pixel color as as condition
 		{ ; Pixel color as as condition
@@ -143,27 +126,17 @@ CoordMode, mouse, Screen
 	*/
 }
 
-{ ; Layer modifier. Press and hold to get into Layer 2. Release to come back to Layer 1.
+{ ; Layer modifier. Press and hold to get into Layer 2, double press and hold to get into Layer 3. Release to come back to Layer 1.
 	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
-	{
-		If (CapsLock_pressed)
-			Return
-		CapsLock_pressed := 1
-		Layer := 2
-		Return
-	}
-	
-	CapsLock Up::
-	{
-		CapsLock_pressed := 0
-		Layer := 1
-		Return
-	}
+	Layer := 2
+	if (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)
+		Layer := 3
+	KeyWait, CapsLock
+	Layer := 1
+	Return	
 }
 
-#IfWinActive Champions Of Anteria
-	
-Down:: ; Pause Spam
+Down::
 {
 	SetkeyDelay 32
 	Loop
@@ -176,24 +149,66 @@ Down:: ; Pause Spam
 	Return
 }
 
-LAlt:: ; Pause
+LAlt::
 {
-	If (LAlt_pressed)
+	Send {Space}
+	KeyWait, LAlt
+	Send {Space}
+	Return
+}
+
+XButton2::
+{
+	If (Layer=1) ;and WinActive(Champions of Anteria)
+	{
+		/*
+			KeyWait XButton2, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				Send {r Down}
+				KeyWait, XButton2
+				Send {r Up}
+			}
+			else
+		*/
+		/*
+			{
+				Send {F3 Down}
+				Sleep 32
+				Send {F3 Up}
+			}
+		*/
 		Return
-	LAlt_pressed := 1
-	Send {Space}
-	Return
+	}
 }
 
-LAlt Up:: ; Pause
+XButton1::
 {
-	LAlt_pressed := 0
-	Send {Space}
-	Return
+	If (Layer=1) ;and WinActive(Settlers 7 Window)
+	{
+		/*
+			KeyWait XButton1, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				Send {f Down}
+				KeyWait, XButton2
+				Send {f Up}
+			}
+			else
+		*/
+		/*
+			{
+				Send {t Down}
+				KeyWait, XButton1
+				Send {t Up}
+			}
+		*/
+		Return
+	}
 }
 
-#IfWinActive
-	
 WheelUp::
 {
 	If (Layer=1) and GetKeyState("MButton")
@@ -236,82 +251,87 @@ WheelDown::
 	}
 }
 
-$SC029::
+$a::
 {
-	If (SC029_pressed)
-		Return
-	SC029_pressed := 1
-	If (Layer=1)
-	{
-		SendInput {esc Down}
-	}
 	If (Layer=2)
 	{
-		SendInput {SC029 Down}
+		Send {& Down}
+		KeyWait, a
+		Send {& Up}
+	}
+	Else
+	{
+		Send {a Down}
+		KeyWait, a
+		Send {a Up}
 	}
 	Return
 }
 
-$SC029 Up::
+$SC029::
 {
-	SC029_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState("SC029"))
-		{
-			SendInput {SC029 Up}
-		}
-		Else
-			SendInput {esc Up}
-	}
 	If (Layer=2)
 	{
-		If (GetKeyState("esc"))
-		{
-			SendInput {esc Up}
-		}
-		Else
-			SendInput {SC029 Up}
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
+	}
+	Else
+	{
+		Send {SC029 Down}
+		KeyWait, SC029
+		Send {SC029 Up}
+	}
+	Return
+}
+
+$e::
+{
+	If (Layer=2)
+	{
+		Send {SC004 Down}
+		KeyWait, e
+		Send {SC004 Up}
+	}
+	Else
+	{
+		Send {e Down}
+		KeyWait, e
+		Send {e Up}
+	}
+	Return
+}
+
+$z::
+{
+	If (Layer=2)
+	{
+		Send {é Down}
+		KeyWait, z
+		Send {é Up}
+	}
+	Else
+	{
+		Send {z Down}
+		KeyWait, z
+		Send {z Up}
 	}
 	Return
 }
 
 $Tab::
 {
-	If (Tab_pressed)
-		Return
-	Tab_pressed := 1
-	If (Layer=1)
-	{
-		SendInput {Tab Down}
-	}
 	If (Layer=2)
 	{
-		SendInput {esc Down}
+		Send {esc Down}
+		KeyWait, Tab
+		Send {esc Up}
 	}
-	Return
-}
-
-$Tab Up::
-{
-	Tab_pressed := 0
-	If (Layer=1)
+	Else
 	{
-		If (GetKeyState("esc"))
-		{
-			SendInput {esc Up}
-		}
-		Else
-			SendInput {Tab Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("Tab"))
-		{
-			SendInput {Tab Up}
-		}
-		Else
-			SendInput {esc Up}
+		Send {Tab Down}
+		KeyWait, Tab
+		Send {Tab Up}
 	}
 	Return
 }

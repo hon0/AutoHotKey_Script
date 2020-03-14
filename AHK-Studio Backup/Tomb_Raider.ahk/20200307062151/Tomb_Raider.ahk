@@ -326,9 +326,9 @@ CoordMode, mouse, Screen
 { ; Mouse
 	
 	#IfWinActive 
-	F13::v
+		F13::v
 	#IfWinActive
-	
+		
 	WheelUp::
 	{
 		If (Layer=1) and GetKeyState("MButton")
@@ -343,15 +343,9 @@ CoordMode, mouse, Screen
 			Send {PgUp}
 			Return
 		}
-		Else If WinActive("Tomb Raider")
-		{
-			SendInput {WheelUp}
-			Sleep 32
-			Return
-		}
 		Else
 		{
-			SendInput {WheelUp}
+			Send {WheelUp}
 			Return
 		}
 		Return
@@ -371,15 +365,9 @@ CoordMode, mouse, Screen
 			Send {PgDn}
 			Return
 		}
-		Else If WinActive("Tomb Raider")
-		{
-			SendInput {WheelDown}
-			Sleep 32
-			Return
-		}
 		Else
 		{
-			SendInput {WheelDown}
+			Send {WheelDown}
 			Return
 		}
 		Return
@@ -905,8 +893,7 @@ CoordMode, mouse, Screen
 	}
 	
 	#IfWinActive Tomb Raider
-	
-	LAlt::
+		LAlt::
 	{
 		Loop
 		{

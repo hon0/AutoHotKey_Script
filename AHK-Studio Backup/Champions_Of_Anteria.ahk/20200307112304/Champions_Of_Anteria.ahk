@@ -161,9 +161,7 @@ CoordMode, mouse, Screen
 	}
 }
 
-#IfWinActive Champions Of Anteria
-	
-Down:: ; Pause Spam
+Down::
 {
 	SetkeyDelay 32
 	Loop
@@ -185,15 +183,65 @@ LAlt:: ; Pause
 	Return
 }
 
-LAlt Up:: ; Pause
+LAlt Up::
 {
 	LAlt_pressed := 0
 	Send {Space}
 	Return
 }
 
-#IfWinActive
-	
+XButton2::
+{
+	If (Layer=1) ;and WinActive(Champions of Anteria)
+	{
+		/*
+			KeyWait XButton2, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				Send {r Down}
+				KeyWait, XButton2
+				Send {r Up}
+			}
+			else
+		*/
+		/*
+			{
+				Send {F3 Down}
+				Sleep 32
+				Send {F3 Up}
+			}
+		*/
+		Return
+	}
+}
+
+XButton1::
+{
+	If (Layer=1) ;and WinActive(Settlers 7 Window)
+	{
+		/*
+			KeyWait XButton1, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				Send {f Down}
+				KeyWait, XButton2
+				Send {f Up}
+			}
+			else
+		*/
+		/*
+			{
+				Send {t Down}
+				KeyWait, XButton1
+				Send {t Up}
+			}
+		*/
+		Return
+	}
+}
+
 WheelUp::
 {
 	If (Layer=1) and GetKeyState("MButton")
@@ -236,82 +284,87 @@ WheelDown::
 	}
 }
 
-$SC029::
+$a::
 {
-	If (SC029_pressed)
-		Return
-	SC029_pressed := 1
-	If (Layer=1)
-	{
-		SendInput {esc Down}
-	}
 	If (Layer=2)
 	{
-		SendInput {SC029 Down}
+		Send {& Down}
+		KeyWait, a
+		Send {& Up}
+	}
+	Else
+	{
+		Send {a Down}
+		KeyWait, a
+		Send {a Up}
 	}
 	Return
 }
 
-$SC029 Up::
+$SC029::
 {
-	SC029_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState("SC029"))
-		{
-			SendInput {SC029 Up}
-		}
-		Else
-			SendInput {esc Up}
-	}
 	If (Layer=2)
 	{
-		If (GetKeyState("esc"))
-		{
-			SendInput {esc Up}
-		}
-		Else
-			SendInput {SC029 Up}
+		Send {esc Down}
+		KeyWait, SC029
+		Send {esc Up}
+	}
+	Else
+	{
+		Send {SC029 Down}
+		KeyWait, SC029
+		Send {SC029 Up}
+	}
+	Return
+}
+
+$e::
+{
+	If (Layer=2)
+	{
+		Send {SC004 Down}
+		KeyWait, e
+		Send {SC004 Up}
+	}
+	Else
+	{
+		Send {e Down}
+		KeyWait, e
+		Send {e Up}
+	}
+	Return
+}
+
+$z::
+{
+	If (Layer=2)
+	{
+		Send {é Down}
+		KeyWait, z
+		Send {é Up}
+	}
+	Else
+	{
+		Send {z Down}
+		KeyWait, z
+		Send {z Up}
 	}
 	Return
 }
 
 $Tab::
 {
-	If (Tab_pressed)
-		Return
-	Tab_pressed := 1
-	If (Layer=1)
-	{
-		SendInput {Tab Down}
-	}
 	If (Layer=2)
 	{
-		SendInput {esc Down}
+		Send {esc Down}
+		KeyWait, Tab
+		Send {esc Up}
 	}
-	Return
-}
-
-$Tab Up::
-{
-	Tab_pressed := 0
-	If (Layer=1)
+	Else
 	{
-		If (GetKeyState("esc"))
-		{
-			SendInput {esc Up}
-		}
-		Else
-			SendInput {Tab Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("Tab"))
-		{
-			SendInput {Tab Up}
-		}
-		Else
-			SendInput {esc Up}
+		Send {Tab Down}
+		KeyWait, Tab
+		Send {Tab Up}
 	}
 	Return
 }

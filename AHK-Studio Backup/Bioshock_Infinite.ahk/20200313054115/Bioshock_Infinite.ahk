@@ -385,7 +385,7 @@ $SC029::
 }
 
 $Tab::
-{
+{ ;*[Bioshock_Infinite]
 	If (Layer=1)
 	{
 		Send {Tab Down}

@@ -162,7 +162,7 @@ CoordMode, mouse, Screen
 }
 
 #IfWinActive Champions Of Anteria
-	
+
 Down:: ; Pause Spam
 {
 	SetkeyDelay 32
@@ -192,8 +192,6 @@ LAlt Up:: ; Pause
 	Return
 }
 
-#IfWinActive
-	
 WheelUp::
 {
 	If (Layer=1) and GetKeyState("MButton")
@@ -214,6 +212,8 @@ WheelUp::
 		Return
 	}
 }
+
+#IfWinActive
 
 WheelDown::
 {

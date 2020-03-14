@@ -345,7 +345,7 @@ CoordMode, mouse, Screen
 		}
 		Else If WinActive("Tomb Raider")
 		{
-			SendInput {WheelUp}
+			Send {WheelUp}
 			Sleep 32
 			Return
 		}
@@ -905,8 +905,7 @@ CoordMode, mouse, Screen
 	}
 	
 	#IfWinActive Tomb Raider
-	
-	LAlt::
+		LAlt::
 	{
 		Loop
 		{
