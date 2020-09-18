@@ -6,9 +6,13 @@
 	
 	SC029_pressed := 0
 	Tab_pressed := 0
+	LControl_pressed := 0
 	
 	XButton2_pressed := 0
 	XButton1_pressed := 0
+	
+	F24_pressed := 0
+	F23_pressed := 0
 	
 	F13_pressed := 0
 	
@@ -22,6 +26,8 @@
 	x_pressed := 0
 	c_pressed := 0
 	v_pressed := 0
+	
+	LAlt_pressed := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -38,20 +44,21 @@ CoordMode, mouse, Screen
 	KeyHistory
 	WinGetActiveTitle, Title
 	WinWait, %Title%
-	SetKeyDelay 0, 32
+	SetKeyDelay 10, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
+	
 	
 	#IfWinExist Event Tester
 	{
 		WinClose Event Tester
 		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+		Run, D:\Dropbox\EventTester.exe
 		WinWait, Event Tester
-		SetKeyDelay 0, 32
+		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
-		Sleep 32
-		MouseClick, left, 1952, 71
-		MouseClick, left, 2016, 96
+		Sleep 100
+		MouseClick, left, 1950, 70
+		MouseClick, left, 2016, 95
 		BlockInput, Off	
 		return
 	}
@@ -71,6 +78,22 @@ CoordMode, mouse, Screen
 			WinMove, , , 0, 0, 1920, 1080
 		}
 		return
+	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
 	}
 } ; AutoHotKey Script option.
 
@@ -93,27 +116,40 @@ CoordMode, mouse, Screen
 }
 
 #IfWinActive Deep Rock Galactic
-
-$XButton2::
+	
+$F24::
 {
-	If (XButton2_pressed)
+	If (F24_pressed) or GetKeyState("LButton")
 		Return
-	XButton2_pressed := 1
-	If GetKeyState("LButton")
-	{
-		Return
-	}
-	Else
+	F24_pressed := 1
 	{
 		SendInput {XButton2 Down}
 	}
 	Return
 }
 
-$XButton2 Up::
+$F24 Up::
 {
-	XButton2_pressed := 0
+	F24_pressed := 0
 	SendInput {XButton2 Up}
+	Return
+}
+
+$F23::
+{
+	If (F23_pressed)
+		Return
+	F23_pressed := 1
+	{
+		SendInput {XButton1 Down}
+	}
+	Return
+}
+
+$F23 Up::
+{
+	F23_pressed := 0
+	SendInput {XButton1 Up}
 	Return
 }
 
@@ -175,16 +211,51 @@ $F13 Up::
 	Return
 }
 
+$LControl::
+{
+	If (LControl_pressed)
+		Return
+	LControl_pressed := 1
+	{
+		Send {LControl}
+		Sleep 400
+	}
+	Return
+}
+
+$LControl Up::
+{
+	LControl_pressed := 0
+	Return
+}
+
+$LAlt::
+{
+	If (LAlt_pressed)
+		Return
+	LAlt_pressed := 1
+	{
+		Send {LControl}{LControl}
+	}
+	Return
+}
+
+$LAlt Up::
+{
+	LAlt_pressed := 0
+	Return
+}
+
 #IfWinActive
 
-$XButton2::
+*$F24::
 {
-	If (XButton2_pressed)
+	If (F24_pressed)
 		Return
-	XButton2_pressed := 1
+	F24_pressed := 1
 	If WinActive("Discord")
 	{
-		KeyWait XButton2, t0.100
+		KeyWait F24, t0.100
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
@@ -194,26 +265,29 @@ $XButton2::
 	}
 	Else
 	{
-		Send {XButton2 Down}
+		Send {Blind}{XButton2 Down}
 	}
 	Return
 }
 
-$XButton2 Up::
+*$F24 Up::
 {
-	XButton2_pressed := 0
-	SendInput {XButton2 Up}
+	F24_pressed := 0
+	If !WinActive("Discord")
+	{
+		SendInput {Blind}{XButton2 Up}
+	}
 	Return
 }
 
-$XButton1::
+*$F23::
 {
-	If (XButton1_pressed)
+	If (F23_pressed)
 		Return
-	XButton1_pressed := 1
+	F23_pressed := 1
 	If WinActive("Discord")
 	{
-		KeyWait XButton1, t0.100
+		KeyWait F23, t0.100
 		t:= A_TimeSinceThisHotkey
 		If ErrorLevel
 		{
@@ -223,15 +297,18 @@ $XButton1::
 	}
 	Else
 	{
-		Send {XButton1 Down}
+		Send {Blind}{XButton1 Down}
 	}
 	Return
 }
 
-$XButton1 Up::
+*$F23 Up::
 {
-	XButton1_pressed := 0
-	SendInput {XButton1 Up}
+	F23_pressed := 0
+	If !WinActive("Discord")
+	{
+		SendInput {Blind}{XButton1 Up}
+	}
 	Return
 }
 
@@ -626,3 +703,5 @@ $f Up::
 	}
 	Return
 }
+
+

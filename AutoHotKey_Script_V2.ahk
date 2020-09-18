@@ -7,14 +7,24 @@
 	SC029_pressed := 0
 	Tab_pressed := 0
 	
-	XButton2_pressed := 0
-	XButton1_pressed := 0
+	SC002_pressed := 0
+	SC003_pressed := 0
+	SC004_pressed := 0
+	SC005_pressed := 0
+	
+	F24_pressed := 0
+	F23_pressed := 0
 	
 	F13_pressed := 0
 	F14_pressed := 0
 	
 	a_pressed := 0
 	e_pressed := 0
+	
+	z_pressed := 0
+	q_pressed := 0
+	s_pressed := 0
+	d_pressed := 0
 	
 	r_pressed := 0
 	f_pressed := 0
@@ -23,6 +33,14 @@
 	x_pressed := 0
 	c_pressed := 0
 	v_pressed := 0
+	
+	LControl_pressed := 0
+	LShift_pressed := 0
+	LAlt_pressed := 0
+	Space_pressed := 0
+	Down_pressed := 0	
+	Left_pressed := 0
+	Right_pressed := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -46,7 +64,7 @@ CoordMode, mouse, Screen
 	{
 		WinClose Event Tester
 		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+		Run, D:\Dropbox\EventTester.exe
 		WinWait, Event Tester
 		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
@@ -74,11 +92,33 @@ CoordMode, mouse, Screen
 		}
 		return
 	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
+	}
 } ; AutoHotKey Script option.
 
 { ; Joystick ID (Use JoyID Program)
-	;4Joy = T16000L (See JoyID)
-	;Joy = Vjoy
+	;Joy = Vjoy1
+	;2Joy = Vjoy2
+	
+	/*
+		1Joy1::a
+		2Joy2::b
+	*/
+	
 }
 
 { ; Testing
@@ -369,14 +409,14 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	$XButton2::
+	*$F24::
 	{
-		If (XButton2_pressed)
+		If (F24_pressed)
 			Return
-		XButton2_pressed := 1
+		F24_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton2, t0.100
+			KeyWait F24, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -386,26 +426,29 @@ CoordMode, mouse, Screen
 		}
 		Else
 		{
-			Send {XButton2 Down}
+			Send {Blind}{XButton2 Down}
 		}
 		Return
 	}
 	
-	$XButton2 Up::
+	*$F24 Up::
 	{
-		XButton2_pressed := 0
-		SendInput {XButton2 Up}
+		F24_pressed := 0
+		If !WinActive("Discord")
+		{
+			SendInput {Blind}{XButton2 Up}
+		}
 		Return
 	}
 	
-	$XButton1::
+	*$F23::
 	{
-		If (XButton1_pressed)
+		If (F23_pressed)
 			Return
-		XButton1_pressed := 1
+		F23_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton1, t0.100
+			KeyWait F23, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -415,15 +458,18 @@ CoordMode, mouse, Screen
 		}
 		Else
 		{
-			Send {XButton1 Down}
+			Send {Blind}{XButton1 Down}
 		}
 		Return
 	}
 	
-	$XButton1 Up::
+	*$F23 Up::
 	{
-		XButton1_pressed := 0
-		SendInput {XButton1 Up}
+		F23_pressed := 0
+		If !WinActive("Discord")
+		{
+			SendInput {Blind}{XButton1 Up}
+		}
 		Return
 	}
 	
@@ -830,11 +876,11 @@ CoordMode, mouse, Screen
 		v_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {v Down}
+			SendInput {Blind}{v Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {; Down}
+			SendInput {Blind}{; Down}
 		}
 		Return
 	}
@@ -846,19 +892,19 @@ CoordMode, mouse, Screen
 		{
 			If (GetKeyState(";"))
 			{
-				SendInput {; Up}
+				SendInput {Blind}{; Up}
 			}
 			Else
-				SendInput {v Up}
+				SendInput {Blind}{v Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("v"))
 			{
-				SendInput {v Up}
+				SendInput {Blind}{v Up}
 			}
 			Else
-				SendInput {; Up}
+				SendInput {Blind}{; Up}
 		}
 		Return
 	}

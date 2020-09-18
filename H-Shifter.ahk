@@ -70,7 +70,7 @@ $MButton::
 	Return
 }
 
-$WheelUp::
+Up::
 {
 	if (key = 8)
 		Return
@@ -94,7 +94,7 @@ $WheelUp::
 	return
 }
 
-$WheelDown::
+Down::
 {
 	if (key = 1)
 		Return

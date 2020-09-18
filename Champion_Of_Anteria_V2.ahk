@@ -67,7 +67,7 @@ CoordMode, mouse, Screen
 	#F4::ExitApp
 	;#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
 	F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	^!f:: ; FullScreen Window. Control+Alt+F
+	^!f:: ; FullScreen Window. Control+Alt+F	
 	{
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
@@ -76,6 +76,22 @@ CoordMode, mouse, Screen
 			WinMove, , , 0, 0, 1920, 1080
 		}
 		return
+	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
 	}
 } ; AutoHotKey Script option.
 
@@ -468,11 +484,11 @@ CoordMode, mouse, Screen
 		SC029_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {SC029 Down}
+			SendInput {esc Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {esc Down}
+			SendInput {SC029 Down}
 		}
 		Return
 	}
@@ -482,21 +498,21 @@ CoordMode, mouse, Screen
 		SC029_pressed := 0
 		If (Layer=1)
 		{
-			If (GetKeyState("esc"))
-			{
-				SendInput {esc Up}
-			}
-			Else
-				SendInput {SC029 Up}
-		}
-		If (Layer=2)
-		{
 			If (GetKeyState("SC029"))
 			{
 				SendInput {SC029 Up}
 			}
 			Else
 				SendInput {esc Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("esc"))
+			{
+				SendInput {esc Up}
+			}
+			Else
+				SendInput {SC029 Up}
 		}
 		Return
 	}
@@ -860,6 +876,20 @@ CoordMode, mouse, Screen
 		}
 		Return
 	}
+	
+	$*Insert::
+	{
+		Send {Insert}
+		Sleep 32
+		Return
+	}
+	
+	$*Delete::
+	{
+		Send {Delete}
+		Sleep 32
+		Return
+	}
 } ; Keypad and/or Keyboard.
 
 #IfWinActive Champions of Anteria
@@ -877,9 +907,9 @@ Down:: ; Pause Spam
 	Return
 }
 
-Down Up::
+Down Up:: ; Pause Spam
 {
-	If Mod(oddeven , 2)
+	If Mod(oddeven , 2) = 1
 	{
 		Send {Space}
 		oddeven := 0

@@ -24,7 +24,7 @@ CoordMode, mouse, Screen
 	{
 		WinClose Event Tester
 		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+		Run, D:\Dropbox\EventTester.exe
 		WinWait, Event Tester
 		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
@@ -50,6 +50,22 @@ CoordMode, mouse, Screen
 			WinMove, , , 0, 0, 1920, 1080
 		}
 		return
+	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
 	}
 } ; AutoHotKey Script option.
 

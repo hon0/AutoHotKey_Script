@@ -7,8 +7,8 @@
 	SC029_pressed := 0
 	Tab_pressed := 0
 	
-	XButton2_pressed := 0
-	XButton1_pressed := 0
+	F24_pressed := 0
+	F23_pressed := 0
 	
 	F13_pressed := 0
 	F14_pressed := 0
@@ -23,6 +23,7 @@
 	x_pressed := 0
 	c_pressed := 0
 	v_pressed := 0
+	LAlt_pressed := 0	
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -42,11 +43,12 @@ CoordMode, mouse, Screen
 	SetKeyDelay 10, 32
 	Send {Lwin down}{Right}{Right}{Right}{Right}{Lwin up}{LControl down}{k}{LControl Up}
 	
+	
 	#IfWinExist Event Tester
 	{
 		WinClose Event Tester
 		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+		Run, D:\Dropbox\EventTester.exe
 		WinWait, Event Tester
 		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
@@ -62,8 +64,10 @@ CoordMode, mouse, Screen
 { ; AutoHotKey Script option.
 	#F1::Suspend, Toggle
 	#F4::ExitApp
-	;#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
-	;F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
+	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
+	;#IfWinNotActive Active The Division
+	F14::Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
+	;#IfWinActive
 	^!f:: ; FullScreen Window. Control+Alt+F
 	{
 		WinGetTitle, currentWindow, A
@@ -73,6 +77,22 @@ CoordMode, mouse, Screen
 			WinMove, , , 0, 0, 1920, 1080
 		}
 		return
+	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
 	}
 } ; AutoHotKey Script option.
 
@@ -335,6 +355,13 @@ CoordMode, mouse, Screen
 			Sleep 100
 			Return
 		}
+		Else if (Layer=1) and GetKeyState("RButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {v}
+			Sleep 100
+			Return
+		}
 		Else
 		{
 			SendInput {WheelUp}
@@ -358,6 +385,13 @@ CoordMode, mouse, Screen
 			Sleep 100
 			Return
 		}
+		Else if (Layer=1) and GetKeyState("RButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {v}
+			Sleep 100
+			Return
+		}
 		Else
 		{
 			SendInput {WheelDown}
@@ -366,14 +400,14 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	$XButton2::
+	$F24::
 	{
-		If (XButton2_pressed)
+		If (F24_pressed)
 			Return
-		XButton2_pressed := 1
+		F24_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton2, t0.100
+			KeyWait F24, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -392,30 +426,30 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	$XButton2 Up::
+	$F24 Up::
 	{
 		If (Layer=2)
 		{
-			XButton2_pressed := 0
+			F24_pressed := 0
 			SendInput {F3 Up}
 			Return
 		}
 		Else
 		{
-			XButton2_pressed := 0
+			F24_pressed := 0
 			SendInput {XButton2 Up}
 			Return
 		}
 	}
 	
-	$XButton1::
+	$F23::
 	{
-		If (XButton1_pressed)
+		If (F23_pressed)
 			Return
-		XButton1_pressed := 1
+		F23_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton1, t0.100
+			KeyWait F23, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -434,17 +468,17 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	$XButton1 Up::
+	$F23 Up::
 	{
 		If (Layer=2)
 		{
-			XButton1_pressed := 0
+			F23_pressed := 0
 			SendInput {F4 Up}
 			Return
 		}
 		Else
 		{
-			XButton1_pressed := 0
+			F23_pressed := 0
 			SendInput {XButton1 Up}
 			Return
 		}
@@ -481,24 +515,6 @@ CoordMode, mouse, Screen
 	{
 		F13_pressed := 0
 		SendInput {v Up}
-		Return
-	}
-	
-	$F14::
-	{
-		If (F14_pressed)
-			Return
-		F14_pressed := 1
-		{
-			Send {XButton1}
-		}
-		Return
-	}
-	
-	$F14 Up::
-	{
-		F14_pressed := 0
-		SendInput {XButton1 Up}
 		Return
 	}
 } ; Mouse
@@ -903,4 +919,81 @@ CoordMode, mouse, Screen
 		}
 		Return
 	}
+	
+	$Insert::
+	{
+		If (Layer=1)
+		{
+			Send {Insert}
+			Sleep 32
+			Return
+		}
+		If (Layer=2)
+		{
+			Send {Numpad1}
+			Sleep 32
+			Return
+		}
+	}
+	
+	$Delete::
+	{
+		If (Layer=1)
+		{
+			Send {Delete}
+			Sleep 32
+			Return
+		}
+		If (Layer=2)
+		{
+			Send {Numpad3}
+			Sleep 32
+			Return
+		}
+	}
+	
+	$LAlt::
+	{
+		If (LAlt_pressed)
+			Return
+		LAlt_pressed := 1
+		If (Layer=1) and !(GetKeyState("RButton"))
+		{
+			SendInput {LAlt Down}
+		}
+		Else If (Layer=1) and (GetKeyState("RButton"))
+		{
+			Send {v}
+		}
+		Return
+	}
+	
+	$LAlt Up::
+	{
+		LAlt_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("RButton"))
+			{
+				
+			}
+			Else
+			{
+				SendInput {LAlt Up}
+			}
+		}
+		Return
+	}
 } ; Keypad and/or Keyboard.
+
+#If WinActive("Fallout Shelter")
+{
+	Left::b
+	/*
+		SC002::F1
+		SC003::F2
+		SC004::F3
+		SC005::F4
+	*/
+}
+#IfWinActive

@@ -4,26 +4,45 @@
 	Layer := 1
 	CapsLock_pressed := 0
 	
-	Space_pressed := 0
-	Down_pressed := 0
-	Left_pressed := 0
-	Right_pressed := 0
-	
-	Toggle_Right := 0
+	/* ; Toggle Slow Time + an exemple
+		;Toggle_Right := 0 ; Toggle Slow Time
+		
+		*Space:: ; Centrer la caméra sur la dernière notification.
+		{
+			If (Space_pressed)
+				Return
+			Space_pressed := 1
+			If Toggle_Right = 1
+			{
+				SendInput {Blind}{NumpadSub Up}{Space}{NumpadSub Down}
+			}
+			Else
+			{
+				SendInput {Blind}{Space}
+			}
+			Return
+		}
+		
+		*Space Up::
+		{
+			Space_pressed := 0
+			Return
+		}
+	*/
 	
 	SC029_pressed := 0
 	Tab_pressed := 0
-	LAlt_pressed := 0
-	
-	XButton2_pressed := 0
-	XButton1_pressed := 0
-	
-	F13_pressed := 0
 	
 	SC002_pressed := 0
 	SC003_pressed := 0
 	SC004_pressed := 0
 	SC005_pressed := 0
+	
+	F24_pressed := 0
+	F23_pressed := 0
+	
+	F13_pressed := 0
+	F14_pressed := 0
 	
 	a_pressed := 0
 	e_pressed := 0
@@ -31,10 +50,27 @@
 	r_pressed := 0
 	f_pressed := 0
 	
+	z_pressed := 0
+	q_pressed := 0
+	s_pressed := 0
+	d_pressed := 0
+	
 	w_pressed := 0
 	x_pressed := 0
 	c_pressed := 0
 	v_pressed := 0
+	
+	LControl_pressed := 0
+	LShift_pressed := 0
+	LAlt_pressed := 0
+	Space_pressed := 0
+	Down_pressed := 0	
+	Left_pressed := 0
+	Right_pressed := 0
+	
+	NumpadEnter_pressed := 0
+	
+	Quantity_ImageSearch := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -58,7 +94,7 @@ CoordMode, mouse, Screen
 	{
 		WinClose Event Tester
 		
-		Run, C:\Program Files (x86)\Thrustmaster\TARGET\Tools\EventTester.exe
+		Run, D:\Dropbox\EventTester.exe
 		WinWait, Event Tester
 		SetKeyDelay 10, 32
 		Send {Lwin down}{Right}{Right}{Lwin up}{esc}{esc}{esc}{esc}
@@ -74,7 +110,8 @@ CoordMode, mouse, Screen
 { ; AutoHotKey Script option.
 	#F3::Suspend, Toggle
 	#F4::ExitApp
-	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.	
+	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
+	*F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 	^!f:: ; FullScreen Window. Control+Alt+F
 	{
 		WinGetTitle, currentWindow, A
@@ -84,6 +121,22 @@ CoordMode, mouse, Screen
 			WinMove, , , 0, 0, 1920, 1080
 		}
 		return
+	}
+	F19:: ; Run, C:\Windows\System32\mmsys.cpl ; Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+	{
+		KeyWait F19, t0.100
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			Run, C:\Windows\System32\mmsys.cpl
+			KeyWait, F19
+		}
+		Else
+		{
+			Run, C:\Users\vieil\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Equalizer APO 1.2.1\Configuration Editor
+			KeyWait, F19
+		}
+		Return
 	}
 } ; AutoHotKey Script option.
 
@@ -289,7 +342,7 @@ CoordMode, mouse, Screen
 }
 
 { ; Layer modifier. Press and hold to get into Layer 2. Release to come back to Layer 1.
-	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
+	*$CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	{
 		If (CapsLock_pressed)
 			Return
@@ -306,719 +359,59 @@ CoordMode, mouse, Screen
 	}
 }
 
-#IfWinActive ANNO 2070
-	
-*Right:: ; Toggle time deceleration
-{
-	If (Right_pressed)
-		Return
-	Right_pressed := 1
-	If Toggle_Right = 0
-	{
-		Toggle_Right := 1
-		SendInput {NumpadSub Down}
-	}
-	Else If Toggle_Right = 1
-	{
-		Toggle_Right := 0
-		SendInput {NumpadSub Up}
-	}
-	Return
-}
-
-*Right Up::
-{
-	Right_pressed := 0
-	Return
-}
-
-*Down:: ; Ouvrir la carte stratégique.
-{
-	If (Down_pressed)
-		Return
-	Down_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{Down}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {Down}
-	}
-	Return
-}
-
-*Down Up::
-{
-	Down_pressed := 0
-	Return
-}
-
-*Space:: ; Centrer la caméra sur la dernière notification.
-{
-	If (Space_pressed)
-		Return
-	Space_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{Space}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {Space}
-	}
-	Return
-}
-
-*Space Up::
-{
-	Space_pressed := 0
-	Return
-}
-
-XButton2:: ; Quick save
-{
-	If (XButton2_pressed)
-		Return
-	XButton2_pressed := 1
-	If Toggle_Right = 1
-	{
-		Send {NumpadSub Up}{F5}{NumpadSub Down}
-	}
-	Else
-	{
-		Send {F5}
-	}
-	Return
-}
-
-XButton2 Up::
-{
-	XButton2_pressed := 0
-	Return
-}
-
-XButton1:: ; Quick save
-{
-	If (XButton2_pressed)
-		Return
-	XButton1_pressed := 1
-	If Toggle_Right = 1
-	{
-		Send {NumpadSub Up}{LControl Down}{F5}{LControl Up}{NumpadSub Down}
-	}
-	Else
-	{
-		Send {LControl Down}{F5}{LControl Up}
-	}
-	Return
-}
-
-XButton1 Up::
-{
-	XButton1_pressed := 0
-	Return
-}
-
-$Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la sélection
-{
-	If (Tab_pressed)
-		Return
-	Tab_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{Tab}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {Tab}
-	}
-	Return
-}
-
-$Tab Up::
-{
-	Tab_pressed := 0
-	Return
-}
-
-LAlt & Tab:: ; Faire défiler les Navires et centrer la caméra sur eux.
-{
-	If (Tab_pressed)
-		Return
-	Tab_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{LControl Down}{k}{LControl Up}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {LControl Down}{k}{LControl Up}
-	}
-	Return
-}
-
-LAlt & Tab Up::
-{
-	Tab_pressed := 0
-	Return
-}
-
-LControl & c:: ; Caméra sur et selection de l'Ark	
-{
-	If (c_pressed)
-		Return
-	c_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {Blind}{NumpadSub Up}{LControl Down}{c}{LControl Up}{NumpadSub Down}
-		If GetKeyState("LControl", "P")
-			SendInput {LControl Down}
-	}
-	Else
-	{
-		SendInput {LControl Down}{c}{LControl Up}
-		If GetKeyState("LControl", "P")
-			SendInput {LControl Down}
-	}
-	Return
-}
-
-LControl & c Up::
-{
-	c_pressed := 0
-	Return
-}
-
-SC002:: ; Layer 1 = Faire défiler la sélection des Navires et centrer la caméra sur la sélection. Layer 2 = Vue carte postale.
-{
-	If (SC002_pressed)
-		Return
-	SC002_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{LControl Down}{TAB}{LControl Up}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {LControl Down}{TAB}{LControl Up}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{F1}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {F1}
-		}
-	}
-	Return
-}
-
-SC002 Up::
-{
-	SC002_pressed := 0
-	Return
-}
-
-SC003:: ; Layer 1 = Décharger toutes les marchandises du véhicule dans l'entrepot à portée. Layer 2 = Vue carte postale.
-{
-	If (SC003_pressed)
-		Return
-	SC003_pressed := 1
-	If (Toggle_Right = 1)
-	{
-		SendInput {NumpadSub Up}{l}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {l}
-	}
-	Return
-}
-
-SC003 Up::
-{
-	SC003_pressed := 0
-	Return
-}
-
-LControl & f:: ; Faire défiler la sélection des Entrepôts et centrer la caméra sur la sélection
-{
-	If (f_pressed)
-		Return
-	f_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{LControl Down}{f}{LControl Up}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {LControl Down}{f}{LControl Up}
-	}
-	Return
-}
-
-LControl & f Up::
-{
-	f_pressed := 0
-	Return
-}
-
-LShift & f:: ; Faire défiler la sélection des Entrepôts sans déplacer la caméra
-{
-	If (f_pressed)
-		Return
-	f_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{LShift Down}{f}{LShift Up}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {LShift Down}{f}{LShift Up}
-	}
-	Return
-}
-
-LShift & f Up::
-{
-	f_pressed := 0
-	Return
-}
-
-LAlt & f:: ; Faire défiler la sélection des Entrepôts et centrer la caméra
-{
-	If (f_pressed)
-		Return
-	f_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{LAlt Down}{f}{LAlt Up}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {LAlt Down}{f}{LAlt Up}
-	}
-	Return
-}
-
-LAlt & f Up::
-{
-	f_pressed := 0
-	Return
-}
-
-Left:: ; Ouvrir la flotte de véhicule et les bâtiments.
-{
-	If (Left_pressed)
-		return
-	Left_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{F11}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {F11}
-	}
-	Return
-}
-
-Left Up::
-{
-	Left_pressed := 0
-	Return
-}
-
-SC029:: ; Déselectionner, menu.
-{
-	If (f_pressed)
-		Return
-	SC029_pressed := 1
-	If Toggle_Right = 1
-	{
-		SendInput {NumpadSub Up}{esc}{NumpadSub Down}
-	}
-	Else
-	{
-		SendInput {esc}
-	}
-	Return
-}
-
-SC029 Up::
-{
-	SC029_pressed := 0
-	Return
-}
-
-$w:: ; Layer 1 = Mode démolition. Layer 2 = Améliorer la Maison.
-{
-	If (w_pressed)
-		Return
-	w_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{w}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {w}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{u}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {u}
-		}
-	}
-	Return
-}
-
-w Up::
-{
-	w_pressed := 0
-	Return
-}
-
-$x::
-{
-	If (x_pressed)
-		Return
-	x_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{x Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {x Down}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{n Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {n Down}
-		}
-	}
-	Return
-}
-
-$x Up::
-{
-	x_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState("n"))
-		{
-			SendInput {n Up}
-		}
-		Else
-			SendInput {x Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("x"))
-		{
-			SendInput {x Up}
-		}
-		Else
-			SendInput {n Up}
-	}
-	Return
-}
-
-$r::
-{
-	If (r_pressed)
-		Return
-	r_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{r Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {r Down}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{t Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {t Down}
-		}
-	}
-	Return
-}
-
-$r Up::
-{
-	x_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState("t"))
-		{
-			SendInput {t Up}
-		}
-		Else
-			SendInput {r Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("r"))
-		{
-			SendInput {r Up}
-		}
-		Else
-			SendInput {t Up}
-	}
-	Return
-}
-
-$f::
-{
-	If (f_pressed)
-		Return
-	f_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{f Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {f Down}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{g Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {g Down}
-		}
-	}
-	Return
-}
-
-$f Up::
-{
-	f_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState("g"))
-		{
-			SendInput {g Up}
-		}
-		Else
-			SendInput {f Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("g"))
-		{
-			SendInput {g Up}
-		}
-		Else
-			SendInput {f Up}
-	}
-	Return
-}
-
-$c::
-{
-	If (c_pressed)
-		Return
-	c_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{c Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {c Down}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{, Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {, Down}
-		}
-	}
-	Return
-}
-
-$c Up::
-{
-	c_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState(","))
-		{
-			SendInput {, Up}
-		}
-		Else
-			SendInput {c Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("c"))
-		{
-			SendInput {c Up}
-		}
-		Else
-			SendInput {, Up}
-	}
-	Return
-}
-
-$v::
-{
-	If (v_pressed)
-		Return
-	v_pressed := 1
-	If (Layer = 1)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{v Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {v Down}
-		}
-	}
-	If (Layer = 2)
-	{
-		If (Toggle_Right = 1)
-		{
-			SendInput {NumpadSub Up}{; Down}{NumpadSub Down}
-		}
-		Else
-		{
-			SendInput {; Down}
-		}
-	}
-	Return
-}
-
-$v Up::
-{
-	v_pressed := 0
-	If (Layer=1)
-	{
-		If (GetKeyState(";"))
-		{
-			SendInput {; Up}
-		}
-		Else
-			SendInput {v Up}
-	}
-	If (Layer=2)
-	{
-		If (GetKeyState("v"))
-		{
-			SendInput {v Up}
-		}
-		Else
-			SendInput {; Up}
-	}
-	Return
-}
-
-#IfWinActive
-	
 { ; Mouse
-	WheelUp::
+	*WheelUp::
 	{
 		If (Layer=1) and GetKeyState("MButton")
 		{
 			SetkeyDelay, 0, 32
-			Send {Home}
+			Send {Blind}{Home}
 			Return
 		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {PgUp}
+			Send {Blind}{PgUp}
 			Return
 		}
 		Else
 		{
-			SendInput {WheelUp}
+			SendInput {Blind}{WheelUp}
 			Return
 		}
 		Return
 	}
 	
-	WheelDown::
+	*WheelDown::
 	{
 		If (Layer=1) and GetKeyState("MButton")
 		{
 			SetkeyDelay, 0, 32
-			Send {End}
+			Send {Blind}{End}
 			Return
 		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {PgDn}
+			Send {Blind}{PgDn}
 			Return
 		}
 		Else
 		{
-			SendInput {WheelDown}
+			SendInput {Blind}{WheelDown}
 			Return
 		}
 		Return
 	}
 	
-	$XButton2::
+	*$F24::
 	{
-		If (XButton2_pressed)
+		If (F24_pressed)
 			Return
-		XButton2_pressed := 1
+		F24_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton2, t0.100
+			KeyWait F24, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -1028,26 +421,29 @@ $v Up::
 		}
 		Else
 		{
-			Send {XButton2 Down}
+			Send {Blind}{XButton2 Down}
 		}
 		Return
 	}
 	
-	$XButton2 Up::
+	*$F24 Up::
 	{
-		XButton2_pressed := 0
-		SendInput {XButton2 Up}
+		F24_pressed := 0
+		If !WinActive("Discord")
+		{
+			SendInput {Blind}{XButton2 Up}
+		}
 		Return
 	}
 	
-	$XButton1::
+	*$F23::
 	{
-		If (XButton1_pressed)
+		If (F23_pressed)
 			Return
-		XButton1_pressed := 1
+		F23_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait XButton1, t0.100
+			KeyWait F23, t0.100
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
@@ -1057,19 +453,22 @@ $v Up::
 		}
 		Else
 		{
-			Send {XButton1 Down}
+			Send {Blind}{XButton1 Down}
 		}
 		Return
 	}
 	
-	$XButton1 Up::
+	*$F23 Up::
 	{
-		XButton1_pressed := 0
-		SendInput {XButton1 Up}
+		F23_pressed := 0
+		If !WinActive("Discord")
+		{
+			SendInput {Blind}{XButton1 Up}
+		}
 		Return
 	}
 	
-	$F13::
+	*$F13::
 	{
 		If (F13_pressed)
 			Return
@@ -1085,102 +484,142 @@ $v Up::
 			Else
 			{
 				SendInput {LControl Down}{k}{LControl Up}
-			;Sleep 32		
+				;Sleep 32		
 				Send {Enter}
 			}
 		}
 		Else
 		{
-			SendInput {F13 Down}
+			SendInput {Blind}{F13 Down}
 		}
 		Return
 	}
 	
-	$F13 Up::
+	*$F13 Up::
 	{
 		F13_pressed := 0
-		SendInput {F13 Up}
+		SendInput {Blind}{F13 Up}
 		Return
 	}
 } ; Mouse
 
 { ; Keypad and/or Keyboard.
-	$SC029::
+	*$SC029::
 	{
 		If (SC029_pressed)
 			Return
 		SC029_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {SC029 Down}
+			SendInput {Blind}{SC029 Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {esc Down}
+			SendInput {Blind}{esc Down}
 		}
 		Return
 	}
 	
-	$SC029 Up::
+	*$SC029 Up::
 	{
 		SC029_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("esc"))
 			{
-				SendInput {esc Up}
+				SendInput {Blind}{esc Up}
 			}
 			Else
-				SendInput {SC029 Up}
+				SendInput {Blind}{SC029 Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("SC029"))
 			{
-				SendInput {SC029 Up}
+				SendInput {Blind}{SC029 Up}
 			}
 			Else
-				SendInput {esc Up}
+				SendInput {Blind}{esc Up}
 		}
 		Return
 	}
 	
-	$Tab::
+	*$Tab::
 	{
 		If (Tab_pressed)
 			Return
 		Tab_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Tab Down}
+			SendInput {Blind}{Tab Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {esc Down}
+			SendInput {Blind}{esc Down}
 		}
 		Return
 	}
 	
-	$Tab Up::
+	*$Tab Up::
 	{
 		Tab_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("esc"))
 			{
-				SendInput {esc Up}
+				SendInput {Blind}{esc Up}
 			}
 			Else
-				SendInput {Tab Up}
+				SendInput {Blind}{Tab Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("Tab"))
 			{
-				SendInput {Tab Up}
+				SendInput {Blind}{Tab Up}
 			}
 			Else
-				SendInput {esc Up}
+				SendInput {Blind}{esc Up}
+		}
+		Return
+	}
+	
+	$*SC003::
+	{
+		If (SC003_pressed)
+			Return
+		SC003_pressed := 1
+		If (Layer=1)
+		{
+			SendInput {Blind}{SC003 Down}
+		}
+		If (Layer=2) and WinActive("ahk_exe chrome.exe")
+		{
+			SendInput ^+e
+		}
+		Return
+	}
+	
+	$*SC003 Up::
+	{
+		SC003_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("F2"))
+			{
+				SendInput {Blind}{F2 Up}
+			}
+			Else
+				SendInput {Blind}{SC003 Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("SC003"))
+			{
+				SendInput {Blind}{SC003 Up}
+			}
+			Else
+				SendInput {Blind}{F2 Up}
 		}
 		Return
 	}
@@ -1265,121 +704,974 @@ $v Up::
 		Return
 	}
 	
-	$r::
+	*$r::
 	{
+		If (r_pressed)
+			Return
+		r_pressed := 1
 		If (Layer=1)
 		{
-			Send {r Down}
-			KeyWait, r
-			Send {r Up}
-			Return
+			SendInput {Blind}{r Down}
 		}
-		Else If (Layer=2)
+		If (Layer=2)
 		{
-			KeyWait r, t0.100
-			t:= A_TimeSinceThisHotkey
-			If ErrorLevel
-			{
-				SendInput {y down}
-				Sleep 32
-				SendInput {y up}
-				KeyWait, r
-			}
-			else
-			{
-				SendInput {t down}
-				sleep 32
-				SendInput {t up}
-				KeyWait, r
-			}
-			return
-		}
-		Else
-		{
-			Send {r Down}
-			KeyWait, r
-			Send {r Up}
-			Return
+			SendInput {Blind}{t Down}
 		}
 		Return
 	}
 	
-	$f::
+	*$r Up::
 	{
+		r_pressed := 0
 		If (Layer=1)
 		{
-			Send {f Down}
-			KeyWait, f
-			Send {f Up}
-			Return
-		}
-		Else If (Layer=2)
-		{
-			KeyWait f, t0.100
-			t:= A_TimeSinceThisHotkey
-			If ErrorLevel
+			If (GetKeyState("t"))
 			{
-				SendInput {h down}
-				Sleep 32
-				SendInput {h up}
-				KeyWait, f
+				SendInput {Blind}{t Up}
 			}
-			else
-			{
-				SendInput {g down}
-				sleep 32
-				SendInput {g up}
-				KeyWait, f
-			}
-			Return
+			Else
+				SendInput {Blind}{r Up}
 		}
-		Else
+		If (Layer=2)
 		{
-			Send {f Down}
-			KeyWait, f
-			Send {f Up}
-			Return
+			If (GetKeyState("r"))
+			{
+				SendInput {Blind}{r Up}
+			}
+			Else
+				SendInput {Blind}{t Up}
 		}
 		Return
 	}
 	
-	$w::
+	*$f::
+	{
+		If (f_pressed)
+			Return
+		f_pressed := 1
+		If (Layer=1)
+		{
+			SendInput {Blind}{f Down}
+		}
+		If (Layer=2)
+		{
+			SendInput {Blind}{g Down}
+		}
+		Return
+	}
+	
+	*$f Up::
+	{
+		f_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("g"))
+			{
+				SendInput {Blind}{g Up}
+			}
+			Else
+				SendInput {Blind}{f Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("f"))
+			{
+				SendInput {Blind}{f Up}
+			}
+			Else
+				SendInput {Blind}{g Up}
+		}
+		Return
+	}
+	
+	LControl & s::
+	{
+		If (s_pressed)
+			Return
+		s_pressed := 1		
+		If WinActive("Tabs Outliner")
+		{
+			SendInput {Blind}{Backspace}
+		}
+		Else
+		{
+			SendInput {Blind}{s Down}
+		}
+		Return
+	}
+	
+	LControl & s Up::
+	{
+		s_pressed := 0
+		{
+			SendInput {Blind}{s Up}
+		}
+		Return
+	}
+	
+	*$w::
 	{
 		If (w_pressed)
 			Return
 		w_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {w Down}
+			SendInput {Blind}{w Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {b Down}
+			SendInput {Blind}{b Down}
 		}
 		Return
 	}
 	
-	$w Up::
+	*$w Up::
 	{
 		w_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("b"))
 			{
-				SendInput {b Up}
+				SendInput {Blind}{b Up}
 			}
 			Else
-				SendInput {w Up}
+				SendInput {Blind}{w Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("w"))
 			{
-				SendInput {w Up}
+				SendInput {Blind}{w Up}
 			}
 			Else
-				SendInput {b Up}
+				SendInput {Blind}{b Up}
 		}
+		Return
+	}
+	
+	*$x::
+	{
+		If (x_pressed)
+			Return
+		x_pressed := 1
+		If (Layer=1)
+		{
+			SendInput {Blind}{x Down}
+		}
+		If (Layer=2)
+		{
+			SendInput {Blind}{n Down}
+		}
+		Return
+	}
+	
+	*$x Up::
+	{
+		x_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("n"))
+			{
+				SendInput {Blind}{n Up}
+			}
+			Else
+				SendInput {Blind}{x Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("x"))
+			{
+				SendInput {Blind}{x Up}
+			}
+			Else
+				SendInput {Blind}{n Up}
+		}
+		Return
+	}
+	
+	*$c::
+	{
+		If (c_pressed)
+			Return
+		c_pressed := 1
+		If (Layer=1)
+		{
+			SendInput {Blind}{c Down}
+		}
+		If (Layer=2)
+		{
+			SendInput {Blind}{, Down}
+		}
+		Return
+	}
+	
+	*$c Up::
+	{
+		c_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState(","))
+			{
+				SendInput {Blind}{, Up}
+			}
+			Else
+				SendInput {Blind}{c Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("c"))
+			{
+				SendInput {Blind}{c Up}
+			}
+			Else
+				SendInput {Blind}{, Up}
+		}
+		Return
+	}
+	
+	$v::
+	{
+		If (v_pressed)
+			Return
+		v_pressed := 1
+		If (Layer=1)
+		{
+			SendInput {Blind}{v Down}
+		}
+		If (Layer=2)
+		{
+			SendInput {Blind}{; Down}
+		}
+		Return
+	}
+	
+	$v Up::
+	{
+		v_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState(";"))
+			{
+				SendInput {Blind}{; Up}
+			}
+			Else
+				SendInput {Blind}{v Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("v"))
+			{
+				SendInput {Blind}{v Up}
+			}
+			Else
+				SendInput {Blind}{; Up}
+		}
+		Return
+	}
+	
+	$Insert::
+	{
+		{
+			SendInput {Insert}
+			Sleep 200
+		}
+		Return
+	}
+	
+	$Delete::
+	{
+		{
+			SendInput {Delete}
+			Sleep 200
+		}
+		Return
+	}
+	
+	$*Space::
+	{
+		If (Space_pressed)
+			Return
+		Space_pressed := 1
+		If WinActive("ahk_exe chrome.exe") and !WinActive("Tabs Outliner") and GetKeyState("LControl", "P")
+		{
+			SendInput {Blind}{LControl Up}{Enter}
+			If GetKeyState("LControl", "P")
+				SendInput {LControl Down}
+			Return
+		}
+		If WinActive("Tabs Outliner")
+		{
+			SendInput {Blind}{Up}
+			Return
+		}
+		Else
+		{
+			SendInput {Blind}{Space Down}
+			Return
+		}
+		Return
+	}
+	
+	$*Space Up::
+	{
+		Space_pressed := 0
+		{
+			SendInput {Blind}{Space Up}
+		}
+		Return
+	}
+	
+	
+	LAlt & Space::
+	{
+		If (Space_pressed)
+			Return
+		Space_pressed := 1
+		{
+			Send {LAlt Up}#{Up}
+		}
+		Return
+	}
+	
+	LAlt & Space Up::
+	{
+		Space_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Down::
+	{
+		If (Down_pressed)
+			Return
+		Down_pressed := 1
+		{
+			Send {LAlt Up}#{Down}
+		}
+		Return
+	}
+	
+	LAlt & Down Up::
+	{
+		Down_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Left::
+	{
+		If (Left_pressed)
+			Return
+		Left_pressed := 1
+		{
+			Send {LAlt Up}#{Left}
+		}
+		Return
+	}
+	
+	LAlt & Left Up::
+	{
+		Left_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Right::
+	{
+		If (Right_pressed)
+			Return
+		Right_pressed := 1
+		{
+			Send {LAlt Up}#{Right}
+		}
+		Return
+	}
+	
+	LAlt & Right Up::
+	{
+		Right_pressed := 0
+		{
+			
+		}
+		Return
+	}
+} ; Keypad and/or Keyboard.
+
+#IfWinActive ANNO 2070
+{ ; Mouse
+	*WheelUp::
+	{
+		If (Layer=1) and GetKeyState("MButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{Home}
+			Return
+		}
+		Else if (Layer=2)
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{PgUp}
+			Return
+		}
+		Else
+		{
+			SendInput {Blind}{WheelUp}
+			Return
+		}
+		Return
+	}
+	
+	*WheelDown::
+	{
+		If (Layer=1) and GetKeyState("MButton")
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{End}
+			Return
+		}
+		Else if (Layer=2)
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{PgDn}
+			Return
+		}
+		Else
+		{
+			SendInput {Blind}{WheelDown}
+			Return
+		}
+		Return
+	}
+	
+	F13:: ; Mouse on Minimap
+	{
+		If (F13_pressed)
+			Return
+		F13_pressed := 1
+		{
+			BlockInput, On
+			MouseGetPos, xpos, ypos 
+			MouseMove, 115, 985
+			BlockInput, Off
+		}
+		Return
+	}
+	
+	F13 Up::
+	{
+		F13_pressed := 0
+		SendInput {LButton Up}
+		MouseMove, xpos, ypos
+		Return
+	}
+	
+	F24:: ; Quick save
+	{
+		If (F24_pressed)
+			Return
+		F24_pressed := 1
+		If Toggle_Right = 1
+		{
+			Send {NumpadSub Up}{F5}{NumpadSub Down}
+		}
+		Else
+		{
+			Send {F5}
+		}
+		Return
+	}
+	
+	F24 Up::
+	{
+		F24_pressed := 0
+		Return
+	}
+	
+	F23:: ; Quick load
+	{
+		If (F23_pressed)
+			Return
+		F23_pressed := 1
+		If Toggle_Right = 1
+		{
+			Send {NumpadSub Up}{LControl Down}{F5}{LControl Up}{NumpadSub Down}
+		}
+		Else
+		{
+			Send {LControl Down}{F5}{LControl Up}
+		}
+		Return
+	}
+	
+	F23 Up::
+	{
+		F23_pressed := 0
+		Return
+	}
+}
+
+{ ; Keypad and/or Keyboard.
+	~LControl::
+	{
+		If (LControl_pressed)
+			Return
+		LControl_pressed := 1
+		ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *75, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quantity_Icon.bmp
+		if (ErrorLevel = 2)
+		{
+			Quantity_ImageSearch := 0
+		;MsgBox Could not conduct the search.
+			return
+		}
+		else if (ErrorLevel = 1)
+		{
+			Quantity_ImageSearch := 0
+		;MsgBox Icon could not be found on the screen.
+			ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *75, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quantity_Icon_10.bmp
+			if (ErrorLevel = 2)
+			{
+				Quantity_ImageSearch := 0
+		;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				Quantity_ImageSearch := 0
+		;MsgBox Icon could not be found on the screen.
+				return
+			}
+			else
+			{
+				Quantity_ImageSearch := 1
+		;MsgBox The icon was found at %FoundX%x%FoundY%.
+				{
+					BlockInput, On
+					MouseGetPos, xpos, ypos 
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 75, 10, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+			}
+			return
+		}
+		else
+		{
+			Quantity_ImageSearch := 1
+		;MsgBox The icon was found at %FoundX%x%FoundY%.
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos 
+				MouseMove, %FoundX%, %FoundY%
+				MouseMove, 75, 10, 0, R
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+		}
+		return
+	}
+	
+	~LControl Up::
+	{
+		LControl_pressed := 0
+		If Quantity_ImageSearch = 1
+		{
+			BlockInput, On
+			MouseGetPos, xpos, ypos 
+			MouseMove, %FoundX%, %FoundY%
+			MouseMove, 20, 10, 0, R
+			MouseClick, left
+			MouseMove, xpos, ypos
+			BlockInput, Off
+			SendInput {LControl Up}
+			Quantity_ImageSearch := 0
+			return
+		}
+		Else
+		{
+			Quantity_ImageSearch := 0
+			Return
+		}
+		Return
+	}
+	
+	~LShift::
+	{
+		If (LShift_pressed)
+			Return
+		LShift_pressed := 1
+		ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *75, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quantity_Icon.bmp
+		if (ErrorLevel = 2)
+		{
+			;MsgBox Could not conduct the search.
+			return
+		}
+		else if (ErrorLevel = 1)
+		{
+			Quantity_ImageSearch := 0
+		;MsgBox Icon could not be found on the screen.
+			ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *75, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quantity_Icon_10.bmp
+			if (ErrorLevel = 2)
+			{
+				Quantity_ImageSearch := 0
+		;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				Quantity_ImageSearch := 0
+		;MsgBox Icon could not be found on the screen.
+				return
+			}
+			else
+			{
+				Quantity_ImageSearch := 1
+		;MsgBox The icon was found at %FoundX%x%FoundY%.
+				{
+					BlockInput, On
+					MouseGetPos, xpos, ypos 
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 50, 10, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+			}
+			return
+		}
+		else
+		{
+			Quantity_ImageSearch := 1
+		;MsgBox The icon was found at %FoundX%x%FoundY%.
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				MouseMove, %FoundX%, %FoundY%
+				MouseMove, 50, 10, 0, R
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+		}
+		return
+	}
+	
+	~LShift Up::
+	{
+		LShift_pressed := 0
+		If Quantity_ImageSearch = 1
+		{
+		;ImageSearch, FoundX, FoundY, 1550, 400, A_ScreenWidth, A_ScreenHeight, *25, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Icon_1.png
+			{
+		;MsgBox The icon was found at %FoundX%x%FoundY%.
+				{
+					MouseGetPos, xpos, ypos 
+					BlockInput, On
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 20, 10, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+					SendInput {LShift Up}
+					Quantity_ImageSearch := 0
+				}
+			}
+			return
+		}
+		Else
+			Return
+	}
+	
+	*$SC029:: ; Déselectionner, menu.
+	{
+		If (SC029_pressed)
+			Return
+		SC029_pressed := 1
+		If (Layer = 1)
+		{
+			KeyWait SC029, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				SendInput {p}
+			}
+			Else
+			{
+				SendInput {esc}
+			}
+			Return
+		}
+		If (Layer = 2)
+		{
+			SendInput {F1}
+		}
+		return
+	}
+	
+	*$SC029 Up::
+	{
+		SC029_pressed := 0
+		Return
+	}
+	
+	$Tab:: ; Faire défiler la sélection des Navires et centrer la caméra sur la sélection
+	{
+		If (Tab_pressed)
+			Return
+		Tab_pressed := 1
+		If (Layer = 1)
+		{
+			SendInput {Tab}
+		}
+		If (Layer = 2)
+		{
+			SendInput {Numpad0}
+		}
+		Return
+	}
+	
+	$Tab Up::
+	{
+		Tab_pressed := 0
+		Return
+	}
+	
+	LAlt & Tab:: ; Faire défiler les Navires sans les selectionner et centrer la caméra sur eux.
+	{
+		If (Tab_pressed)
+			Return
+		Tab_pressed := 1
+		{
+			SendInput {LControl Down}{k}{LControl Up}
+		}
+		Return
+	}
+	
+	LAlt & Tab Up::
+	{
+		Tab_pressed := 0
+		Return
+	}
+	
+	*$SC002:: ; Layer 1 = Faire défiler la sélection des Navires. Layer 2 = Vue carte postale.
+	{
+		If (SC002_pressed)
+			Return
+		SC002_pressed := 1
+		If (Layer = 1)
+		{
+			KeyWait SC002, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				ImageSearch, FoundX, FoundY, 683, 946, 1223, 1074, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Eco-ctr-icon.png
+				if (ErrorLevel = 2)
+				{
+				;MsgBox Could not conduct the search.
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					return
+				}
+				else
+				{
+					;MouseGetPos, xpos, ypos
+					BlockInput, On
+					Click, %FoundX%, %FoundY%
+					MouseMove, A_ScreenWidth/2, A_ScreenHeight/2
+					Sleep 333
+					MouseClick, left
+					BlockInput, Off
+				}
+				return
+			}
+			Else
+			{
+				SendInput {Blind}{SC002}
+			}
+			Return
+		}
+		If (Layer = 2)
+		{
+			SendInput {F1}
+		}
+		Return
+	}
+	
+	SC002 Up::
+	{
+		SC002_pressed := 0
+		Return
+	}
+	
+	*$SC003:: ; Layer 1 = Décharger toutes les marchandises du véhicule dans l'entrepot à portée.
+	{
+		If (SC003_pressed)
+			Return
+		SC003_pressed := 1
+		If (Layer = 1)
+		{
+			KeyWait SC003, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				ImageSearch, FoundX, FoundY, 683, 946, 1223, 1074, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Tycoon-ctr-icon.png
+				if (ErrorLevel = 2)
+				{
+					;MsgBox Could not conduct the search.
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					return
+				}
+				else
+				{
+						;MouseGetPos, xpos, ypos
+					BlockInput, On
+					Click, %FoundX%, %FoundY%
+					MouseMove, A_ScreenWidth/2, A_ScreenHeight/2
+					Sleep 333
+					MouseClick, left
+					BlockInput, Off
+				}
+				return
+			}
+			Else
+			{
+				SendInput {Blind}{SC003}
+			}
+			Return
+		}	
+		If (Layer = 2)
+		{
+			SendInput {l}
+		}
+		Return
+	}
+	
+	SC003 Up::
+	{
+		SC003_pressed := 0
+		Return
+	}	
+	
+	*$SC004:: ; Groupe 3
+	{
+		If (SC004_pressed)
+			Return
+		SC004_pressed := 1
+		If (Layer = 1)
+		{
+			KeyWait SC004, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				ImageSearch, FoundX, FoundY, 683, 946, 1223, 1074, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Tech-ctr-icon.png
+				if (ErrorLevel = 2)
+				{
+				;MsgBox Could not conduct the search.
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					return
+				}
+				else
+				{
+					;MouseGetPos, xpos, ypos
+					BlockInput, On
+					Click, %FoundX%, %FoundY%
+					MouseMove, A_ScreenWidth/2, A_ScreenHeight/2
+					Sleep 333
+					MouseClick, left
+					BlockInput, Off
+				}
+				return
+			}
+			Else
+			{
+				SendInput {Blind}{SC004}
+			}
+			Return
+		}	
+		If (Layer = 2)
+		{
+			SendInput {F3}
+		}
+		Return
+	}
+	
+	SC004 Up::
+	{
+		SC004_pressed := 0
+		Return
+	}
+	
+	*$SC005:: ; Groupe 4
+	{
+		If (SC005_pressed)
+			Return
+		SC005_pressed := 1
+		If (Layer = 1)
+		{
+			KeyWait SC005, t0.100
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel
+			{
+				MouseGetPos, xpos, ypos
+				BlockInput, On
+				Click, 894, 1045
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+			Else
+			{
+				SendInput {Blind}{SC005}
+			}
+			Return
+		}	
+		If (Layer = 2)
+		{
+			SendInput {F4}
+		}
+		Return
+	}
+	
+	SC005 Up::
+	{
+		SC005_pressed := 0
+		Return
+	}
+	
+	$w:: ; Layer 1 = Mode démolition. Layer 2 = Améliorer la Maison.
+	{
+		If (w_pressed)
+			Return
+		w_pressed := 1
+		If (Layer = 1)
+		{
+			SendInput {w}
+		}
+		If (Layer = 2)
+		{
+			SendInput {u}
+		}
+		Return
+	}
+	
+	w Up::
+	{
+		w_pressed := 0
 		Return
 	}
 	
@@ -1388,11 +1680,11 @@ $v Up::
 		If (x_pressed)
 			Return
 		x_pressed := 1
-		If (Layer=1)
+		If (Layer = 1)
 		{
 			SendInput {x Down}
 		}
-		If (Layer=2)
+		If (Layer = 2)
 		{
 			SendInput {n Down}
 		}
@@ -1423,16 +1715,178 @@ $v Up::
 		Return
 	}
 	
+	$*e::
+	{
+		If (e_pressed)
+			Return
+		e_pressed := 1
+		If (Layer=1)
+		{
+			ImageSearch, FoundX, FoundY, 1500, 750, A_ScreenWidth, A_ScreenHeight, *25, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Icon_Load.png
+			if (ErrorLevel = 2)
+			{
+				;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				;MsgBox Icon could not be found on the screen.
+				ImageSearch, FoundX, FoundY, 1500, 750, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Transaction_Icon.png
+				if (ErrorLevel = 2)
+				{
+				;MsgBox Could not conduct the search.
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+				;MsgBox Icon could not be found on the screen.
+					return
+				}
+				else
+				{
+					MouseGetPos, xpos, ypos 
+					BlockInput, On
+					MouseMove, %FoundX%, %FoundY%
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+				return
+			}
+			else
+			{
+				MouseGetPos, xpos, ypos 
+				BlockInput, On
+				MouseMove, %FoundX%, %FoundY%
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+			return
+		}
+		If (Layer=2)
+		{
+			SendInput {Blind}{e}
+		}	
+		Return
+	}
+	
+	$*e Up::
+	{
+		e_pressed := 0
+		/*
+			If (Layer=1)
+			{
+				If (GetKeyState("SC007"))
+				{
+					SendInput {Blind}{SC007 Up}
+				}
+				Else
+					SendInput {Blind}{e Up}
+			}
+			If (Layer=2)
+			{
+				If (GetKeyState("e"))
+				{
+					SendInput {Blind}{e Up}
+				}
+				Else
+					SendInput {Blind}{SC007 Up}
+			}
+		*/
+		Return
+	}
+	
+	$r::
+	{
+		If (r_pressed)
+			Return
+		r_pressed := 1
+		If (Layer = 1)
+		{
+			SendInput {r Down}
+		}
+		If (Layer = 2)
+		{
+			SendInput {t Down}
+		}
+		Return
+	}
+	
+	$r Up::
+	{
+		r_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("t"))
+			{
+				SendInput {t Up}
+			}
+			Else
+				SendInput {r Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("r"))
+			{
+				SendInput {r Up}
+			}
+			Else
+				SendInput {t Up}
+		}
+		Return
+	}
+	
+	$f::
+	{
+		If (f_pressed)
+			Return
+		f_pressed := 1
+		If (Layer = 1)
+		{
+			SendInput {f Down}
+		}
+		If (Layer = 2)
+		{
+			SendInput {g Down}
+		}
+		Return
+	}
+	
+	$f Up::
+	{
+		f_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("g"))
+			{
+				SendInput {g Up}
+			}
+			Else
+				SendInput {f Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("g"))
+			{
+				SendInput {g Up}
+			}
+			Else
+				SendInput {f Up}
+		}
+		Return
+	}
+	
 	$c::
 	{
 		If (c_pressed)
 			Return
 		c_pressed := 1
-		If (Layer=1)
+		If (Layer = 1)
 		{
 			SendInput {c Down}
 		}
-		If (Layer=2)
+		If (Layer = 2)
 		{
 			SendInput {, Down}
 		}
@@ -1468,13 +1922,13 @@ $v Up::
 		If (v_pressed)
 			Return
 		v_pressed := 1
-		If (Layer=1)
+		If (Layer = 1)
 		{
 			SendInput {v Down}
 		}
-		If (Layer=2)
+		If (Layer = 2)
 		{
-			SendInput {; Down}
+			SendInput {SC033 Down}
 		}
 		Return
 	}
@@ -1502,8 +1956,335 @@ $v Up::
 		}
 		Return
 	}
-} ; Keypad and/or Keyboard.
-
-{ ; Keyboard
 	
-} ; Keyboard
+	*$Insert::
+	{
+		If (Layer = 1)
+		{
+			SendInput {v}
+			Sleep 200
+		}
+		If (Layer = 2)
+		{
+			SendInput {SC033}
+			Sleep 200
+		}
+		Return
+	}
+	
+	*$Delete::
+	{
+		If (Layer = 1)
+		{
+			SendInput {v}
+			Sleep 200
+		}
+		If (Layer = 2)
+		{
+			SendInput {SC033}
+			Sleep 200
+		}
+		Return
+	}
+	
+	*Left:: ; Ouvrir la flotte de véhicule et les bâtiments.
+	{
+		If (Left_pressed)
+			return
+		Left_pressed := 1
+		KeyWait Left, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			ImageSearch, FoundX, FoundY, 1500, 750, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Route_Commercial_02.png
+			if (ErrorLevel = 2)
+			{
+				;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Route_Commercial_02_bis.png
+				if (ErrorLevel = 2)
+				{
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Route_Commercial_01.png
+					if (ErrorLevel = 2)
+					{
+						return
+					}
+					else if (ErrorLevel = 1)
+					{
+						return
+					}
+					else
+					{
+						BlockInput, On
+						MouseGetPos, xpos, ypos 
+						MouseMove, %FoundX%, %FoundY%
+						MouseMove, 10, 3, 0, R
+						MouseClick, left
+						MouseMove, xpos, ypos
+						BlockInput, Off
+					}
+					return
+				}
+				else
+				{
+					BlockInput, On
+					MouseGetPos, xpos, ypos 
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 10, 3, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+				return
+			}
+			else
+			{
+				MouseGetPos, xpos, ypos
+				BlockInput, On
+				MouseMove, %FoundX%, %FoundY%
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+			return
+		}
+		Else
+		{
+			SendInput {Blind}{z Up}{q Up}{s Up}{d Up}{F11}
+			If GetKeyState("z", "P")
+				SendInput {z Down}
+			If GetKeyState("q", "P")
+				SendInput {q Down}
+			If GetKeyState("s", "P")
+				SendInput {s Down}
+			If GetKeyState("d", "P")
+				SendInput {d Down}
+		}
+		Return
+	}
+	
+	Left Up::
+	{
+		Left_pressed := 0
+		Return
+	}
+	
+	*Right:: ; Toggle time deceleration
+	{
+		If (Right_pressed)
+			return
+		Right_pressed := 1
+		KeyWait Right, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			ImageSearch, FoundX, FoundY, 1500, 750, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quitter_route_commerciale.png
+			if (ErrorLevel = 2)
+			{
+				;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Quitter_route_commerciale_bis.png
+				if (ErrorLevel = 2)
+				{
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					return
+				}
+				else
+				{
+					BlockInput, On
+					MouseGetPos, xpos, ypos 
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 10, 3, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+				return
+			}
+			else
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos 
+				MouseMove, %FoundX%, %FoundY%
+				MouseMove, 10, 3, 0, R
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+			return
+		}
+		else
+		{
+			BlockInput, On
+			MouseGetPos, xpos, ypos 
+			SendInput {F10}
+			Click, 1637, 923  ; Click left mouse button at specified coordinates.		
+			MouseMove, xpos, ypos
+			SendInput {F10}
+			BlockInput, Off
+			Return
+		}
+		Return
+	}
+	
+	*Right Up::
+	{
+		Right_pressed := 0
+		Return
+	}
+	
+	*Down:: ; Ouvrir la carte stratégique.
+	{
+		If (Down_pressed)
+			Return
+		Down_pressed := 1
+		KeyWait Down, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			SendInput {Blind}{F7}
+		}
+		Else
+		{
+			SendInput {Blind}{Down}
+		}
+		Return
+	}
+	
+	*Down Up::
+	{
+		Down_pressed := 0
+		Return
+	}
+	
+	*Space:: ; Tempo : Centrer la caméra sur la dernière notification ; Pause ou reprise de la route commerciale
+	{
+		If (Space_pressed)
+			Return
+		Space_pressed := 1
+		KeyWait Space, t0.200
+		t:= A_TimeSinceThisHotkey
+		If ErrorLevel
+		{
+			ImageSearch, FoundX, FoundY, 1500, 750, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Pause_Route_Commerciale.png
+			if (ErrorLevel = 2)
+			{
+				;MsgBox Could not conduct the search.
+				return
+			}
+			else if (ErrorLevel = 1)
+			{
+				ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Pause_Route_Commerciale_bis.png
+				if (ErrorLevel = 2)
+				{
+					return
+				}
+				else if (ErrorLevel = 1)
+				{
+					ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Resume_Route_Commerciale.png
+					if (ErrorLevel = 2)
+					{
+						return
+					}
+					else if (ErrorLevel = 1)
+					{
+						ImageSearch, FoundX, FoundY, 1550, 575, A_ScreenWidth, A_ScreenHeight, *100, D:\Dropbox\Anno 2070\AutoHotKey Image Search\Resume_Route_Commerciale_bis.png
+						if (ErrorLevel = 2)
+						{
+							return
+						}
+						else if (ErrorLevel = 1)
+						{
+							return
+						}
+						else
+						{
+							BlockInput, On
+							MouseGetPos, xpos, ypos 
+							MouseMove, %FoundX%, %FoundY%
+							MouseMove, 0, 10, 0, R
+							MouseClick, left
+							MouseMove, xpos, ypos
+							BlockInput, Off
+						}
+						return
+					}
+					else
+					{
+						BlockInput, On
+						MouseGetPos, xpos, ypos 
+						MouseMove, %FoundX%, %FoundY%
+						MouseMove, 0, 10, 0, R
+						MouseClick, left
+						MouseMove, xpos, ypos
+						BlockInput, Off
+					}
+					return
+				}
+				else
+				{
+					BlockInput, On
+					MouseGetPos, xpos, ypos 
+					MouseMove, %FoundX%, %FoundY%
+					MouseMove, 0, 10, 0, R
+					MouseClick, left
+					MouseMove, xpos, ypos
+					BlockInput, Off
+				}
+				return
+			}
+			else
+			{
+				MouseGetPos, xpos, ypos
+				BlockInput, On
+				MouseMove, %FoundX%, %FoundY%
+				MouseClick, left
+				MouseMove, xpos, ypos
+				BlockInput, Off
+			}
+			return
+		}
+		Else
+		{
+			SendInput {Blind}{Space}
+		}
+		Return
+	}
+	
+	*Space Up::
+	{
+		Space_pressed := 0
+		Return
+	}
+	
+	*NumpadEnter:: ; Enter
+	{
+		If (NumpadEnter_pressed)
+			Return
+		NumpadEnter_pressed := 1
+		{
+			SendInput {Blind}{NumpadEnter}{Escape}
+		}
+		Return
+	}
+	
+	*NumpadEnter Up::
+	{
+		NumpadEnter_pressed := 0
+		Return
+	}
+}
+#IfWinActive
