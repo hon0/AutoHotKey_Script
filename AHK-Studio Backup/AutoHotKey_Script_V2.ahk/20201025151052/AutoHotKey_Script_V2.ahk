@@ -47,8 +47,7 @@ SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
 SetTitleMatchMode, 2
-DetectHiddenWindows, on
-;#HotkeyInterval 2000  ; This is  the default value (milliseconds).
+;#HotkeyInterval 2000
 #MaxHotkeysPerInterval 500
 ;#InstallKeybdHook
 ;#InstallMouseHook
@@ -111,7 +110,7 @@ CoordMode, mouse, Screen
 	}
 	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 	*F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
-	#!f:: ; FullScreen Window. Windows+Alt+F
+	^!f:: ; FullScreen Window. Ctl+Alt+F
 	{
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
@@ -239,13 +238,20 @@ CoordMode, mouse, Screen
 { ; Testing
 	
 	/* ; If prior key ""
-		{ ; If prior key ""
-			m::
-			Send o
-			if (A_PriorKey = "space")
-				SendInput {p}
-			return
+		$m::
+		If (A_PriorKey = "space")
+		{
+			SendInput {p Down}
+			KeyWait m
+			Send {p Up}
 		}
+		Else
+		{
+			Send {m Down}
+			KeyWait m
+			Send {m Up}
+		}
+		return
 		
 	*/
 	
@@ -289,34 +295,30 @@ CoordMode, mouse, Screen
 	/* ; On press != on double press != on long press.
 		$a::
 		KeyWait, a, T0.1
-		
-		if (ErrorLevel)
+		If (ErrorLevel)
 		{
 			Send {b down}
-			keywait a
+			KeyWait a
 			Send {b up}
 		}
-		else {
+		Else 
+		{
 			KeyWait, a, D T0.1
-			
-			if (ErrorLevel)
+			If (ErrorLevel)
 			{
 				Send {a down}
-				keywait a
+				KeyWait a
 				Send {a up}
 			}
-			
-			else
+			Else
 			{
 				Send {c down}
-				keywait a
+				KeyWait a
 				Send {c up}
 			}
-			
 		}
-		
 		KeyWait, a
-		return
+		Return
 	*/
 	
 	/* ; Multi-Tap
@@ -435,10 +437,31 @@ CoordMode, mouse, Screen
 		}
 	*/	
 	
+	/*;Cycle
+		{
+			$&::
+			key++
+			if key = 1
+				Send, {SC002}
+			
+			else if key = 2
+				Send, {SC003}
+			
+			else if key = 3
+				Send, {SC004}
+			
+			else if key = 4
+			{
+				Send, {SC005}
+				key = 0              
+			}
+			return
+		}
+	*/
 }
 
 { ; Layer modifier. Press and hold to get into Layer 2. Release to come back to Layer 1.
-	*$CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
+	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	{
 		If (CapsLock_pressed)
 			Return
@@ -461,18 +484,19 @@ CoordMode, mouse, Screen
 		If (Layer=1) and GetKeyState("MButton")
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{Home}
+			Send {Home}
 			Return
 		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{PgUp}
+			Send {F1}
+			Sleep 100
 			Return
 		}
 		Else
 		{
-			SendInput {Blind}{WheelUp}
+			SendInput {WheelUp}
 			Return
 		}
 		Return
@@ -483,18 +507,19 @@ CoordMode, mouse, Screen
 		If (Layer=1) and GetKeyState("MButton")
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{End}
+			Send {End}
 			Return
 		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{PgDn}
+			Send {F2}
+			Sleep 100
 			Return
 		}
 		Else
 		{
-			SendInput {Blind}{WheelDown}
+			SendInput {WheelDown}
 			Return
 		}
 		Return
@@ -616,126 +641,82 @@ CoordMode, mouse, Screen
 } ; Mouse
 
 { ; Keypad and/or Keyboard.
-	*$SC029::
+	$SC029::
 	{
 		If (SC029_pressed)
 			Return
 		SC029_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{SC029 Down}
+			SendInput {esc Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{esc Down}
+			SendInput {SC029 Down}
 		}
 		Return
 	}
 	
-	*$SC029 Up::
+	$SC029 Up::
 	{
 		SC029_pressed := 0
 		If (Layer=1)
 		{
-			If (GetKeyState("esc"))
+			If (GetKeyState("SC029SC029"))
 			{
-				SendInput {Blind}{esc Up}
+				SendInput {SC029 Up}
 			}
 			Else
-				SendInput {Blind}{SC029 Up}
+				SendInput {esc Up}
 		}
 		If (Layer=2)
 		{
-			If (GetKeyState("SC029"))
+			If (GetKeyState("esc"))
 			{
-				SendInput {Blind}{SC029 Up}
+				SendInput {esc Up}
 			}
 			Else
-				SendInput {Blind}{esc Up}
+				SendInput {SC029 Up}
 		}
 		Return
 	}
 	
-	*$Tab::
+	$Tab::
 	{
 		If (Tab_pressed)
 			Return
 		Tab_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{Tab Down}
+			SendInput {Tab Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{esc Down}
+			SendInput {esc Down}
 		}
 		Return
 	}
 	
-	*$Tab Up::
+	$Tab Up::
 	{
 		Tab_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("esc"))
 			{
-				SendInput {Blind}{esc Up}
+				SendInput {esc Up}
 			}
 			Else
-				SendInput {Blind}{Tab Up}
+				SendInput {Tab Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("Tab"))
 			{
-				SendInput {Blind}{Tab Up}
+				SendInput {Tab Up}
 			}
 			Else
-				SendInput {Blind}{esc Up}
-		}
-		Return
-	}
-	
-	$*SC003::
-	{
-		If (SC003_pressed)
-			Return
-		SC003_pressed := 1
-		If (Layer=1)
-		{
-			SendInput {Blind}{SC003 Down}
-		}
-		If (Layer=2) and WinActive("ahk_exe chrome.exe")
-		{
-			SendInput ^+e
-		}
-		If (Layer=2) and WinActive("Tabs Outliner")
-		{
-			SendInput {F2}
-		}
-		Return
-	}
-	
-	$*SC003 Up::
-	{
-		SC003_pressed := 0
-		If (Layer=1)
-		{
-			If (GetKeyState("F2"))
-			{
-				SendInput {Blind}{F2 Up}
-			}
-			Else
-				SendInput {Blind}{SC003 Up}
-		}
-		If (Layer=2)
-		{
-			If (GetKeyState("SC003"))
-			{
-				SendInput {Blind}{SC003 Up}
-			}
-			Else
-				SendInput {Blind}{F2 Up}
+				SendInput {esc Up}
 		}
 		Return
 	}
@@ -820,123 +801,98 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	*$r::
+	$r::
 	{
 		If (r_pressed)
 			Return
 		r_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{r Down}
+			SendInput {r Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{t Down}
+			SendInput {t Down}
 		}
 		Return
 	}
 	
-	*$r Up::
+	$r Up::
 	{
 		r_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("t"))
 			{
-				SendInput {Blind}{t Up}
+				SendInput {t Up}
 			}
 			Else
-				SendInput {Blind}{r Up}
+				SendInput {r Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("r"))
 			{
-				SendInput {Blind}{r Up}
+				SendInput {r Up}
 			}
 			Else
-				SendInput {Blind}{t Up}
+				SendInput {t Up}
 		}
 		Return
 	}
 	
-	*$f::
+	$f::
 	{
 		If (f_pressed)
 			Return
 		f_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{f Down}
+			SendInput {f Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{g Down}
+			SendInput {g Down}
 		}
 		Return
 	}
 	
-	*$f Up::
+	$f Up::
 	{
 		f_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("g"))
 			{
-				SendInput {Blind}{g Up}
+				SendInput {g Up}
 			}
 			Else
-				SendInput {Blind}{f Up}
+				SendInput {f Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("f"))
 			{
-				SendInput {Blind}{f Up}
+				SendInput {f Up}
 			}
 			Else
-				SendInput {Blind}{g Up}
+				SendInput {g Up}
 		}
 		Return
 	}
 	
-	LControl & s::
-	{
-		If (s_pressed)
-			Return
-		s_pressed := 1		
-		If WinActive("Tabs Outliner")
-		{
-			SendInput {Backspace}
-		}
-		Else
-		{
-			SendInput {Blind}{s Down}
-		}
-		Return
-	}
-	
-	LControl & s Up::
-	{
-		s_pressed := 0
-		{
-			SendInput {Blind}{s Up}
-		}
-		Return
-	}
-	
-	*$w::
+	$w::
 	{
 		If (w_pressed)
 			Return
 		w_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{w Down}
+			SendInput {w Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{b Down}
+			SendInput {b Down}
 		}
 		Return
 	}
@@ -948,139 +904,139 @@ CoordMode, mouse, Screen
 		{
 			If (GetKeyState("b"))
 			{
-				SendInput {Blind}{b Up}
+				SendInput {b Up}
 			}
 			Else
-				SendInput {Blind}{w Up}
+				SendInput {w Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("w"))
 			{
-				SendInput {Blind}{w Up}
+				SendInput {w Up}
 			}
 			Else
-				SendInput {Blind}{b Up}
+				SendInput {b Up}
 		}
 		Return
 	}
 	
-	*$x::
+	$x::
 	{
 		If (x_pressed)
 			Return
 		x_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{x Down}
+			SendInput {x Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{n Down}
+			SendInput {n Down}
 		}
 		Return
 	}
 	
-	*$x Up::
+	$x Up::
 	{
 		x_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState("n"))
 			{
-				SendInput {Blind}{n Up}
+				SendInput {n Up}
 			}
 			Else
-				SendInput {Blind}{x Up}
+				SendInput {x Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("x"))
 			{
-				SendInput {Blind}{x Up}
+				SendInput {x Up}
 			}
 			Else
-				SendInput {Blind}{n Up}
+				SendInput {n Up}
 		}
 		Return
 	}
 	
-	*$c::
+	$c::
 	{
 		If (c_pressed)
 			Return
 		c_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{c Down}
+			SendInput {c Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{, Down}
+			SendInput {, Down}
 		}
 		Return
 	}
 	
-	*$c Up::
+	$c Up::
 	{
 		c_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState(","))
 			{
-				SendInput {Blind}{, Up}
+				SendInput {, Up}
 			}
 			Else
-				SendInput {Blind}{c Up}
+				SendInput {c Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("c"))
 			{
-				SendInput {Blind}{c Up}
+				SendInput {c Up}
 			}
 			Else
-				SendInput {Blind}{, Up}
+				SendInput {, Up}
 		}
 		Return
 	}
 	
-	*$v::
+	$v::
 	{
 		If (v_pressed)
 			Return
 		v_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{v Down}
+			SendInput {v Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{; Down}
+			SendInput {; Down}
 		}
 		Return
 	}
 	
-	*$v Up::
+	$v Up::
 	{
 		v_pressed := 0
 		If (Layer=1)
 		{
 			If (GetKeyState(";"))
 			{
-				SendInput {Blind}{; Up}
+				SendInput {; Up}
 			}
 			Else
-				SendInput {Blind}{v Up}
+				SendInput {v Up}
 		}
 		If (Layer=2)
 		{
 			If (GetKeyState("v"))
 			{
-				SendInput {Blind}{v Up}
+				SendInput {v Up}
 			}
 			Else
-				SendInput {Blind}{; Up}
+				SendInput {; Up}
 		}
 		Return
 	}
@@ -1117,29 +1073,35 @@ CoordMode, mouse, Screen
 		}
 	}
 	
-	$*Space::
+	$LAlt::
 	{
-		If (Space_pressed)
+		If (LAlt_pressed)
 			Return
-		Space_pressed := 1
-		If WinActive("Tabs Outliner") and GetKeyState("LControl")
+		LAlt_pressed := 1
+		If (Layer=1) and !(GetKeyState("RButton"))
 		{
-			SendInput {Blind}{Up}
-			Return
+			SendInput {LAlt Down}
 		}
-		Else
+		Else If (Layer=1) and (GetKeyState("RButton"))
 		{
-			SendInput {Blind}{Space Down}
-			Return
+			Send {v}
 		}
 		Return
 	}
 	
-	$*Space Up::
+	$LAlt Up::
 	{
-		Space_pressed := 0
+		LAlt_pressed := 0
+		If (Layer=1)
 		{
-			SendInput {Blind}{Space Up}
+			If (GetKeyState("RButton"))
+			{
+				
+			}
+			Else
+			{
+				SendInput {LAlt Up}
+			}
 		}
 		Return
 	}

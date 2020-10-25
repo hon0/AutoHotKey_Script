@@ -4,6 +4,32 @@
 	Layer := 1
 	CapsLock_pressed := 0
 	
+	/* ; Toggle Slow Time + an exemple
+		;Toggle_Right := 0 ; Toggle Slow Time
+		
+		*Space:: ; Centrer la caméra sur la dernière notification.
+		{
+			If (Space_pressed)
+				Return
+			Space_pressed := 1
+			If Toggle_Right = 1
+			{
+				SendInput {Blind}{NumpadSub Up}{Space}{NumpadSub Down}
+			}
+			Else
+			{
+				SendInput {Blind}{Space}
+			}
+			Return
+		}
+		
+		*Space Up::
+		{
+			Space_pressed := 0
+			Return
+		}
+	*/
+	
 	SC029_pressed := 0
 	Tab_pressed := 0
 	
@@ -42,6 +68,10 @@
 	Down_pressed := 0	
 	Left_pressed := 0
 	Right_pressed := 0
+	
+	NumpadEnter_pressed := 0
+	
+	Quantity_ImageSearch := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
@@ -1045,7 +1075,7 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	*$v::
+	$v::
 	{
 		If (v_pressed)
 			Return
@@ -1061,7 +1091,7 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
-	*$v Up::
+	$v Up::
 	{
 		v_pressed := 0
 		If (Layer=1)
@@ -1087,34 +1117,20 @@ CoordMode, mouse, Screen
 	
 	$Insert::
 	{
-		If (Layer=1)
 		{
-			Send {Insert}
-			Sleep 32
-			Return
+			SendInput {Insert}
+			Sleep 200
 		}
-		If (Layer=2)
-		{
-			Send {Numpad1}
-			Sleep 32
-			Return
-		}
+		Return
 	}
 	
 	$Delete::
 	{
-		If (Layer=1)
 		{
-			Send {Delete}
-			Sleep 32
-			Return
+			SendInput {Delete}
+			Sleep 200
 		}
-		If (Layer=2)
-		{
-			Send {Numpad3}
-			Sleep 32
-			Return
-		}
+		Return
 	}
 	
 	$*Space::
@@ -1140,6 +1156,87 @@ CoordMode, mouse, Screen
 		Space_pressed := 0
 		{
 			SendInput {Blind}{Space Up}
+		}
+		Return
+	}
+	
+	
+	LAlt & Space::
+	{
+		If (Space_pressed)
+			Return
+		Space_pressed := 1
+		{
+			Send {LAlt Up}#{Up}
+		}
+		Return
+	}
+	
+	LAlt & Space Up::
+	{
+		Space_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Down::
+	{
+		If (Down_pressed)
+			Return
+		Down_pressed := 1
+		{
+			Send {LAlt Up}#{Down}
+		}
+		Return
+	}
+	
+	LAlt & Down Up::
+	{
+		Down_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Left::
+	{
+		If (Left_pressed)
+			Return
+		Left_pressed := 1
+		{
+			Send {LAlt Up}#{Left}
+		}
+		Return
+	}
+	
+	LAlt & Left Up::
+	{
+		Left_pressed := 0
+		{
+			
+		}
+		Return
+	}
+	
+	LAlt & Right::
+	{
+		If (Right_pressed)
+			Return
+		Right_pressed := 1
+		{
+			Send {LAlt Up}#{Right}
+		}
+		Return
+	}
+	
+	LAlt & Right Up::
+	{
+		Right_pressed := 0
+		{
+			
 		}
 		Return
 	}

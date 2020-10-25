@@ -207,63 +207,59 @@ CoordMode, mouse, Screen
 	}
 	
 	#IfWinActive ahk_exe chrome.exe
+	*e::
+	If (e_pressed)
+		Return
+	e_pressed := 1
 	{
-		*e::
+		If GetKeyState("LShift") && GetKeyState("LAlt")
 		{
-			If (e_pressed)
-				Return
-			e_pressed := 1
-			{
-				If GetKeyState("LShift") && GetKeyState("LAlt")
-				{
-					Send {LShift Up}{LAlt Up}
-					Send ^t
-					Sleep 32
-					SendInput https://app.raindrop.io/my/0
-					Sleep 32
-					Send {Enter}
-					Return
-				}
-				Else
-				{
-					If (Layer=1)
-					{
-						SendInput {Blind}{e Down}
-					}
-					If (Layer=2)
-					{
-						SendInput {Blind}{SC007 Down}
-					}
-				}
-				return
-			}
+			Send {LShift Up}{LAlt Up}
+			Send ^t
+			Sleep 32
+			SendInput https://app.raindrop.io/my/0
+			Sleep 32
+			Send {Enter}
+			Return
 		}
-		
-		$*e Up::
+		Else
 		{
-			e_pressed := 0
 			If (Layer=1)
 			{
-				If (GetKeyState("SC007"))
-				{
-					SendInput {Blind}{SC007 Up}
-				}
-				Else
-					SendInput {Blind}{e Up}
+				SendInput {Blind}{e Down}
 			}
 			If (Layer=2)
 			{
-				If (GetKeyState("e"))
-				{
-					SendInput {Blind}{e Up}
-				}
-				Else
-					SendInput {Blind}{SC007 Up}
+				SendInput {Blind}{SC007 Down}
 			}
-			Return
 		}
-		#If
+		return
 	}
+	
+	$*e Up::
+	{
+		e_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("SC007"))
+			{
+				SendInput {Blind}{SC007 Up}
+			}
+			Else
+				SendInput {Blind}{e Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("e"))
+			{
+				SendInput {Blind}{e Up}
+			}
+			Else
+				SendInput {Blind}{SC007 Up}
+		}
+		Return
+	}
+	#If
 } ; AutoHotKey Script option.
 
 { ; Testing

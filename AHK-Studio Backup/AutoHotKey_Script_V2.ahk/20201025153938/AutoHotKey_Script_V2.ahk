@@ -4,6 +4,32 @@
 	Layer := 1
 	CapsLock_pressed := 0
 	
+	/* ; Toggle Slow Time + an exemple
+		;Toggle_Right := 0 ; Toggle Slow Time
+		
+		*Space:: ; Centrer la caméra sur la dernière notification.
+		{
+			If (Space_pressed)
+				Return
+			Space_pressed := 1
+			If Toggle_Right = 1
+			{
+				SendInput {Blind}{NumpadSub Up}{Space}{NumpadSub Down}
+			}
+			Else
+			{
+				SendInput {Blind}{Space}
+			}
+			Return
+		}
+		
+		*Space Up::
+		{
+			Space_pressed := 0
+			Return
+		}
+	*/
+	
 	SC029_pressed := 0
 	Tab_pressed := 0
 	
@@ -42,6 +68,10 @@
 	Down_pressed := 0	
 	Left_pressed := 0
 	Right_pressed := 0
+	
+	NumpadEnter_pressed := 0
+	
+	Quantity_ImageSearch := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff

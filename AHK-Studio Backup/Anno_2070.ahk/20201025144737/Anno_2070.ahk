@@ -84,52 +84,53 @@ DetectHiddenWindows, on
 ;#InstallMouseHook
 CoordMode, mouse, Screen
 
-{ ; AutoHotKey Script option.
-	#F2:: ; Monitoring Windows
+#F2:: ; Monitoring Windows
+{
+	CoordMode, mouse, Relative
+	KeyWait F2, t0.100
+	t:= A_TimeSinceThisHotkey
+	If ErrorLevel
 	{
-		CoordMode, mouse, Relative
-		KeyWait F2, t0.100
-		t:= A_TimeSinceThisHotkey
-		If ErrorLevel
-		{
-			KeyHistory
-			KeyWait, F2
-		}
-		Else
-		{
-			IfWinNotExist, Event Tester
-			{
-				BlockInput, On
-				Run, E:\Google Drive\HOTAS_Joysticks_USB_Software\EventTester.exe
-				WinWait, Event Tester
-				SetKeyDelay 10, 32
-				Send {LWin Up}
-				MouseClick, left, 39, 41
-				Send {Down}{Enter}
-				MouseClick, left, 86, 42
-				WinMove, , , 3175, 648 , 432, 409, , 
-				BlockInput, Off
-				Send {LWin Up}
-				return
-			}
-			else
-			{
-				BlockInput, On
-				WinActivate, Event Tester
-				Send {LWin Up}
-				MouseClick, left, 39, 41
-				Send {Down}{Enter}
-				MouseClick, left, 86, 42
-				WinMove, , , 3175, 648 , 432, 409, , 
-				BlockInput, Off
-				Send {LWin Up}
-				return
-			}
-			CoordMode, mouse, Screen
-			KeyWait, F2
-		}
-		return
+		KeyHistory
+		KeyWait, F2
 	}
+	Else
+	{
+		IfWinNotExist, Event Tester
+		{
+			BlockInput, On
+			Run, E:\Google Drive\HOTAS_Joysticks_USB_Software\EventTester.exe
+			WinWait, Event Tester
+			SetKeyDelay 10, 32
+			Send {LWin Up}
+			MouseClick, left, 39, 41
+			Send {Down}{Enter}
+			MouseClick, left, 86, 42
+			WinMove, , , 3175, 648 , 432, 409, , 
+			BlockInput, Off
+			Send {LWin Up}
+			return
+		}
+		else
+		{
+			BlockInput, On
+			WinActivate, Event Tester
+			Send {LWin Up}
+			MouseClick, left, 39, 41
+			Send {Down}{Enter}
+			MouseClick, left, 86, 42
+			WinMove, , , 3175, 648 , 432, 409, , 
+			BlockInput, Off
+			Send {LWin Up}
+			return
+		}
+		CoordMode, mouse, Screen
+		KeyWait, F2
+	}
+	return
+}
+
+{ ; AutoHotKey Script option.
 	#F3::Suspend, Toggle
 	#F4::ExitApp
 	#F5:: ; WinGetPos
@@ -141,7 +142,7 @@ CoordMode, mouse, Screen
 	}
 	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 	*F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
-	#!f:: ; FullScreen Window. Windows+Alt+F
+	#!f:: ; FullScreen Window. Control+Alt+F
 	{
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
@@ -207,63 +208,59 @@ CoordMode, mouse, Screen
 	}
 	
 	#IfWinActive ahk_exe chrome.exe
+	*e::
+	If (e_pressed)
+		Return
+	e_pressed := 1
 	{
-		*e::
+		If GetKeyState("LShift") && GetKeyState("LAlt")
 		{
-			If (e_pressed)
-				Return
-			e_pressed := 1
-			{
-				If GetKeyState("LShift") && GetKeyState("LAlt")
-				{
-					Send {LShift Up}{LAlt Up}
-					Send ^t
-					Sleep 32
-					SendInput https://app.raindrop.io/my/0
-					Sleep 32
-					Send {Enter}
-					Return
-				}
-				Else
-				{
-					If (Layer=1)
-					{
-						SendInput {Blind}{e Down}
-					}
-					If (Layer=2)
-					{
-						SendInput {Blind}{SC007 Down}
-					}
-				}
-				return
-			}
+			Send {LShift Up}{LAlt Up}
+			Send ^t
+			Sleep 32
+			SendInput https://app.raindrop.io/my/0
+			Sleep 32
+			Send {Enter}
+			Return
 		}
-		
-		$*e Up::
+		Else
 		{
-			e_pressed := 0
 			If (Layer=1)
 			{
-				If (GetKeyState("SC007"))
-				{
-					SendInput {Blind}{SC007 Up}
-				}
-				Else
-					SendInput {Blind}{e Up}
+				SendInput {Blind}{e Down}
 			}
 			If (Layer=2)
 			{
-				If (GetKeyState("e"))
-				{
-					SendInput {Blind}{e Up}
-				}
-				Else
-					SendInput {Blind}{SC007 Up}
+				SendInput {Blind}{SC007 Down}
 			}
-			Return
 		}
-		#If
+		return
 	}
+	
+	$*e Up::
+	{
+		e_pressed := 0
+		If (Layer=1)
+		{
+			If (GetKeyState("SC007"))
+			{
+				SendInput {Blind}{SC007 Up}
+			}
+			Else
+				SendInput {Blind}{e Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("e"))
+			{
+				SendInput {Blind}{e Up}
+			}
+			Else
+				SendInput {Blind}{SC007 Up}
+		}
+		Return
+	}
+	#If
 } ; AutoHotKey Script option.
 
 { ; Testing

@@ -42,6 +42,10 @@
 	Down_pressed := 0	
 	Left_pressed := 0
 	Right_pressed := 0
+	
+	NumpadEnter_pressed := 0
+	
+	Quantity_ImageSearch := 0
 }
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff

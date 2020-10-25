@@ -47,8 +47,7 @@ SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
 SetTitleMatchMode, 2
-DetectHiddenWindows, on
-;#HotkeyInterval 2000  ; This is  the default value (milliseconds).
+;#HotkeyInterval 2000
 #MaxHotkeysPerInterval 500
 ;#InstallKeybdHook
 ;#InstallMouseHook
@@ -111,7 +110,7 @@ CoordMode, mouse, Screen
 	}
 	#SPACE::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
 	*F14::  Winset, Alwaysontop, , A ; Toggle Active Windows Always on Top.
-	#!f:: ; FullScreen Window. Windows+Alt+F
+	^!f:: ; FullScreen Window. Ctl+Alt+F
 	{
 		WinGetTitle, currentWindow, A
 		IfWinExist %currentWindow%
@@ -239,13 +238,20 @@ CoordMode, mouse, Screen
 { ; Testing
 	
 	/* ; If prior key ""
-		{ ; If prior key ""
-			m::
-			Send o
-			if (A_PriorKey = "space")
-				SendInput {p}
-			return
+		$m::
+		If (A_PriorKey = "space")
+		{
+			SendInput {p Down}
+			KeyWait m
+			Send {p Up}
 		}
+		Else
+		{
+			Send {m Down}
+			KeyWait m
+			Send {m Up}
+		}
+		return
 		
 	*/
 	
@@ -289,34 +295,30 @@ CoordMode, mouse, Screen
 	/* ; On press != on double press != on long press.
 		$a::
 		KeyWait, a, T0.1
-		
-		if (ErrorLevel)
+		If (ErrorLevel)
 		{
 			Send {b down}
-			keywait a
+			KeyWait a
 			Send {b up}
 		}
-		else {
+		Else 
+		{
 			KeyWait, a, D T0.1
-			
-			if (ErrorLevel)
+			If (ErrorLevel)
 			{
 				Send {a down}
-				keywait a
+				KeyWait a
 				Send {a up}
 			}
-			
-			else
+			Else
 			{
 				Send {c down}
-				keywait a
+				KeyWait a
 				Send {c up}
 			}
-			
 		}
-		
 		KeyWait, a
-		return
+		Return
 	*/
 	
 	/* ; Multi-Tap
@@ -435,10 +437,31 @@ CoordMode, mouse, Screen
 		}
 	*/	
 	
+	/*;Cycle
+		{
+			$&::
+			key++
+			if key = 1
+				Send, {SC002}
+			
+			else if key = 2
+				Send, {SC003}
+			
+			else if key = 3
+				Send, {SC004}
+			
+			else if key = 4
+			{
+				Send, {SC005}
+				key = 0              
+			}
+			return
+		}
+	*/
 }
 
 { ; Layer modifier. Press and hold to get into Layer 2. Release to come back to Layer 1.
-	*$CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
+	CapsLock:: ;Key disabled by "SetCapsLockState, AlwaysOff".
 	{
 		If (CapsLock_pressed)
 			Return
@@ -637,21 +660,21 @@ CoordMode, mouse, Screen
 		SC029_pressed := 0
 		If (Layer=1)
 		{
-			If (GetKeyState("esc"))
-			{
-				SendInput {Blind}{esc Up}
-			}
-			Else
-				SendInput {Blind}{SC029 Up}
-		}
-		If (Layer=2)
-		{
 			If (GetKeyState("SC029"))
 			{
 				SendInput {Blind}{SC029 Up}
 			}
 			Else
 				SendInput {Blind}{esc Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("esc"))
+			{
+				SendInput {Blind}{esc Up}
+			}
+			Else
+				SendInput {Blind}{SC029 Up}
 		}
 		Return
 	}
@@ -820,6 +843,31 @@ CoordMode, mouse, Screen
 		Return
 	}
 	
+	LControl & s::
+	{
+		If (s_pressed)
+			Return
+		s_pressed := 1		
+		If WinActive("Tabs Outliner")
+		{
+			SendInput {Backspace}
+		}
+		Else
+		{
+			SendInput {Blind}{s Down}
+		}
+		Return
+	}
+	
+	LControl & s Up::
+	{
+		s_pressed := 0
+		{
+			SendInput {Blind}{s Up}
+		}
+		Return
+	}
+	
 	*$r::
 	{
 		If (r_pressed)
@@ -896,31 +944,6 @@ CoordMode, mouse, Screen
 			}
 			Else
 				SendInput {Blind}{g Up}
-		}
-		Return
-	}
-	
-	LControl & s::
-	{
-		If (s_pressed)
-			Return
-		s_pressed := 1		
-		If WinActive("Tabs Outliner")
-		{
-			SendInput {Backspace}
-		}
-		Else
-		{
-			SendInput {Blind}{s Down}
-		}
-		Return
-	}
-	
-	LControl & s Up::
-	{
-		s_pressed := 0
-		{
-			SendInput {Blind}{s Up}
 		}
 		Return
 	}
@@ -1117,29 +1140,35 @@ CoordMode, mouse, Screen
 		}
 	}
 	
-	$*Space::
+	$LAlt::
 	{
-		If (Space_pressed)
+		If (LAlt_pressed)
 			Return
-		Space_pressed := 1
-		If WinActive("Tabs Outliner") and GetKeyState("LControl")
+		LAlt_pressed := 1
+		If (Layer=1) and !(GetKeyState("RButton"))
 		{
-			SendInput {Blind}{Up}
-			Return
+			SendInput {LAlt Down}
 		}
-		Else
+		Else If (Layer=1) and (GetKeyState("RButton"))
 		{
-			SendInput {Blind}{Space Down}
-			Return
+			Send {v}
 		}
 		Return
 	}
 	
-	$*Space Up::
+	$LAlt Up::
 	{
-		Space_pressed := 0
+		LAlt_pressed := 0
+		If (Layer=1)
 		{
-			SendInput {Blind}{Space Up}
+			If (GetKeyState("RButton"))
+			{
+				
+			}
+			Else
+			{
+				SendInput {LAlt Up}
+			}
 		}
 		Return
 	}
