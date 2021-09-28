@@ -79,7 +79,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return
@@ -92,7 +92,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return
@@ -282,8 +282,8 @@ CoordMode, mouse, Screen
 			Return
 		}
 		
-		*/
-		
+	*/
+	
 	/* ; If prior key ""
 		{ ; If prior key ""
 			m::
@@ -669,11 +669,11 @@ CoordMode, mouse, Screen
 		SC029_pressed := 1
 		If (Layer=1)
 		{
-			SendInput {Blind}{SC029 Down}
+			SendInput {Blind}{esc Down}
 		}
 		If (Layer=2)
 		{
-			SendInput {Blind}{esc Down}
+			SendInput {Blind}{SC029 Down}
 		}
 		Return
 	}
@@ -683,21 +683,21 @@ CoordMode, mouse, Screen
 		SC029_pressed := 0
 		If (Layer=1)
 		{
-			If (GetKeyState("esc"))
-			{
-				SendInput {Blind}{esc Up}
-			}
-			Else
-				SendInput {Blind}{SC029 Up}
-		}
-		If (Layer=2)
-		{
 			If (GetKeyState("SC029"))
 			{
 				SendInput {Blind}{SC029 Up}
 			}
 			Else
 				SendInput {Blind}{esc Up}
+		}
+		If (Layer=2)
+		{
+			If (GetKeyState("esc"))
+			{
+				SendInput {Blind}{esc Up}
+			}
+			Else
+				SendInput {Blind}{SC029 Up}
 		}
 		Return
 	}
@@ -1199,3 +1199,33 @@ CoordMode, mouse, Screen
 		Return
 	}
 } ; Keypad and/or Keyboard.
+
+#IfWinActive StateOfDecay:YOSE
+*$SC002::
+{
+	SetKeyDelay 0, 32
+	Send {SC029 Down}{SC002}{SC029 Up}
+	Return
+}
+
+*$SC003::
+{
+	SetKeyDelay 0, 32
+	Send {SC029 Down}{SC003}{SC029 Up}
+	Return
+}
+
+*$SC004::
+{
+	SetKeyDelay 0, 32
+	Send {SC029 Down}{SC004}{SC029 Up}
+	Return
+}
+
+*$SC005::
+{
+	SetKeyDelay 0, 32
+	Send {SC029 Down}{SC005}{SC029 Up}
+	Return
+}
+#IfWinActive

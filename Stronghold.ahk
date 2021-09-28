@@ -48,7 +48,7 @@
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 Process, Priority, , A
-SetTitleMatchMode, 2
+SetTitleMatchMode, 1
 DetectHiddenWindows, on
 ;#HotkeyInterval 2000  ; This is  the default value (milliseconds).
 #MaxHotkeysPerInterval 500
@@ -510,10 +510,16 @@ CoordMode, mouse, Screen
 			Send {Blind}{Home}
 			Return
 		}
+		Else if (Layer=1) and WinActive("Stronghold")
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{NumpadAdd}
+			Return
+		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{PgUp}
+			Send {Blind}{NumpadAdd}
 			Return
 		}
 		Else
@@ -532,10 +538,16 @@ CoordMode, mouse, Screen
 			Send {Blind}{End}
 			Return
 		}
+		Else if (Layer=1) and WinActive("Stronghold")
+		{
+			SetkeyDelay, 0, 32
+			Send {Blind}{NumpadSub}
+			Return
+		}
 		Else if (Layer=2)
 		{
 			SetkeyDelay, 0, 32
-			Send {Blind}{PgDn}
+			Send {Blind}{NumpadSub}
 			Return
 		}
 		Else
@@ -553,12 +565,37 @@ CoordMode, mouse, Screen
 		F24_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait F24, t0.100
+			KeyWait F24, t0.150
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
 				SetKeyDelay 10, 32
 				Send, {LShift Down}{LAlt Down}{Up}{LShift Up}{LAlt Up}
+			}
+		}
+		Else if (Layer=1) and WinActive("Stronghold")
+		{
+			KeyWait F24, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel ;Magasin
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos
+				MouseClick, left, 1300, 1025
+				MouseClick, left, 1030, 990
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+				Return
+			}
+			Else ;Nouriture
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos
+				MouseClick, left, 1300, 1025
+				MouseClick, left, 930, 1060
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+				Return
 			}
 		}
 		Else
@@ -585,12 +622,49 @@ CoordMode, mouse, Screen
 		F23_pressed := 1
 		If WinActive("Discord")
 		{
-			KeyWait F23, t0.100
+			KeyWait F23, t0.150
 			t:= A_TimeSinceThisHotkey
 			If ErrorLevel
 			{
 				SetKeyDelay 10, 32
 				Send, {LShift Down}{LAlt Down}{Down}{LShift Up}{LAlt Up}
+			}
+		}
+		Else if (Layer=1) and WinActive("Stronghold")
+		{
+			KeyWait F23, t0.200
+			t:= A_TimeSinceThisHotkey
+			If ErrorLevel ;Popularité 
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos
+				MouseMove 1300, 1025
+				Sleep 32
+				Click
+				Sleep 32
+				MouseMove 900, 960
+				Sleep 32
+				Click
+				Sleep 32
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+				Return
+			}
+			Else ;Religion
+			{
+				BlockInput, On
+				MouseGetPos, xpos, ypos
+				MouseMove 1300, 1025
+				Sleep 32
+				Click
+				Sleep 32
+				MouseMove 1030, 1060
+				Sleep 32
+				Click
+				Sleep 32
+				MouseMove, xpos, ypos 
+				BlockInput, Off
+				Return
 			}
 		}
 		Else

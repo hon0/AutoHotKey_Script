@@ -79,7 +79,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return
@@ -92,7 +92,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return

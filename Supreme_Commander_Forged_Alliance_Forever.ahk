@@ -79,7 +79,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return
@@ -92,7 +92,7 @@ CoordMode, mouse, Screen
 				MouseClick, left, 39, 41
 				Send {Down}{Enter}
 				MouseClick, left, 86, 42
-				WinMove, , , 1438, 258 , 432, 409, , ;3175, 648 , 432, 409
+				WinMove, , , 3175, 648 , 432, 409, , 
 				BlockInput, Off
 				Send {LWin Up}
 				return
@@ -1139,15 +1139,12 @@ CoordMode, mouse, Screen
 	{
 		If (Layer=1)
 		{
-			
-			SetKeyDelay 0, 32
 			Send {Insert}
 			Sleep 32
 			Return
 		}
 		If (Layer=2)
 		{
-			SetKeyDelay 0, 32
 			Send {Numpad1}
 			Sleep 32
 			Return
@@ -1158,14 +1155,12 @@ CoordMode, mouse, Screen
 	{
 		If (Layer=1)
 		{
-			SetKeyDelay 0, 32
 			Send {Delete}
 			Sleep 32
 			Return
 		}
 		If (Layer=2)
 		{
-			SetKeyDelay 0, 32		
 			Send {Numpad3}
 			Sleep 32
 			Return
